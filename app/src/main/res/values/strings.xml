@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Get Off Your Phone</string>
+    <string name="title">Get Off Your Phone</string>
+    <string name="description">You can lock your selected apps using the options below</string>
+    <string name="lock_button">LOCK SELECTED APPS !</string>
+    <string name="start_by_swiping_left">Start by swiping left.</string>
+    <string name="changes">
+        v5.4r (1.7.2018//15:30:09)\n\n[ANNOUNCMENT]\n- GOYP is FOSS now, which means the source code is available for the public on my GitHub repo\n\n[NEW]\n- Removed all google ads\n\n[UPDATED]\n- All Libraries and Dependencies
+    </string>
+</resources>

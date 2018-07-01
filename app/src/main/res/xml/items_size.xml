@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swipeitems>
+    <!--<item-->
+    <!--value="size_kids"-->
+    <!--title="Kids' size"-->
+    <!--description="For the small appetite. Can be shared by four toddlers." />-->
+    <item
+        description="Just a tiny bit of control, lock my apps for 30 minutes"
+        title="30 Mins."
+        value="30_hour" />
+    <item
+        description="Quick and fast, lock my apps for 1 hour"
+        title="1 Hour"
+        value="1_hour" />
+    <item
+        description="I need to finish a task that needs a bit of time, lock my apps for 2 hours"
+        title="2 Hours"
+        value="2_hours" />
+    <item
+        description="HELP ME PLEASE!! Lock my apps for 3 hours !"
+        title="3 Hours"
+        value="3_hours" />
+</swipeitems>

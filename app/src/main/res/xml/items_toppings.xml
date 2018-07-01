@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swipeitems>
+    <item
+        description="Meh.. I know my limits"
+        title="5 Times"
+        value="5_times" />
+    <item
+        description="Well.. I thought i needed a break"
+        title="15 Times"
+        value="15_times" />
+    <item
+        description="Okay Okay, you caught me"
+        title="20 Times"
+        value="20_times" />
+    <item
+        description="Destroy Me"
+        title="21 and Above"
+        value="21_times" />
+</swipeitems>

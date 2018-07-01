@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swipeitems>
+    <item
+        value="pizza"
+        title="Pizza"
+        description="Pizza is love. Pizza is life." />
+    <item
+        value="burger"
+        title="Hamburger"
+        description="EY WOOD LAKE TO BYE A AMBURGER" />
+    <item
+        value="sushi"
+        title="Sushi"
+        description="Who doesn't love raw fish?" />
+</swipeitems>

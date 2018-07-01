@@ -1,0 +1,308 @@
+package com.nephi.getoffyourphone;
+
+/**
+ * Created by xerxes on 02.12.17.
+ */
+
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.SystemClock;
+import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.SortedMap;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
+
+import io.fabric.sdk.android.Fabric;
+
+public class Timer_Service extends Service {
+
+    public static final long NOTIFY_INTERVAL = 1000;
+    public static String str_receiver = "com.nephi.getoffyourphone.receiver";
+    public String str_testing;
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String strDate;
+    Date date_current, date_diff;
+    //DH Helper
+    DB_Helper db;
+    Intent intent;
+    Intent lockIntent;
+    Intent Shame;
+    //Shame Int Counter
+    private Handler mHandler = new Handler();
+    private Timer mTimer = null;
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics(), new Answers())
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
+        //Lock Screen launch
+        lockIntent = new Intent(this, locked.class);
+        lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Shame Screen launch
+        Shame = new Intent(this, shame_activity.class);
+        Shame.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("H:M:ss");
+
+        mTimer = new Timer();
+        mTimer.scheduleAtFixedRate(new TimeDisplayTimerTask(), 5, NOTIFY_INTERVAL);
+        intent = new Intent(str_receiver);
+
+
+        //DB
+        db = new DB_Helper(this);
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Answers.getInstance().logCustom(new CustomEvent("Service_Task")
+                .putCustomAttribute("Removed&Restarted?", "YES"));
+        Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
+        restartServiceIntent.setPackage(getPackageName());
+
+        PendingIntent restartServicePendingIntent = PendingIntent.getService(getApplicationContext(), 1, restartServiceIntent, PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager alarmService = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        assert alarmService != null;
+        alarmService.set(
+                AlarmManager.ELAPSED_REALTIME,
+                SystemClock.elapsedRealtime() + 1000,
+                restartServicePendingIntent);
+
+        super.onTaskRemoved(rootIntent);
+        Log.e("Service_Auto_Restart", "ON");
+    }
+
+    public String twoDatesBetweenTime() {
+
+
+        try {
+            date_current = simpleDateFormat.parse(strDate);
+        } catch (Exception e) {
+
+        }
+
+        try {
+            date_diff = simpleDateFormat.parse(db.get_Data(1));
+        } catch (Exception e) {
+
+        }
+
+        try {
+
+
+            long diff = date_current.getTime() - date_diff.getTime();
+            int int_hours = Integer.valueOf(db.get_Hours(1));
+            long int_timer;
+            if (int_hours > 10) {
+                int_timer = TimeUnit.MINUTES.toMillis(int_hours);
+            } else {
+                int_timer = TimeUnit.HOURS.toMillis(int_hours);
+            }
+            long long_hours = int_timer - diff;
+            long diffSeconds2 = long_hours / 1000 % 60;
+            long diffMinutes2 = long_hours / (60 * 1000) % 60;
+            long diffHours2 = long_hours / (60 * 60 * 1000) % 24;
+
+
+            if (long_hours >= 0) {
+                str_testing = String.format("%d:%d:%02d", diffHours2, diffMinutes2, diffSeconds2);
+                Log.e("TIME", str_testing);
+                db.set_TimerFinish(0);
+                //db.set_Running("Y");
+                fn_update(str_testing);
+            } else {
+                Answers.getInstance().logCustom(new CustomEvent("Timer_Finished")
+                        .putCustomAttribute("Finished?", "YES"));
+                stopService(new Intent(getApplicationContext(), Timer_Service.class));
+                notification_update();
+                db.set_TimerFinish(1);
+                db.set_Running("N");
+                //db.set_LockTime("");
+                db.set_Hours("");
+                db.set_Data("");
+                //db.set_openCounter(0);
+                db.set_openTimes(0);
+                mTimer.cancel();
+            }
+        } catch (Exception e) {
+            stopService(new Intent(getApplicationContext(), Timer_Service.class));
+            db.set_TimerFinish(1);
+            db.set_Running("N");
+            // db.set_LockTime("");
+            db.set_Hours("");
+            db.set_Data("");
+            //db.set_openCounter(0);
+            db.set_openTimes(0);
+            mTimer.cancel();
+            mTimer.purge();
+        }
+
+        return "";
+
+    }
+
+    public void notification_update() {
+        Intent intent = new Intent(this, Main.class);
+        // use System.currentTimeMillis() to have a unique ID for the pending intent
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        int notificationId = new Random().nextInt(); // just use a counter in some util class...
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel("notification_1", "Timer_Notification", NotificationManager.IMPORTANCE_DEFAULT);
+
+            // Configure the notification channel.
+            notificationChannel.setDescription("Channel description");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.BLUE);
+            notificationChannel.setVibrationPattern(new long[]{0, 500,});
+            notificationChannel.enableVibration(true);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notification_1");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
+                //.setDefaults(Notification.) // also requires VIBRATE permission
+                .setSmallIcon(R.mipmap.ic_launcher) // Required!
+                .setContentTitle("Lock-Down Finished !")
+                .setContentText("You can use your apps again")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("You can use your apps again"))
+                .setVibrate(new long[]{0, 500})
+                //.setAutoCancel(true)
+                .setContentIntent(pIntent);
+        //.setOngoing(true)
+        //.addAction(R.drawable.ic_clear_black_48dp, "Dismiss", dismissIntent);
+        //.addAction(R.drawable.ic_action_boom, "Action!", someOtherPendingIntent);
+
+        // Builds the notification and issues it.
+        assert notificationManager != null;
+        notificationManager.notify(313, builder.build());
+    }
+
+    private void LockApps() {
+        if ((int) db.getAppsCount() != 0) {
+            int count = (int) db.getAppsCount();
+            for (int i = 1; i <= count; ++i) {
+                if (printForegroundTask().equalsIgnoreCase(db.get_app_PKG(i))) {
+                    if (db.get_openCounter(1) >= db.get_openTimes(1)) {
+                        if (db.get_openCounter(1) == 0) {
+                            startActivity(lockIntent);
+                        } else {
+                            startActivity(lockIntent);
+                            db.set_openTimes(db.get_openTimes(1) + 1);
+                        }
+                    } else {
+                        startActivity(Shame);
+                    }
+
+                }
+            }
+        }
+    }
+
+    private String printForegroundTask() {
+        String currentApp = "";
+        @SuppressLint("WrongConstant") UsageStatsManager usm = (UsageStatsManager) this.getSystemService("usagestats");
+        long time = System.currentTimeMillis();
+        assert usm != null;
+        List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time - 1000 * 1000, time);
+        if (appList != null && appList.size() > 0) {
+            SortedMap<Long, UsageStats> mySortedMap = new TreeMap<>();
+            for (UsageStats usageStats : appList) {
+                mySortedMap.put(usageStats.getLastTimeUsed(), usageStats);
+            }
+            if (mySortedMap != null && !mySortedMap.isEmpty()) {
+                currentApp = mySortedMap.get(mySortedMap.lastKey()).getPackageName();
+            }
+        } else {
+            ActivityManager am = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+            assert am != null;
+            List<ActivityManager.RunningAppProcessInfo> tasks = am.getRunningAppProcesses();
+            currentApp = tasks.get(0).processName;
+        }
+
+        Log.e("Foreground App", "Current App in foreground is: " + currentApp);
+        return currentApp;
+    }
+
+    @Override
+    public void onDestroy() {
+        stopService(new Intent(getApplicationContext(), Timer_Service.class));
+        super.onDestroy();
+        db.set_TimerFinish(1);
+        db.set_Running("N");
+//        db.set_LockTime("");
+        db.set_Hours("");
+        db.set_Data("");
+//        db.set_openCounter(0);
+        db.set_openTimes(0);
+        Log.e("Timer Done", "Finish");
+    }
+
+    private void fn_update(String str_time) {
+        intent.putExtra("time", str_time);
+        sendBroadcast(intent);
+    }
+
+    class TimeDisplayTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    calendar = Calendar.getInstance();
+                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+                    strDate = simpleDateFormat.format(calendar.getTime());
+                    Log.e("strDate", strDate);
+                    twoDatesBetweenTime();
+                    LockApps();
+                }
+
+            });
+        }
+
+    }
+}

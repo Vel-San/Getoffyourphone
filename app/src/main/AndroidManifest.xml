@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.nephi.getoffyourphone">
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+
+        <!-- <activity android:name=".MainActivity"> -->
+
+
+        <!-- </activity> -->
+        <activity
+            android:name=".shame_activity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".locked"
+            android:launchMode="singleInstance" />
+
+        <activity
+            android:name=".Main"
+            android:theme="@style/AppTheme.BrandedLaunch">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".FireBaseIDservice">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Timer_Service"
+            android:process=":Timer_Service"
+            android:stopWithTask="false" />
+        <!-- <service -->
+        <!-- android:name=".ReviverService" -->
+        <!-- android:process=":ReviverService" -->
+        <!-- android:stopWithTask="false" /> -->
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="REPLACE WITH UR OWN" />
+    </application>
+
+</manifest>

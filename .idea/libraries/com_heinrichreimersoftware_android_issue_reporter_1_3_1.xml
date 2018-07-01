@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.heinrichreimersoftware:android-issue-reporter-1.3.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/android-issue-reporter-1.3.1.aar/c75d0b83b31a6e8918ef164c311292de/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/android-issue-reporter-1.3.1.aar/c75d0b83b31a6e8918ef164c311292de/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
