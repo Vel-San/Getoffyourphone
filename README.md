@@ -47,15 +47,17 @@ ______
 
 *Permissions:*
 
-- Update component usage statistics
+- Update component usage statistics ( To check if an app is running or not )
 
-- Receive data from Internet
+- ~~Receive data from Internet~~ **Not needed anymore**
 
-- View network connections
+- ~~View network connections~~ **Not needed anymore**
 
-- Full network access
+- ~~Full network access~~ **Not needed anymore**
 
-- Prevent device from sleeping
+- Prevent device from sleeping (wakelock)
+
+- Vibrate (For Notifications)
 
 ______
 
@@ -63,11 +65,11 @@ ______
 
 You need to change the following files/tokens to your OWN private ones:
 
-- Fabric key in manifest
-- FireBase project name in xml
+- ~~Fabric key in manifest~~ **Removed**
+- ~~FireBase project name in xml~~ **Removed**
 - GitHub Account credentials and Bot Token from Main.java
 - Change About Me data in Main.java
-- Json file in App folder
+- ~~Json file in App folder~~ **Removed**
 
 **Other:**
 
