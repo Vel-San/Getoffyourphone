@@ -149,7 +149,7 @@ public class Main extends DrawerActivity {
         //AboutPageView
         aboutPage = new AboutPage(Main.this)
                 .isRTL(false)
-                .setDescription("Free - v5.4r" + "\nAn App that simply tries to help you achieve a more-productive day;\nIf it helped you, it would be greatly appreciated to leave a rating !")
+                .setDescription("Free - v5.5r" + "\nAn App that simply tries to help you achieve a more-productive day;\nIf it helped you, it would be greatly appreciated to leave a rating !")
                 //.setImage(R.drawable.dummy_image)
                 //.addItem(new Element().setTitle("Version 6.2"))
                 //.addItem(adsElement)
