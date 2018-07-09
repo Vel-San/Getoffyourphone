@@ -68,4 +68,8 @@ You need to change the following files/tokens to your OWN private ones:
 - GitHub Account credentials and Bot Token from Main.java
 - Change About Me data in Main.java
 - Json file in App folder
+
+**Other:**
+
+-You can contribute to this project by submitting your pull requests.
 ______
