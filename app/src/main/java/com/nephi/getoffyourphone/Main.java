@@ -34,7 +34,6 @@ import com.facebook.stetho.Stetho;
 import com.franmontiel.attributionpresenter.AttributionPresenter;
 import com.franmontiel.attributionpresenter.entities.Attribution;
 import com.franmontiel.attributionpresenter.entities.License;
-import com.github.javiersantos.appupdater.AppUpdater;
 import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher;
 import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
@@ -126,7 +125,6 @@ public class Main extends DrawerActivity {
         isIgnoringBattery();
 //        update_check();
         first_Boot_check();
-        check_for_playStore_update();
         try {
             LS = getInstalledComponentList();
         } catch (PackageManager.NameNotFoundException e) {
@@ -346,11 +344,6 @@ public class Main extends DrawerActivity {
         startService(intent_service);
     }
 
-    public void check_for_playStore_update() {
-        AppUpdater appUpdater = new AppUpdater(this);
-        appUpdater.start();
-    }
-
 //    public void redirectStore(String updateUrl) {
 //        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -559,7 +552,7 @@ public class Main extends DrawerActivity {
         addDivider();
         addItem(
                 new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.ic_system_update_white_24dp))
+                        .setImage(getResources().getDrawable(R.drawable.baseline_system_update_white_48))
                         .setTextPrimary("Recent Changes")
                         .setTextSecondary("What's new in this release")
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
