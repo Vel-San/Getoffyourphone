@@ -39,22 +39,6 @@
         <item name="colorAccent">@color/white</item>
     </style>
 
-    <style name="PreferenceThemeOverlay">
-        <item name="preferenceScreenStyle">@style/Preference.PreferenceScreen</item>
-        <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment</item>
-        <item name="preferenceCategoryStyle">@style/Preference.Category</item>
-        <item name="preferenceStyle">@style/Preference</item>
-        <item name="preferenceInformationStyle">@style/Preference.Information</item>
-        <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference</item>
-        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat</item>
-        <item name="seekBarPreferenceStyle">@style/Preference.SeekBarPreference</item>
-        <item name="dialogPreferenceStyle">@style/Preference.DialogPreference</item>
-        <item name="editTextPreferenceStyle">@style/Preference.DialogPreference.EditTextPreference</item>
-        <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList</item>
-        <item name="dropdownPreferenceStyle">@style/Preference.DropDown</item>
-        <item name="android:background">#222222</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
 
 </resources>
 

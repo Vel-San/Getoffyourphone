@@ -6,9 +6,7 @@
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -39,12 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name=".FireBaseIDservice">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
         <service
             android:name=".Timer_Service"
             android:process=":Timer_Service"
@@ -53,10 +45,6 @@
         <!-- android:name=".ReviverService" -->
         <!-- android:process=":ReviverService" -->
         <!-- android:stopWithTask="false" /> -->
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="REPLACE WITH UR OWN" />
     </application>
 
 </manifest>

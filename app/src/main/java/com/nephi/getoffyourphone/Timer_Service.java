@@ -24,10 +24,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,7 +35,6 @@ import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-import io.fabric.sdk.android.Fabric;
 
 public class Timer_Service extends Service {
 
@@ -68,11 +63,6 @@ public class Timer_Service extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        final Fabric fabric = new Fabric.Builder(this)
-                .kits(new Crashlytics(), new Answers())
-                .debuggable(true)
-                .build();
-        Fabric.with(fabric);
         //Lock Screen launch
         lockIntent = new Intent(this, locked.class);
         lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -94,8 +84,6 @@ public class Timer_Service extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        Answers.getInstance().logCustom(new CustomEvent("Service_Task")
-                .putCustomAttribute("Removed&Restarted?", "YES"));
         Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
         restartServiceIntent.setPackage(getPackageName());
 
@@ -150,8 +138,6 @@ public class Timer_Service extends Service {
                 //db.set_Running("Y");
                 fn_update(str_testing);
             } else {
-                Answers.getInstance().logCustom(new CustomEvent("Timer_Finished")
-                        .putCustomAttribute("Finished?", "YES"));
                 stopService(new Intent(getApplicationContext(), Timer_Service.class));
                 notification_update();
                 db.set_TimerFinish(1);

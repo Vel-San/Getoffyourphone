@@ -28,9 +28,6 @@ import android.widget.TextView;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 import com.danimahardhika.cafebar.CafeBar;
 import com.danimahardhika.cafebar.CafeBarTheme;
 import com.facebook.stetho.Stetho;
@@ -38,8 +35,6 @@ import com.franmontiel.attributionpresenter.AttributionPresenter;
 import com.franmontiel.attributionpresenter.entities.Attribution;
 import com.franmontiel.attributionpresenter.entities.License;
 import com.github.javiersantos.appupdater.AppUpdater;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.crash.FirebaseCrash;
 import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher;
 import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
@@ -55,7 +50,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-import io.fabric.sdk.android.Fabric;
 import mehdi.sakout.aboutpage.AboutPage;
 
 
@@ -104,15 +98,9 @@ public class Main extends DrawerActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Fabric fabric = new Fabric.Builder(this)
-                .kits(new Crashlytics(), new Answers())
-                .debuggable(true)
-                .build();
-        Fabric.with(fabric);
-        FirebaseApp.initializeApp(this);
+
 //        startService(new Intent(this, ReviverService.class));
         init();
-        FirebaseCrash.setCrashCollectionEnabled(!BuildConfig.DEBUG);
     }
 
     public void init() {
@@ -193,8 +181,6 @@ public class Main extends DrawerActivity {
     public void first_Boot_check() {
         //First launch and update check
         if (db.getFirstBootCount() == 0) {
-            Answers.getInstance().logCustom(new CustomEvent("First_Boot")
-                    .putCustomAttribute("FirstBoot?", "YES"));
             db.set_AllTimerData("", "N", 1, "", 0, "");
             db.set_defaultOpenCounter(0, 0);
 //            saveVersionNameAndCode(this);
@@ -214,8 +200,6 @@ public class Main extends DrawerActivity {
                     .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Answers.getInstance().logCustom(new CustomEvent("Usage_Permission")
-                                    .putCustomAttribute("Clicked?", "YES"));
                             Intent intent = new Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS);
                             startActivity(intent);
                         }
@@ -307,11 +291,6 @@ public class Main extends DrawerActivity {
                                                     .maxLines(4)
                                                     .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
                                                     .show();
-
-                                            Answers.getInstance().logCustom(new CustomEvent("Start Lock")
-                                                    .putCustomAttribute("Selection: ", db.get_LockTime(1))
-                                                    .putCustomAttribute("Open-Counter: ", db.get_openCounter(1))
-                                                    .putCustomAttribute("Pro Version?", "False"));
 
                                             final Handler handler = new Handler();
                                             handler.postDelayed(new Runnable() {
@@ -407,8 +386,6 @@ public class Main extends DrawerActivity {
                         .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Answers.getInstance().logCustom(new CustomEvent("Battery_Optimisation")
-                                        .putCustomAttribute("Permission_Given?", "YES"));
                                 Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
 //                                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                                 //intent.setData(Uri.parse("package:" + package_name));
@@ -480,9 +457,6 @@ public class Main extends DrawerActivity {
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, final long id, int position) {
-                                //Fire-Base events capture, every thing below is created every time you click on this drawer item
-                                Answers.getInstance().logCustom(new CustomEvent("App_Selector")
-                                        .putCustomAttribute("Clicked?", "YES"));
                                 //Checking if the lock is running or not
                                 if (db.get_Running(1).equals("N")) {
 
@@ -514,10 +488,6 @@ public class Main extends DrawerActivity {
                                                         //Toast.makeText(Main.this,"Selected Ids : " + ids.get(i),Toast.LENGTH_SHORT).show();
                                                     }
 
-                                                    Answers.getInstance().logCustom(new CustomEvent("App_Selector")
-                                                            .putCustomAttribute("Applied?", "YES")
-                                                            .putCustomAttribute("Apps Count", ids.size()));
-
                                                     //Showing result in a cafeBar
                                                     CafeBar.builder(Main.this)
                                                             .duration(CafeBar.Duration.SHORT)
@@ -536,8 +506,6 @@ public class Main extends DrawerActivity {
                                                 //I added this button to your library, this clears all
                                                 //selections, tho, it needs an app restart to see it visually
                                                 public void onClear() {
-                                                    Answers.getInstance().logCustom(new CustomEvent("App_Selector")
-                                                            .putCustomAttribute("Cleared?", "YES"));
                                                     db.deleteAll();
                                                     db.set_Selected(0);
                                                     preselectedApps = new ArrayList<>();
@@ -575,8 +543,6 @@ public class Main extends DrawerActivity {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
                                 //Toast.makeText(MainActivity.this, "Clicked first item #" + id, Toast.LENGTH_SHORT).show();
-                                Answers.getInstance().logCustom(new CustomEvent("Help_Screen")
-                                        .putCustomAttribute("Clicked?", "YES"));
                                 new LovelyCustomDialog(Main.this)
                                         .setTopColorRes(R.color.blue)
                                         .setTitle("Help")
@@ -599,8 +565,6 @@ public class Main extends DrawerActivity {
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
-                                Answers.getInstance().logCustom(new CustomEvent("Recent_Changes")
-                                        .putCustomAttribute("Clicked?", "YES"));
                                 new LovelyCustomDialog(Main.this)
                                         .setTopColorRes(R.color.blue)
                                         .setTitle("Recent Changes")
@@ -625,8 +589,6 @@ public class Main extends DrawerActivity {
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
-                                Answers.getInstance().logCustom(new CustomEvent("Issue_Reporter")
-                                        .putCustomAttribute("Clicked?", "YES"));
                                 IssueReporterLauncher.forTarget("REPLACE WITH UR OWN", "REPLACE WITH UR OWN")
                                         // [Recommended] Theme to use for the reporter.
                                         // (See #theming for further information.)
@@ -663,8 +625,6 @@ public class Main extends DrawerActivity {
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
-                                Answers.getInstance().logCustom(new CustomEvent("Libraries_Used")
-                                        .putCustomAttribute("Clicked?", "YES"));
                                 libraries_used();
                                 // demoRef.child("Recent Changes").setValue("Gibirish Text Here");
 
@@ -681,8 +641,6 @@ public class Main extends DrawerActivity {
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
-                                Answers.getInstance().logCustom(new CustomEvent("About_Me")
-                                        .putCustomAttribute("Clicked?", "YES"));
                                 if (aboutPage.getParent() != null)
                                     ((ViewGroup) aboutPage.getParent()).removeView(aboutPage);
                                 new LovelyCustomDialog(Main.this)
@@ -895,8 +853,6 @@ public class Main extends DrawerActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Answers.getInstance().logCustom(new CustomEvent("App_Resume")
-                .putCustomAttribute("Resumed?", "YES"));
         registerReceiver(broadcastReceiver, new IntentFilter(Timer_Service.str_receiver));
         Log.e("Lock_Time", db.get_LockTime(1));
         Log.e("IsRunning?", db.get_Running(1));
