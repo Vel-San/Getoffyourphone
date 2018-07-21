@@ -34,7 +34,6 @@ import com.facebook.stetho.Stetho;
 import com.franmontiel.attributionpresenter.AttributionPresenter;
 import com.franmontiel.attributionpresenter.entities.Attribution;
 import com.franmontiel.attributionpresenter.entities.License;
-import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher;
 import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
@@ -84,10 +83,12 @@ public class Main extends DrawerActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String str_time = intent.getStringExtra("time");
-            title_timer.setText("Time left: " + str_time + "\n" + "Selected time: " + db.get_Hours(1)
-                    + " mins/hours\n" + "Selected counter: " + db.get_openCounter(1) + "+ Times");
+            title_timer.setText(getString(R.string.time_left1)
+                    + str_time
+                    + "\n" + getString(R.string.selected_time) + db.get_Hours(1)
+                    + getString(R.string.minutes_hours) + "\n" + getString(R.string.selected_counter) + db.get_openCounter(1) + getString(R.string.open_times));
             if (db.get_TimerFinish(1) == 1) {
-                title_timer.setText("Lock Timer Not Running");
+                title_timer.setText(getString(R.string.not_running));
             }
         }
     };
@@ -136,7 +137,7 @@ public class Main extends DrawerActivity {
         about_page();
         //Title text change
         if (db.get_Running(1).equals("N")) {
-            title_timer.setText("Lock Timer Not Running");
+            title_timer.setText(getString(R.string.not_running));
         }
         Stetho.initializeWithDefaults(this);
 
@@ -147,19 +148,19 @@ public class Main extends DrawerActivity {
         //AboutPageView
         aboutPage = new AboutPage(Main.this)
                 .isRTL(false)
-                .setDescription("Free - v5.5r" + "\nAn App that simply tries to help you achieve a more-productive day;\nIf it helped you, it would be greatly appreciated to leave a rating !")
+                .setDescription(getString(R.string.dialog_description))
                 //.setImage(R.drawable.dummy_image)
                 //.addItem(new Element().setTitle("Version 6.2"))
                 //.addItem(adsElement)
                 //.addGroup("Connect with us")
-                //.addEmail("REPLACE WITH UR OWN")
+                .addEmail("goyp.sup@outlook.com")
                 //.addWebsite("REPLACE WITH UR OWN")
                 //.addFacebook("REPLACE WITH UR OWN")
                 //.addTwitter("REPLACE WITH UR OWN")
                 //.addYoutube("REPLACE WITH UR OWN")
                 .addPlayStore("com.nephi.getoffyourphone")
                 //.addInstagram("REPLACE WITH UR OWN")
-                //.addGitHub("REPLACE WITH UR OWN")
+                .addGitHub("Alikaraki95")
                 //.addItem(getCopyRightsElement())
                 .create();
 
@@ -193,8 +194,8 @@ public class Main extends DrawerActivity {
                     .setTopColorRes(R.color.blue)
                     .setButtonsColorRes(R.color.black)
                     .setIcon(R.drawable.ic_perm_device_information_white_48dp)
-                    .setTitle("Do you want to give usage permissions ?")
-                    .setMessage("Without this permission, the app won't work")
+                    .setTitle(getString(R.string.permission_check_title))
+                    .setMessage(getString(R.string.permission_check_message))
                     .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -234,8 +235,8 @@ public class Main extends DrawerActivity {
                             new LovelyStandardDialog(Main.this)
                                     .setTopColorRes(R.color.blue)
                                     .setIcon(R.drawable.ic_lock)
-                                    .setTitle("Confirm selections ?")
-                                    .setMessage("You cannot change these settings until the timer finishes!")
+                                    .setTitle(getString(R.string.lockBT_dialog_title))
+                                    .setMessage(getString(R.string.lockBT_dialog_message))
                                     .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -246,12 +247,12 @@ public class Main extends DrawerActivity {
                                                     h_value = selected_hour.getValue();
                                                     start_timer(h_value);
                                                     db.set_LockTime(h_value);
-                                                    toastMessage += "Hours: " + selected_hour.getTitle();
+                                                    toastMessage += getString(R.string.hours) + selected_hour.getTitle();
                                                 } else if (db.get_Running(1).equals("Y")) {
-                                                    toastMessage += "Timer already running, new selection ignored.";
+                                                    toastMessage += getString(R.string.toast_already_running);
                                                 }
                                             } else {
-                                                toastMessage += "No hours selected.";
+                                                toastMessage += getString(R.string.toast_no_hour_selection);
                                             }
 
                                             if (counter_selector.hasSelection()) {
@@ -261,26 +262,26 @@ public class Main extends DrawerActivity {
                                                 switch (c_value) {
                                                     case "5_times":
                                                         db.set_openCounter(5);
-                                                        toastMessage += "\nCounter: " + selected_Counter.getTitle();
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
                                                         break;
                                                     case "15_times":
                                                         db.set_openCounter(15);
-                                                        toastMessage += "\nCounter: " + selected_Counter.getTitle();
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
                                                         break;
                                                     case "20_times":
                                                         db.set_openCounter(20);
-                                                        toastMessage += "\nCounter: " + selected_Counter.getTitle();
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
                                                         break;
                                                     case "21_times":
                                                         db.set_openCounter(21);
-                                                        toastMessage += "\nCounter: " + selected_Counter.getTitle();
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
                                                         break;
                                                 }
 //                                                    } else {
 //                                                        toastMessage += "\nCounter already Selected, new Counter ignored.";
 //                                                    }
                                             } else {
-                                                toastMessage += "\nNo counter selected.";
+                                                toastMessage += getString(R.string.toast_no_counter_selection);
                                             }
                                             notification_update();
                                             CafeBar.builder(Main.this)
@@ -305,7 +306,7 @@ public class Main extends DrawerActivity {
                         } else {
                             CafeBar.builder(Main.this)
                                     .duration(CafeBar.Duration.SHORT)
-                                    .content("Please select Desired Lock Time")
+                                    .content(getString(R.string.cafebar_error))
                                     .maxLines(4)
                                     .theme(CafeBarTheme.Custom(Color.parseColor("#C62828")))
                                     .show();
@@ -313,7 +314,7 @@ public class Main extends DrawerActivity {
                     } else if (db.get_Selected(1) == 0) {
                         CafeBar.builder(Main.this)
                                 .duration(CafeBar.Duration.SHORT)
-                                .content("Select at least 1 app to lock")
+                                .content(getString(R.string.cafebar_error2))
                                 .maxLines(4)
                                 .theme(CafeBarTheme.Custom(Color.parseColor("#C62828")))
                                 .show();
@@ -321,7 +322,7 @@ public class Main extends DrawerActivity {
                 } else if (db.get_Running(1).equals("Y")) {
                     CafeBar.builder(Main.this)
                             .duration(CafeBar.Duration.MEDIUM)
-                            .content("Timer already running.")
+                            .content(getString(R.string.cafebar_error3))
                             .maxLines(4)
                             .theme(CafeBarTheme.Custom(Color.parseColor("#C62828")))
                             .show();
@@ -374,8 +375,8 @@ public class Main extends DrawerActivity {
                         .setTopColorRes(R.color.blue)
                         .setButtonsColorRes(R.color.black)
                         .setIcon(R.drawable.ic_perm_device_information_white_48dp)
-                        .setTitle("Disable Battery Optimization?")
-                        .setMessage("I STRONGLY RECOMMEND DISABLING THIS.\n\nAndroid System will kill the app after a short while if this is Enabled!")
+                        .setTitle(getString(R.string.battery_dialog_title))
+                        .setMessage(getString(R.string.battery_dialog_message))
                         .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -445,8 +446,8 @@ public class Main extends DrawerActivity {
         addItem(
                 new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.ic_installed))
-                        .setTextPrimary("Select Apps")
-                        .setTextSecondary("Select the apps to lock")
+                        .setTextPrimary(getString(R.string.drawer_item1_text))
+                        .setTextSecondary(getString(R.string.drawer_item1_text2))
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, final long id, int position) {
@@ -455,16 +456,16 @@ public class Main extends DrawerActivity {
 
                                     //Creating multi dialog
                                     multiSelectDialog = new MultiSelectDialog()
-                                            .title("Select Apps: ") //setting title for dialog
+                                            .title(R.string.app_selector_title) //setting title for dialog
                                             .titleSize(20) //setting textSize
-                                            .positiveText("Apply") //setting Submit text
-                                            .negativeText("Cancel") //setting Cancel text
-                                            .clearText("Clear")
+                                            .positiveText(getString(R.string.app_selector_apply)) //setting Submit text
+                                            .negativeText(getString(R.string.app_selector_cancel)) //setting Cancel text
+                                            .clearText(getString(R.string.app_selector_clear))
                                             .preSelectIDsList(preselectedApps) //List of ids that you need to be selected
                                             .multiSelectList(listOfApps) // the multi select model list with ids and name
                                             .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
                                                 @Override
-                                                public void onDismiss(ArrayList<Integer> ids, String dataString) throws PackageManager.NameNotFoundException {
+                                                public void onDismiss(ArrayList<Integer> ids, String dataString) {
                                                     //Clear previous selections from DB and add the new ones
                                                     db.deleteAll();
                                                     if (ids.size() >= 1) {
@@ -484,7 +485,7 @@ public class Main extends DrawerActivity {
                                                     //Showing result in a cafeBar
                                                     CafeBar.builder(Main.this)
                                                             .duration(CafeBar.Duration.SHORT)
-                                                            .content("Selected Apps: " + ids.size())
+                                                            .content(getString(R.string.selected_apps) + ids.size())
                                                             .maxLines(4)
                                                             .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
                                                             .show();
@@ -504,7 +505,7 @@ public class Main extends DrawerActivity {
                                                     preselectedApps = new ArrayList<>();
                                                     CafeBar.builder(Main.this)
                                                             .duration(CafeBar.Duration.SHORT)
-                                                            .content("Selections Cleared")
+                                                            .content(getString(R.string.cafebar_error4))
                                                             .maxLines(4)
                                                             .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
                                                             .show();
@@ -515,7 +516,7 @@ public class Main extends DrawerActivity {
                                 } else {
                                     CafeBar.builder(Main.this)
                                             .duration(CafeBar.Duration.MEDIUM)
-                                            .content("Apps already selected, wait until timer ends")
+                                            .content(getString(R.string.cafebar_error5))
                                             .maxLines(4)
                                             .theme(CafeBarTheme.Custom(Color.parseColor("#C62828")))
                                             .show();
@@ -530,16 +531,16 @@ public class Main extends DrawerActivity {
         addItem(
                 new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.ic_help_outline_white_48dp))
-                        .setTextPrimary("Help")
-                        .setTextSecondary("Important usage information")
+                        .setTextPrimary(getString(R.string.drawer_item2_text))
+                        .setTextSecondary(getString(R.string.drawer_item2_text2))
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
                                 //Toast.makeText(MainActivity.this, "Clicked first item #" + id, Toast.LENGTH_SHORT).show();
                                 new LovelyCustomDialog(Main.this)
                                         .setTopColorRes(R.color.blue)
-                                        .setTitle("Help")
-                                        .setMessage("General Info:\n\n1- You CANNOT lock apps without selecting a timer\n\n2- You CAN lock apps without selecting App-Open Counter\n\n3- App will close when you confirm lock down and a notification will show up\n\n4- You can dismiss the notification, and a \"Timer Finished\" notification will show when the lock-down is done\n\n______\n\n-Select Desired Time:\n\nThis option is where the magic happens, you select the desired time, which will be the duration of apps lock-down. After you select this, you cannot change it until lock-down is done. Please do not force close the app or you will have to clear app data.\n\n-Select Desired Counter:\n\nThis option is related to how many times you open the locked apps. All you have to do is select an option, every time you bypass the selected value, the Lock Screen ( screen that opens when you launch a locked app ) will change. I made 4 lock screens, each with a different GIF and text that will somehow, make you feel ashamed for passing the limit. You CANNOT change this after starting the lock-down, until it finishes.\n\nThat's all ! if you have any issues or concerns please don't hesitate to use the built-in issue reporter. Enjoy !")
+                                        .setTitle(getString(R.string.drawer_item2_dialog_title))
+                                        .setMessage(getString(R.string.drawer_item2_dialog_message))
                                         .setIcon(R.drawable.ic_help_outline_white_48dp)
                                         //.configureView(/* ... */)
                                         //.setListener(R.id.ld_btn_yes, /* ... */)
@@ -553,15 +554,15 @@ public class Main extends DrawerActivity {
         addItem(
                 new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.baseline_system_update_white_48))
-                        .setTextPrimary("Recent Changes")
-                        .setTextSecondary("What's new in this release")
+                        .setTextPrimary(getString(R.string.drawer_item3_text))
+                        .setTextSecondary(getString(R.string.drawer_item3_text2))
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
                                 new LovelyCustomDialog(Main.this)
                                         .setTopColorRes(R.color.blue)
-                                        .setTitle("Recent Changes")
-                                        .setMessage(R.string.changes)
+                                        .setTitle(getString(R.string.drawer_item3_dialog_title))
+                                        .setMessage(getString(R.string.changes))
                                         .setIcon(R.drawable.ic_fiber_new)
                                         //.configureView(/* ... */)
                                         //.setListener(R.id.ld_btn_yes, /* ... */)
@@ -572,49 +573,12 @@ public class Main extends DrawerActivity {
                         })
         );
 
-
-        addDivider();
-        addItem(
-                new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.ic_bug_report_white_48dp))
-                        .setTextPrimary("Issue Reporter")
-                        .setTextSecondary("Report any issues you're facing")
-                        .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
-                            @Override
-                            public void onClick(DrawerItem drawerItem, long id, int position) {
-                                IssueReporterLauncher.forTarget("REPLACE WITH UR OWN", "REPLACE WITH UR OWN")
-                                        // [Recommended] Theme to use for the reporter.
-                                        // (See #theming for further information.)
-                                        .theme(R.style.Theme_IssueReporter_Light)
-                                        // [Optional] Auth token to open issues if users don't have a GitHub account
-                                        // You can register a bot account on GitHub and copy ist OAuth2 token here.
-                                        // (See #how-to-create-a-bot-key for further information.)
-                                        .guestToken("REPLACE WITH UR OWN")
-                                        // [Optional] Force users to enter an email adress when the report is sent using
-                                        // the guest token.
-                                        .guestEmailRequired(true)
-                                        // [Optional] Set a minimum character limit for the description to filter out
-                                        // empty reports.
-                                        .minDescriptionLength(20)
-                                        // [Optional] Include other relevant info in the bug report (like custom variables)
-//                                        .putExtraInfo("Test 1", "Example string")
-                                        .putExtraInfo("Pro Version?", false)
-                                        // [Optional] Disable back arrow in toolbar
-                                        .homeAsUpEnabled(false)
-                                        .launch(Main.this);
-                                // demoRef.child("Recent Changes").setValue("Gibirish Text Here");
-
-                            }
-                        })
-        );
-
-
         addDivider();
         addItem(
                 new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.ic_local_library))
-                        .setTextPrimary("Libraries")
-                        .setTextSecondary("Libraries used to cook this app")
+                        .setTextPrimary(getString(R.string.drawer_item4_text))
+                        .setTextSecondary(getString(R.string.drawer_item4_text2))
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
@@ -629,8 +593,8 @@ public class Main extends DrawerActivity {
         addItem(
                 new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.ic_tag_faces))
-                        .setTextPrimary("About Me")
-                        .setTextSecondary("Social Links")
+                        .setTextPrimary(getString(R.string.drawer_item5_text))
+                        .setTextSecondary(getString(R.string.drawer_item5_text2))
                         .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
                             @Override
                             public void onClick(DrawerItem drawerItem, long id, int position) {
@@ -639,8 +603,8 @@ public class Main extends DrawerActivity {
                                 new LovelyCustomDialog(Main.this)
                                         .setView(aboutPage)
                                         .setTopColorRes(R.color.blue)
-                                        .setTitle("About")
-                                        .setMessage("Social Links Below")
+                                        .setTitle(getString(R.string.drawer_item5_dialog_title))
+                                        .setMessage(getString(R.string.drawer_item5_dialog_message))
                                         .setIcon(R.drawable.ic_tag_faces)
                                         //.configureView(/* ... */)
                                         //.setListener(R.id.ld_btn_yes, /* ... */)
@@ -681,13 +645,6 @@ public class Main extends DrawerActivity {
                                 .build()
                 )
                 .addAttributions(
-                        new Attribution.Builder("Android-issue-reporter")
-                                .addCopyrightNotice("Copyright (c) 2017 Jan Heinrich Reimer")
-                                .addLicense(License.MIT)
-                                .setWebsite("https://github.com/heinrichreimer/android-issue-reporter")
-                                .build()
-                )
-                .addAttributions(
                         new Attribution.Builder("Material Drawer")
                                 .addCopyrightNotice("Copyright (c) 2017 Jan Heinrich Reimer")
                                 .addLicense(License.MIT)
@@ -699,13 +656,6 @@ public class Main extends DrawerActivity {
                                 .addCopyrightNotice("Copyright (c) 2017 Francisco José Montiel Navarro")
                                 .addLicense(License.APACHE)
                                 .setWebsite("https://github.com/franmontiel/AttributionPresenter")
-                                .build()
-                )
-                .addAttributions(
-                        new Attribution.Builder("AppUpdater")
-                                .addCopyrightNotice("Copyright (c) 2016 Javier Santos")
-                                .addLicense(License.APACHE)
-                                .setWebsite("https://github.com/javiersantos/AppUpdater")
                                 .build()
                 )
                 .addAttributions(
@@ -774,9 +724,9 @@ public class Main extends DrawerActivity {
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
                 //.setDefaults(Notification.) // also requires VIBRATE permission
                 .setSmallIcon(R.mipmap.ic_launcher) // Required!
-                .setContentTitle("Click to open app")
-                .setContentText("Time Chosen: " + db.get_Hours(1) + " mins/hours" + "\n" + "App-Open: " + db.get_openCounter(1) + " Times")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("Time Chosen: " + db.get_Hours(1) + " mins/hours" + "\n" + "App-Opens Counter: " + db.get_openCounter(1) + "+ Times"))
+                .setContentTitle(getString(R.string.notification_title1))
+                .setContentText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + ", " + getString(R.string.app_open1) + db.get_openCounter(1) + getString(R.string.open_times))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + "\n" + getString(R.string.app_open2) + db.get_openCounter(1) + getString(R.string.open_times)))
                 .setVibrate(new long[]{0, 500})
                 //.setAutoCancel(true)
                 .setContentIntent(pIntent);

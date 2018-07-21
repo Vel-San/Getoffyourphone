@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             app:swipe_itemsXmlResource="@xml/items_size"
             app:swipe_unselectedItemDescription="@string/start_by_swiping_left"
-            app:swipe_unselectedItemTitle="Select Desired Time" />
+            app:swipe_unselectedItemTitle="@string/select_desired_time" />
 
         <View
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             app:swipe_itemsXmlResource="@xml/items_toppings"
             app:swipe_unselectedItemDescription="@string/start_by_swiping_left"
-            app:swipe_unselectedItemTitle="Select Desired Counter" />
+            app:swipe_unselectedItemTitle="@string/select_desired_counter" />
 
         <View
             android:layout_width="match_parent"

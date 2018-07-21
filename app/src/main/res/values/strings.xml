@@ -4,7 +4,90 @@
     <string name="description">You can lock your selected apps using the options below</string>
     <string name="lock_button">LOCK SELECTED APPS !</string>
     <string name="start_by_swiping_left">Start by swiping left.</string>
+    <string name="select_desired_counter">Select Desired Counter.</string>
+    <string name="select_desired_time">Select Desired Time.</string>
+
+    <string name="time_left1">Time Left:&#160;</string>
+    <string name="time_left2">Time left to unlock:&#160;</string>
+
+    <string name="time_chosen">Time Chosen:&#160;</string>
+    <string name="times">&#160;Times</string>
+    <string name="app_open1">App-Open:&#160;</string>
+    <string name="app_open2">App-Open Counter:&#160;</string>
+    <string name="minutes_hours">&#160;mins/hours</string>
+    <string name="hours">Hours:&#160;</string>
+    <string name="counter">\nCounter:&#160;</string>
+
+    <string name="selected_time">Selected Time:&#160;</string>
+    <string name="selected_counter">Selected Counter:&#160;</string>
+    <string name="selected_apps">Selected Apps:&#160;</string>
+
+    <string name="open_times">+ Times</string>
+    <string name="not_running">Lock Timer Not Running</string>
+    <string name="dialog_description">v5.6r\nAn App that simply tries to help you achieve a more-productive day;\nIf it helped you, it would be greatly appreciated to leave a rating !"</string>
+
+    <string name="permission_check_title">Do you want to give usage permissions ?</string>
+    <string name="permission_check_message">Without this permission, the app won\'t work</string>
+
+    <string name="lockBT_dialog_title">Confirm selections ?</string>
+    <string name="lockBT_dialog_message">You cannot change these settings until the timer ends!</string>
+
+    <string name="toast_already_running">Timer already running, new selection ignored</string>
+    <string name="toast_no_hour_selection">No hours selected</string>
+    <string name="toast_no_counter_selection">\nNo counter selected</string>
+
+    <string name="cafebar_error">Please select Desired Lock Time</string>
+    <string name="cafebar_error2">Select at least 1 app to lock</string>
+    <string name="cafebar_error3">Timer already running</string>
+    <string name="cafebar_error4">Selections Cleared</string>
+    <string name="cafebar_error5">Apps already selected, wait until timer ends</string>
+
+    <string name="battery_dialog_title">Disable Battery Optimization?</string>
+    <string name="battery_dialog_message">I STRONGLY RECOMMEND DISABLING THIS.\nAndroid System will kill the app after a short while if this is Enabled!</string>
+
+    <string name="drawer_item1_text">Select Apps</string>
+    <string name="drawer_item1_text2">Select the apps to lock</string>
+    <string name="drawer_item2_text">Help</string>
+    <string name="drawer_item2_text2">Important usage information</string>
+    <string name="drawer_item3_text">Recent Changes</string>
+    <string name="drawer_item3_text2">What\'s new in this release</string>
+    <string name="drawer_item4_text">Libraries</string>
+    <string name="drawer_item4_text2">Libraries used to cook this app</string>
+    <string name="drawer_item5_text">About Me</string>
+    <string name="drawer_item5_text2">Social Links</string>
+
+    <string name="app_selector_title">Select Apps: </string>
+    <string name="app_selector_apply">Apply</string>
+    <string name="app_selector_cancel">Cancel</string>
+    <string name="app_selector_clear">Clear</string>
+
+    <string name="drawer_item2_dialog_title">Help</string>
+    <string name="drawer_item2_dialog_message">General Info:\n\n1- You CANNOT lock apps without selecting a timer\n2- You CAN lock apps without selecting App-Open Counter\n3- App will close when you confirm lock down and a notification will show up\n4- You can dismiss the notification, and a "Timer Finished" notification will show when the lock-down is done\n\n______\n\n-Select Desired Time:\nThis option is where the magic happens, you select the desired time, which will be the duration of apps lock-down. After you select this, you cannot change it until lock-down is done. Please do not force close the app or you will have to clear app data.\n\n-Select Desired Counter:\nThis option is related to how many times you open the locked apps. All you have to do is select an option, every time you bypass the selected value, the Lock Screen ( screen that opens when you launch a locked app ) will change. I made 4 lock screens, each with a different GIF and text that will somehow, make you feel ashamed for passing the limit. You CANNOT change this after starting the lock-down, until it finishes.\n\nThat\'s all ! if you have any issues or concerns please don't hesitate to use the built-in issue reporter. Enjoy !</string>
+    <string name="drawer_item3_dialog_title">Recent Changes</string>
+    <string name="drawer_item5_dialog_title">About</string>
+    <string name="drawer_item5_dialog_message">Social Links Below</string>
+
+    <string name="notification_title1">Click to open app</string>
+    <string name="notification_title2">Lock-Down Finished !</string>
+    <string name="notification_message">You can use your apps again</string>
+
+    <string name="shame_message1">You see that box ? That\'s you in the box. \nYou have no self control. \nGet Back to Work.\nTime left to unlock:&#160;</string>
+    <string name="shame_message2">OH I\'VE GOT YOU NOW!\nTOUCH THIS APP ONE MORE TIME.\nI DARE YOU, I DOUBLE DARE YOU!\nTime left to unlock:&#160;</string>
+    <string name="shame_message3">You\'re pushing my buttons here..\nWhy are you doing this ?\nIt\'s already locked &amp; loaded now\nTime left to unlock:&#160;</string>
+    <string name="shame_message4">BRING IT ON !\nDODGE THIS\nDODGE THAT\nNO WAY TO RUN!!!\nTime left to unlock:&#160;</string>
+
+    <string name="swipe_item1">Just a tiny bit of control, lock my apps for 30 minutes</string>
+    <string name="swipe_item2">Quick and fast, lock my apps for 1 hour</string>
+    <string name="swipe_item3">I need to finish a task that needs a bit of time, lock my apps for 2 hours</string>
+    <string name="swipe_item4">HELP ME PLEASE!! Lock my apps for 3 hours !</string>
+
+    <string name="swipe_item5">Meh.. I know my limits</string>
+    <string name="swipe_item6">Well, I thought i needed a break anyways</string>
+    <string name="swipe_item7">Okay Okay, this is getting out of hands</string>
+    <string name="swipe_item8">Destroy Me</string>
+
+
     <string name="changes">
-        v5.5r (9.7.2018//14:23:24)\n\n[OTHER]\n\n- Removed all internet permissions\n- Removed Google(FireBase) &amp; Fabric Analytics\n- Removed dependencies and libraries related to Firebase/Fabric\n- Deleted unused code
+    v5.6r (21.7.2018//10:40:31)\n\n[NEW]\n\n- You can now contribute to translations! Email me if you are interested in translating the app :)\n\n[Fixed]\n\n- Some of the selected apps disappearing (Thanks to a user bug report!)\n- Crash upon pressing on Bug Reporter (This has been completely removed)\n\n[Updated]\n\n- Multi Selector Library\n- Other dependancies\n- Playstore screenshots\n- Added support email in About\n- Added GitHub account in About\n\n\nThankyou for taking the time and leaving bug reports/feedback!\n\nHave a wonderful weekend!
     </string>
 </resources>

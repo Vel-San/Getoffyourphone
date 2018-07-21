@@ -35,17 +35,13 @@ public class shame_activity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String str_time = intent.getStringExtra("time");
             if (db.get_openCounter(1) == 5) {
-                tv1.setText("You see that box ? That's you in the box. \nYou have no self control. \nGet Back to Work."
-                        + "\n" + "Oh And, time left to unlock: " + str_time);
+                tv1.setText(getString(R.string.shame_message1) + str_time);
             } else if (db.get_openCounter(1) == 15) {
-                tv1.setText("OH I'VE GOT YOU NOW!\nTOUCH THIS APP ONE MORE TIME.\nI DARE YOU, I DOUBLE DARE YOU!"
-                        + "\n" + "Oh And, time left to unlock: " + str_time);
+                tv1.setText(getString(R.string.shame_message2) + str_time);
             } else if (db.get_openCounter(1) == 20) {
-                tv1.setText("You're pressing my buttons here..\nWhy are you doing this ?\nIt's already locked & loaded now"
-                        + "\n" + "Oh And, time left to unlock: " + str_time);
+                tv1.setText(getString(R.string.shame_message3) + str_time);
             } else if (db.get_openCounter(1) > 20) {
-                tv1.setText("BRING IT ON !\nDODGE THIS\nDODGE THAT\nNO WAY TO RUN!!!"
-                        + "\n" + "Oh And, time left to unlock: " + str_time);
+                tv1.setText(getString(R.string.shame_message4) + str_time);
             }
         }
     };

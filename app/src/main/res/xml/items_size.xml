@@ -5,19 +5,19 @@
     <!--title="Kids' size"-->
     <!--description="For the small appetite. Can be shared by four toddlers." />-->
     <item
-        description="Just a tiny bit of control, lock my apps for 30 minutes"
+        description="@string/swipe_item1"
         title="30 Mins."
         value="30_hour" />
     <item
-        description="Quick and fast, lock my apps for 1 hour"
+        description="@string/swipe_item2"
         title="1 Hour"
         value="1_hour" />
     <item
-        description="I need to finish a task that needs a bit of time, lock my apps for 2 hours"
+        description="@string/swipe_item3"
         title="2 Hours"
         value="2_hours" />
     <item
-        description="HELP ME PLEASE!! Lock my apps for 3 hours !"
+        description="@string/swipe_item4"
         title="3 Hours"
         value="3_hours" />
 </swipeitems>

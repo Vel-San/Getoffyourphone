@@ -20,7 +20,7 @@ public class locked extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String str_time = intent.getStringExtra("time");
-            tv1.setText("Time left to unlock: " + str_time);
+            tv1.setText(getString(R.string.time_left2) + str_time);
         }
     };
 

@@ -25,7 +25,7 @@ public class MultiSelectDialog extends AppCompatDialogFragment implements Search
     private MutliSelectAdapter mutliSelectAdapter;
 
     //Default Values
-    private String title;
+    private int title;
     private float titleSize = 25;
     private String positiveText = "DONE";
     private String negativeText = "CANCEL";
@@ -52,12 +52,12 @@ public class MultiSelectDialog extends AppCompatDialogFragment implements Search
         dialog.setContentView(R.layout.custom_multi_select);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        RecyclerViewEmptySupport mrecyclerView = (RecyclerViewEmptySupport) dialog.findViewById(R.id.recycler_view);
-        SearchView searchView = (SearchView) dialog.findViewById(R.id.search_view);
-        dialogTitle = (TextView) dialog.findViewById(R.id.title);
-        dialogSubmit = (TextView) dialog.findViewById(R.id.done);
-        dialogCancel = (TextView) dialog.findViewById(R.id.cancel);
-        dialogClear = (TextView) dialog.findViewById(R.id.clear);
+        RecyclerViewEmptySupport mrecyclerView = dialog.findViewById(R.id.recycler_view);
+        SearchView searchView = dialog.findViewById(R.id.search_view);
+        dialogTitle = dialog.findViewById(R.id.title);
+        dialogSubmit = dialog.findViewById(R.id.done);
+        dialogCancel = dialog.findViewById(R.id.cancel);
+        dialogClear = dialog.findViewById(R.id.clear);
 
         mrecyclerView.setEmptyView(dialog.findViewById(R.id.list_empty1));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -82,7 +82,7 @@ public class MultiSelectDialog extends AppCompatDialogFragment implements Search
     }
 
 
-    public MultiSelectDialog title(String title) {
+    public MultiSelectDialog title(int title) {
         this.title = title;
         return this;
     }

@@ -191,9 +191,9 @@ public class Timer_Service extends Service {
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
                 //.setDefaults(Notification.) // also requires VIBRATE permission
                 .setSmallIcon(R.mipmap.ic_launcher) // Required!
-                .setContentTitle("Lock-Down Finished !")
-                .setContentText("You can use your apps again")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("You can use your apps again"))
+                .setContentTitle(getString(R.string.notification_title2))
+                .setContentText(getString(R.string.notification_message))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_message)))
                 .setVibrate(new long[]{0, 500})
                 //.setAutoCancel(true)
                 .setContentIntent(pIntent);

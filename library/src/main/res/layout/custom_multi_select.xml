@@ -25,6 +25,34 @@
         android:iconifiedByDefault="true"
         android:queryHint="Search" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/select_all_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/select_all_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:buttonTint="@color/colorAccent"
+            android:clickable="false" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="@dimen/searchview_margin"
+        android:layout_marginEnd="@dimen/line_margin"
+        android:layout_marginStart="@dimen/line_margin"
+        android:layout_marginTop="@dimen/recyclerview_margin"
+        android:background="@color/colorPrimary"
+        android:visibility="gone" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
