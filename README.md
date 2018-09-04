@@ -28,7 +28,7 @@ ______
 
 And you can get it on F-Droid!
 
-![F-Droid](https://f-droid.org/badge/get-it-on.png)
+<img src="https://f-droid.org/badge/get-it-on.png" height="75">
 
 ______
 
