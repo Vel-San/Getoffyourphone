@@ -26,6 +26,10 @@ ______
 
 -[Google Play Store](https://play.google.com/store/apps/details?id=com.nephi.getoffyourphone)
 
+And you can get it on F-Droid!
+
+![F-Droid](https://f-droid.org/badge/get-it-on.png)
+
 ______
 
 *Change Log:*
