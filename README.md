@@ -31,6 +31,7 @@ And you can get it on F-Droid!
 <a href="https://f-droid.org/en/">
   <img src="https://f-droid.org/badge/get-it-on.png" height="75">
 </a>
+
 ______
 
 *Change Log:*
