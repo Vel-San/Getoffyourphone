@@ -260,20 +260,20 @@ public class Main extends DrawerActivity {
                                                 SwipeItem selected_Counter = counter_selector.getSelectedItem();
                                                 c_value = selected_Counter.getValue();
                                                 switch (c_value) {
+                                                    case "2_times":
+                                                        db.set_openCounter(2);
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
+                                                        break;
+                                                    case "3_times":
+                                                        db.set_openCounter(3);
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
+                                                        break;
+                                                    case "4_times":
+                                                        db.set_openCounter(4);
+                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
+                                                        break;
                                                     case "5_times":
                                                         db.set_openCounter(5);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
-                                                        break;
-                                                    case "15_times":
-                                                        db.set_openCounter(15);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
-                                                        break;
-                                                    case "20_times":
-                                                        db.set_openCounter(20);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
-                                                        break;
-                                                    case "21_times":
-                                                        db.set_openCounter(21);
                                                         toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
                                                         break;
                                                 }

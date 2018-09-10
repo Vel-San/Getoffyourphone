@@ -34,13 +34,13 @@ public class shame_activity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String str_time = intent.getStringExtra("time");
-            if (db.get_openCounter(1) == 5) {
+            if (db.get_openCounter(1) == 2) {
                 tv1.setText(getString(R.string.shame_message1) + str_time);
-            } else if (db.get_openCounter(1) == 15) {
+            } else if (db.get_openCounter(1) == 3) {
                 tv1.setText(getString(R.string.shame_message2) + str_time);
-            } else if (db.get_openCounter(1) == 20) {
+            } else if (db.get_openCounter(1) == 4) {
                 tv1.setText(getString(R.string.shame_message3) + str_time);
-            } else if (db.get_openCounter(1) > 20) {
+            } else if (db.get_openCounter(1) > 4) {
                 tv1.setText(getString(R.string.shame_message4) + str_time);
             }
         }
@@ -68,13 +68,13 @@ public class shame_activity extends AppCompatActivity {
         tv1 = findViewById(R.id.locked_counter);
         toGif = findViewById(R.id.image_to_gif);
 
-        if (db.get_openCounter(1) == 5) {
+        if (db.get_openCounter(1) == 2) {
             toGif.setImageDrawable(gif1);
-        } else if (db.get_openCounter(1) == 15) {
+        } else if (db.get_openCounter(1) == 3) {
             toGif.setImageDrawable(gif2);
-        } else if (db.get_openCounter(1) == 20) {
+        } else if (db.get_openCounter(1) == 4) {
             toGif.setImageDrawable(gif3);
-        } else if (db.get_openCounter(1) > 20) {
+        } else if (db.get_openCounter(1) > 4) {
             toGif.setImageDrawable(gif4);
         }
         //getSupportActionBar().hide();
