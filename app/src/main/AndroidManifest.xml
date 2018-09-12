@@ -8,8 +8,12 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" tools:node="remove"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove"/>
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:node="remove" />
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE"
+        tools:node="remove" />
 
     <application
         android:allowBackup="true"
@@ -29,7 +33,9 @@
         <activity
             android:name=".locked"
             android:launchMode="singleInstance" />
-
+        <activity
+            android:name=".selected_apps"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".Main"
             android:theme="@style/AppTheme.BrandedLaunch">
@@ -39,6 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".Timer_Service"
             android:process=":Timer_Service"

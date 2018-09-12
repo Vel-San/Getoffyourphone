@@ -526,6 +526,21 @@ public class Main extends DrawerActivity {
                         })
         );
 
+        addDivider();
+        addItem(
+                new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.baseline_save_white_48))
+                        .setTextPrimary(getString(R.string.drawer_item6_text))
+                        .setTextSecondary(getString(R.string.drawer_item6_text2))
+                        .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+                            @Override
+                            public void onClick(DrawerItem drawerItem, long id, int position) {
+                                //Open selected_apps activity
+                                Intent intent = new Intent(Main.this, selected_apps.class);
+                                startActivity(intent);
+                            }
+                        })
+        );
 
         addDivider();
         addItem(
