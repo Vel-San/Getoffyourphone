@@ -55,6 +55,8 @@
     <string name="drawer_item4_text2">Libraries used to cook this app</string>
     <string name="drawer_item5_text">About Me</string>
     <string name="drawer_item5_text2">Social Links</string>
+    <string name="drawer_item6_text">Selected Apps</string>
+    <string name="drawer_item6_text2">Apps you\'ve already saved</string>
 
     <string name="app_selector_title">Select Apps: </string>
     <string name="app_selector_apply">Apply</string>
@@ -85,6 +87,11 @@
     <string name="swipe_item6">Well, I thought i needed a break anyways</string>
     <string name="swipe_item7">Okay Okay, this is getting out of hands</string>
     <string name="swipe_item8">Destroy Me</string>
+
+    <string name="custom_list_name">Name</string>
+    <string name="custom_list_version">Version:&#160;</string>
+    <string name="custom_list_title">Currently Selected Apps&#160;</string>
+
 
 
     <string name="changes">
