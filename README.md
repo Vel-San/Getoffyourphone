@@ -27,6 +27,27 @@ ______
 
 ### Change Log:
     
+    v5.9r (18.9.2018//00:05:37)
+
+    [NEW]
+
+    - Daily usage per app (Press on an app in "Selected Apps" screen)
+    - Privacy Policy link in About Me
+    - F-Droid link in About Me
+
+    [Announcment]
+
+    - Next update will take sometime as i will implement user requested features & reported bugs all at once, bare with me please!
+
+    _________
+
+
+    If you want to contribute with translations, visit the GitHub repo or Email me.
+
+    Now Get Off Your Phone 🤨
+
+    _________
+
     5.8r (12.9.2018//10:25:57)
 
     [NEW]
