@@ -18,6 +18,16 @@
         android:gravity="center"
         android:textSize="25sp"/>
 
+    <TextView
+        android:id="@+id/hint"
+        android:layout_below="@id/selected_apps_title"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:textColor="@color/grey"
+        android:text="@string/custom_list_hint"
+        android:gravity="center"
+        android:textSize="12sp"/>
+
 
     <ListView
         android:id="@+id/selected_apps_list"

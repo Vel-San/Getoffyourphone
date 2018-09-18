@@ -17,11 +17,13 @@ import java.util.List;
 public class DB_Helper extends SQLiteOpenHelper {
 
     // All Static variables
-    private static final int DATABASE_VERSION = 10;  // Database Version
+    private static final int DATABASE_VERSION = 11;  // Database Version
     // Database Name
     private static final String DATABASE_NAME = "SelectedApps";
     // Apps table name
     private static final String TABLE_APPS = "Apps";
+    // Usage stats table
+    private static final String TABLE_STATS = "Stats";
     //First_Boot table name
     private static final String TABLE_FIRST_BOOT = "First_Boot";
     //Timer table name
@@ -34,6 +36,11 @@ public class DB_Helper extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_SELECTOR_ID = "s_id";
     private static final String KEY_PKG = "PKG";
+
+    // Stats Table Column names
+    private static final String KEY_ID_USG = "usg_id";
+    private static final String KEY_USG = "USG";
+
     //FirstBoot
     private static final String KEY_ID_FB = "fb_id";
     private static final String KEY_FIRST_BOOT = "isFirstBoot";
@@ -73,6 +80,10 @@ public class DB_Helper extends SQLiteOpenHelper {
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_PKG + " TEXT,"
                 + KEY_SELECTOR_ID + " INTEGER" + ")";
+        //Create first boot table
+        String CREATE_STATS_TABLE = "CREATE TABLE " + TABLE_STATS + "("
+                + KEY_ID_USG + " INTEGER PRIMARY KEY,"
+                + KEY_USG + " TEXT" + ")";
         //Create Timer table
         String CREATE_TIMER_TABLE = "CREATE TABLE " + TABLE_TIMER + "("
                 + KEY_ID_TIMER + " INTEGER PRIMARY KEY,"
@@ -86,6 +97,8 @@ public class DB_Helper extends SQLiteOpenHelper {
         db.execSQL(CREATE_APPS_TABLE);
         db.execSQL(CREATE_TIMER_TABLE);
         db.execSQL(CREATE_OPEN_COUNTER);
+        db.execSQL(CREATE_STATS_TABLE);
+
     }
 
     // Upgrading database
@@ -94,6 +107,7 @@ public class DB_Helper extends SQLiteOpenHelper {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FIRST_BOOT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_APPS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMER);
         db.execSQL("DROP TABLE IF EXISTS Version");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OPEN_COUNTER);
@@ -110,6 +124,18 @@ public class DB_Helper extends SQLiteOpenHelper {
 
         //Inserting Row
         db.insert(TABLE_OPEN_COUNTER, null, values);
+
+        db.close(); //closing database connetion
+    }
+
+    void set_defaultUsage(String USG) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_USG, USG); //Counter of Opens
+
+        //Inserting Row
+        db.insert(TABLE_STATS, null, values);
 
         db.close(); //closing database connetion
     }
@@ -320,6 +346,30 @@ public class DB_Helper extends SQLiteOpenHelper {
         }
         // return App
         return lock_time;
+    }
+
+    void set_Usage(String Usage) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_USG, Usage); //Usage set
+        //Inserting Row
+        db.update(TABLE_STATS, values, "usg_id=?", new String[]{"1"});
+        db.close(); //closing database connetion
+    }
+
+    String get_Usage(int _id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String usage = "";
+        Cursor cursor = db.query(TABLE_STATS, new String[]{KEY_ID_USG
+                        , KEY_USG}, KEY_ID_USG + "=?",
+                new String[]{String.valueOf(_id)}, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            usage = cursor.getString(1);
+            cursor.close();
+        }
+        // return usage
+        return usage;
     }
 
     public void dbClose() {

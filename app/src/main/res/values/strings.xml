@@ -3,6 +3,7 @@
     <string name="title">Get Off Your Phone</string>
     <string name="description">You can lock your selected apps using the options below</string>
     <string name="lock_button">LOCK SELECTED APPS !</string>
+    <string name="system_wide_lock">SYSTEM LOCK-DOWN</string>
     <string name="start_by_swiping_left">Start by swiping left.</string>
     <string name="select_desired_counter">Select Desired Counter.</string>
     <string name="select_desired_time">Select Desired Time.</string>
@@ -91,6 +92,14 @@
     <string name="custom_list_name">Name</string>
     <string name="custom_list_version">Version:&#160;</string>
     <string name="custom_list_title">Currently Selected Apps&#160;</string>
+    <string name="custom_list_hint">(Click on apps for more info)</string>
+
+    <string name="usage_dialog_message">Usage Today:&#160;</string>
+    <string name="usage_dialog_title">App Info</string>
+    <string name="usage_dialog_bt1">App Settings</string>
+    <string name="usage_dialog_bt2">Launch App</string>
+
+
 
 
 

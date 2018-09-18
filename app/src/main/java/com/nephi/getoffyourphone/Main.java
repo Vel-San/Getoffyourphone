@@ -63,6 +63,7 @@ public class Main extends DrawerActivity {
     //------------Variables------------
     //Database
     DB_Helper db;
+    static Context appContext;
     //intents
     Intent lockIntent;
     //Arraylists for Apps
@@ -111,6 +112,7 @@ public class Main extends DrawerActivity {
 
         //DataBase Handler
         db = new DB_Helper(this);
+        appContext=getApplicationContext();
         //Locked_intent
         lockIntent = new Intent(this, locked.class);
         lockIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -182,8 +184,9 @@ public class Main extends DrawerActivity {
         if (db.getFirstBootCount() == 0) {
             db.set_AllTimerData("", "N", 1, "", 0, "");
             db.set_defaultOpenCounter(0, 0);
-//            saveVersionNameAndCode(this);
+//          saveVersionNameAndCode(this);
             db.set_FirstBoot("N");
+            db.set_defaultUsage("XXX");
         }
     }
 
