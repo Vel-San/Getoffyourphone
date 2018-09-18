@@ -26,6 +26,15 @@ ______
 ______
 
 ### Change Log:
+    
+    5.8r (12.9.2018//10:25:57)
+
+    [NEW]
+
+    Currently selected apps ( Feature Request )
+    Now you can check your selected apps without opening the app selector; you can also open specific app settings screen by clicking on it. ( This feature will get more updates such as Usage Time per App )
+
+    _________
 
     v5.7r (10.9.2018//11:11:41)
 
