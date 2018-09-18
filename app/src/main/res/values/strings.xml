@@ -99,7 +99,8 @@
     <string name="usage_dialog_bt1">App Settings</string>
     <string name="usage_dialog_bt2">Launch App</string>
 
-
+    <string name="privacy_element">Privacy Policy</string>
+    <string name="FDroid_element">Get on F-Droid</string>
 
 
 

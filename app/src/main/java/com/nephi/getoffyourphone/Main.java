@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,10 +22,12 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -49,6 +52,7 @@ import java.util.List;
 import java.util.Random;
 
 import mehdi.sakout.aboutpage.AboutPage;
+import mehdi.sakout.aboutpage.Element;
 
 
 public class Main extends DrawerActivity {
@@ -163,9 +167,46 @@ public class Main extends DrawerActivity {
                 .addPlayStore("com.nephi.getoffyourphone")
                 //.addInstagram("REPLACE WITH UR OWN")
                 .addGitHub("Alikaraki95")
-                //.addItem(getCopyRightsElement())
+                .addItem(getPrivacyP())
+                .addItem(FDroid())
                 .create();
 
+    }
+
+    Element getPrivacyP() {
+        Element privacy = new Element();
+        final String privacy_p = getString(R.string.privacy_element);
+        privacy.setTitle(privacy_p);
+        privacy.setIconDrawable(R.drawable.baseline_security_black_48);
+        privacy.setIconTint(mehdi.sakout.aboutpage.R.color.about_item_icon_color);
+        privacy.setIconNightTint(android.R.color.white);
+        privacy.setGravity(Gravity.START);
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://htmlpreview.github.io/?https://raw.githubusercontent.com/Alikaraki95/Getoffyourphone/master/privacy_policy.html"));
+                startActivity(browserIntent);
+            }
+        });
+        return privacy;
+    }
+
+    Element FDroid() {
+        Element FDroid_e = new Element();
+        final String FDroid = getString(R.string.FDroid_element);
+        FDroid_e.setTitle(FDroid);
+        FDroid_e.setIconDrawable(R.drawable.fdroid);
+        FDroid_e.setIconTint(mehdi.sakout.aboutpage.R.color.about_item_icon_color);
+        FDroid_e.setIconNightTint(android.R.color.white);
+        FDroid_e.setGravity(Gravity.START);
+        FDroid_e.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://f-droid.org/packages/com.nephi.getoffyourphone/"));
+                startActivity(browserIntent);
+            }
+        });
+        return FDroid_e;
     }
 
 //    public void update_check() {
