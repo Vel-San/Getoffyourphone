@@ -25,7 +25,7 @@ ______
 
 ______
 
-## <details><summary>Change Log</summary>
+<details><summary>Change Log</summary>
 <p>
 
     v5.9r (18.9.2018//00:05:37)
