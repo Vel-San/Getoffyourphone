@@ -25,8 +25,9 @@ ______
 
 ______
 
-### Change Log:
-    
+## <details><summary>Change Log</summary>
+<p>
+
     v5.9r (18.9.2018//00:05:37)
 
     [NEW]
@@ -92,6 +93,10 @@ ______
     Thankyou for taking the time and leaving bug reports/feedback!
 
     Have a wonderful weekend!
+
+</p>
+</details>
+
 ______
 
 ### Permissions:
@@ -120,7 +125,5 @@ You need to change the following files/tokens to your OWN private ones:
 - Change About Me data in Main.java
 - ~~Json file in App folder~~ **Removed**
 
-#### Other:
-
--You can contribute to this project by submitting your pull requests. <br>
--Logo made by @twingenious 
+### Contributions:
+-New Logo made by @twingenious 
