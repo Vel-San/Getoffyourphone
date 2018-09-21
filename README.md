@@ -123,3 +123,4 @@ You need to change the following files/tokens to your OWN private ones:
 #### Other:
 
 -You can contribute to this project by submitting your pull requests.
+-Logo made by @twingenious 
