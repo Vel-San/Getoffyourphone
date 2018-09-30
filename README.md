@@ -101,17 +101,13 @@ ______
 
 ### Permissions:
 
-- Update component usage statistics ( To check if an app is running or not )
-
-- ~~Receive data from Internet~~ **Not needed anymore**
-
-- ~~View network connections~~ **Not needed anymore**
-
-- ~~Full network access~~ **Not needed anymore**
-
-- Prevent device from sleeping (wakelock)
-
-- Vibrate (For Notifications)
+- "android.permission.PACKAGE_USAGE_STATS" ( Running Apps )
+- "android.permission.WAKE_LOCK" (Keep Lock Service alive )
+- "android.permission.VIBRATE" ( Notifications )
+- "android.permission.ACCESS_WIFI_STATE" ( Enable/Disable Wifi/Mobile Data )
+- "android.permission.CHANGE_WIFI_STATE" ( Enable/Disable Wifi/Mobile Data )
+- "MODIFY_PHONE_STATE" ( Enable/Disable Wifi/Mobile Data )
+- Root ( Optional,  you can disable it, however, it is needed if you want to Disable mobile data with your lockdown )
 
 ______
 
