@@ -161,9 +161,17 @@ public class Timer_Service extends Service {
                 db.set_Data("");
                 //db.set_openCounter(0);
                 db.set_on_off(0);
-                db.set_StateTitle("None");
-                db.set_once(0);
-                lock_State();
+                switch (db.get_StateTable(1)){
+                    case 1:
+                        db.set_StateTitle("None");
+                        unlockStateWifi();
+                        break;
+                    case 2:
+                        db.set_StateTitle("None");
+                        unlockStateWifi();
+                        unlockStateData();
+                        break;
+                }
                 mTimer.cancel();
             }
         } catch (Exception e) {
@@ -176,11 +184,16 @@ public class Timer_Service extends Service {
             //db.set_openCounter(0);
             db.set_on_off(0);
             db.set_StateTitle("None");
-            db.set_once(0);
-            try {
-                lock_State();
-            } catch (Exception e1) {
-                e1.printStackTrace();
+            switch (db.get_StateTable(1)){
+                case 1:
+                    db.set_StateTitle("None");
+                    unlockStateWifi();
+                    break;
+                case 2:
+                    db.set_StateTitle("None");
+                    unlockStateWifi();
+                    unlockStateData();
+                    break;
             }
             mTimer.cancel();
             mTimer.purge();
@@ -241,20 +254,20 @@ public class Timer_Service extends Service {
     }
 
     private void lock_State() throws Exception {
-        if (db.get_on_off(1) == 1){
-            switch (db.get_StateTable(1)){
+        if (db.get_on_off(1) == 1) {
+            switch (db.get_StateTable(1)) {
                 case 1:
                     assert wifiManager != null;
-                    if (wifiManager.isWifiEnabled()){
+                    if (wifiManager.isWifiEnabled()) {
                         wifiManager.setWifiEnabled(false);
                     }
                     break;
                 case 2:
                     assert wifiManager != null;
-                    if (wifiManager.isWifiEnabled()){
+                    if (wifiManager.isWifiEnabled()) {
                         wifiManager.setWifiEnabled(false);
                     }
-                    if (rootbeer.isRooted()){
+                    if (rootbeer.isRooted()) {
                         Process p;
                         try {
                             p = Runtime.getRuntime().exec("su");
@@ -266,7 +279,7 @@ public class Timer_Service extends Service {
                             outputStream.flush();
 
                             p.waitFor();
-                        }catch(IOException | InterruptedException e){
+                        } catch (IOException | InterruptedException e) {
                             Toast.makeText(this, "Root not detected for Airplane Mode", Toast.LENGTH_LONG).show();
                             throw new Exception(e);
                         }
@@ -275,34 +288,34 @@ public class Timer_Service extends Service {
             }
 
         }
-        else{
-            assert wifiManager != null;
-            if (!wifiManager.isWifiEnabled()){
-                wifiManager.setWifiEnabled(true);
-            }
+    }
 
-            if (rootbeer.isRooted()){
-                Process p;
-                try {
-                    p = Runtime.getRuntime().exec("su");
-
-                    DataOutputStream outputStream = new DataOutputStream(p.getOutputStream());
-                    outputStream.writeBytes("svc data enable" + "\n");
-                    outputStream.flush();
-                    Log.e("Mobile Data", "Enabled");
-                    outputStream.writeBytes("exit\n");
-                    outputStream.flush();
-                    p.waitFor();
-                }catch(IOException | InterruptedException e){
-                    Toast.makeText(this, "Root not detected for Airplane Mode", Toast.LENGTH_LONG).show();
-                    throw new Exception(e);
-                }
-            }
-
+    public void unlockStateWifi() {
+        assert wifiManager != null;
+        if (!wifiManager.isWifiEnabled()) {
+            wifiManager.setWifiEnabled(true);
         }
     }
 
+    public void unlockStateData() {
 
+        if (rootbeer.isRooted()) {
+            Process p;
+            try {
+                p = Runtime.getRuntime().exec("su");
+                DataOutputStream outputStream = new DataOutputStream(p.getOutputStream());
+                outputStream.writeBytes("svc data enable" + "\n");
+                outputStream.flush();
+                Log.e("Mobile Data", "Enabled");
+                outputStream.writeBytes("exit\n");
+                outputStream.flush();
+                p.waitFor();
+            } catch (IOException | InterruptedException e) {
+                Toast.makeText(this, "Root not detected for Airplane Mode", Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
 
     private String printForegroundTask() {
         String currentApp = "";
@@ -341,11 +354,16 @@ public class Timer_Service extends Service {
 //        db.set_openCounter(0);
         db.set_on_off(0);
         db.set_StateTitle("None");
-        db.set_once(0);
-        try {
-            lock_State();
-        } catch (Exception e) {
-            e.printStackTrace();
+        switch (db.get_StateTable(1)){
+            case 1:
+                db.set_StateTitle("None");
+                unlockStateWifi();
+                break;
+            case 2:
+                db.set_StateTitle("None");
+                unlockStateWifi();
+                unlockStateData();
+                break;
         }
         Log.e("Timer Done", "Finish");
     }
@@ -377,7 +395,6 @@ public class Timer_Service extends Service {
                             e.printStackTrace();
                         }
                     }
-
                 }
 
             });
