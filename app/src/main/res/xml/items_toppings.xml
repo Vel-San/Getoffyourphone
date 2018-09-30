@@ -2,18 +2,10 @@
 <swipeitems>
     <item
         description="@string/swipe_item5"
-        title="2 Times"
-        value="2_times" />
+        title="Wifi Only"
+        value="1" />
     <item
         description="@string/swipe_item6"
-        title="3 Times"
-        value="3_times" />
-    <item
-        description="@string/swipe_item7"
-        title="4 Times"
-        value="4_times" />
-    <item
-        description="@string/swipe_item8"
-        title="5 and Above"
-        value="5_times" />
+        title="Full ( Needs Root )"
+        value="2" />
 </swipeitems>

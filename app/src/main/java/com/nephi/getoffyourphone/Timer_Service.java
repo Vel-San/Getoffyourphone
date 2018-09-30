@@ -16,14 +16,22 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.scottyab.rootbeer.RootBeer;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +53,10 @@ public class Timer_Service extends Service {
     SimpleDateFormat simpleDateFormat;
     String strDate;
     Date date_current, date_diff;
+    //Root Detector
+    RootBeer rootbeer;
+    //Con Manager
+    WifiManager wifiManager;
     //DH Helper
     DB_Helper db;
     Intent intent;
@@ -66,9 +78,6 @@ public class Timer_Service extends Service {
         //Lock Screen launch
         lockIntent = new Intent(this, locked.class);
         lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //Shame Screen launch
-        Shame = new Intent(this, shame_activity.class);
-        Shame.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("H:M:ss");
@@ -77,6 +86,10 @@ public class Timer_Service extends Service {
         mTimer.scheduleAtFixedRate(new TimeDisplayTimerTask(), 5, NOTIFY_INTERVAL);
         intent = new Intent(str_receiver);
 
+        //Root Detector
+        rootbeer = new RootBeer(this);
+        //Wifi Manager
+        wifiManager = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
 
         //DB
         db = new DB_Helper(this);
@@ -137,6 +150,7 @@ public class Timer_Service extends Service {
                 db.set_TimerFinish(0);
                 //db.set_Running("Y");
                 fn_update(str_testing);
+
             } else {
                 stopService(new Intent(getApplicationContext(), Timer_Service.class));
                 notification_update();
@@ -146,7 +160,10 @@ public class Timer_Service extends Service {
                 db.set_Hours("");
                 db.set_Data("");
                 //db.set_openCounter(0);
-                db.set_openTimes(0);
+                db.set_on_off(0);
+                db.set_StateTitle("None");
+                db.set_once(0);
+                lock_State();
                 mTimer.cancel();
             }
         } catch (Exception e) {
@@ -157,7 +174,14 @@ public class Timer_Service extends Service {
             db.set_Hours("");
             db.set_Data("");
             //db.set_openCounter(0);
-            db.set_openTimes(0);
+            db.set_on_off(0);
+            db.set_StateTitle("None");
+            db.set_once(0);
+            try {
+                lock_State();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
             mTimer.cancel();
             mTimer.purge();
         }
@@ -167,9 +191,9 @@ public class Timer_Service extends Service {
     }
 
     public void notification_update() {
-        Intent intent = new Intent(this, Main.class);
-        // use System.currentTimeMillis() to have a unique ID for the pending intent
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+//        Intent intent = new Intent(this, Main.class);
+//        // use System.currentTimeMillis() to have a unique ID for the pending intent
+//        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         int notificationId = new Random().nextInt(); // just use a counter in some util class...
@@ -194,9 +218,8 @@ public class Timer_Service extends Service {
                 .setContentTitle(getString(R.string.notification_title2))
                 .setContentText(getString(R.string.notification_message))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_message)))
-                .setVibrate(new long[]{0, 500})
-                //.setAutoCancel(true)
-                .setContentIntent(pIntent);
+                .setVibrate(new long[]{0, 500});
+                //.setAutoCancel(true);
         //.setOngoing(true)
         //.addAction(R.drawable.ic_clear_black_48dp, "Dismiss", dismissIntent);
         //.addAction(R.drawable.ic_action_boom, "Action!", someOtherPendingIntent);
@@ -211,21 +234,75 @@ public class Timer_Service extends Service {
             int count = (int) db.getAppsCount();
             for (int i = 1; i <= count; ++i) {
                 if (printForegroundTask().equalsIgnoreCase(db.get_app_PKG(i))) {
-                    if (db.get_openCounter(1) >= db.get_openTimes(1)) {
-                        if (db.get_openCounter(1) == 0) {
                             startActivity(lockIntent);
-                        } else {
-                            startActivity(lockIntent);
-                            db.set_openTimes(db.get_openTimes(1) + 1);
-                        }
-                    } else {
-                        startActivity(Shame);
-                    }
-
                 }
             }
         }
     }
+
+    private void lock_State() throws Exception {
+        if (db.get_on_off(1) == 1){
+            switch (db.get_StateTable(1)){
+                case 1:
+                    assert wifiManager != null;
+                    if (wifiManager.isWifiEnabled()){
+                        wifiManager.setWifiEnabled(false);
+                    }
+                    break;
+                case 2:
+                    assert wifiManager != null;
+                    if (wifiManager.isWifiEnabled()){
+                        wifiManager.setWifiEnabled(false);
+                    }
+                    if (rootbeer.isRooted()){
+                        Process p;
+                        try {
+                            p = Runtime.getRuntime().exec("su");
+                            DataOutputStream outputStream = new DataOutputStream(p.getOutputStream());
+                            outputStream.writeBytes("svc data disable" + "\n");
+                            outputStream.flush();
+                            Log.e("Mobile Data", "Disabled");
+                            outputStream.writeBytes("exit\n");
+                            outputStream.flush();
+
+                            p.waitFor();
+                        }catch(IOException | InterruptedException e){
+                            Toast.makeText(this, "Root not detected for Airplane Mode", Toast.LENGTH_LONG).show();
+                            throw new Exception(e);
+                        }
+                    }
+
+            }
+
+        }
+        else{
+            assert wifiManager != null;
+            if (!wifiManager.isWifiEnabled()){
+                wifiManager.setWifiEnabled(true);
+            }
+
+            if (rootbeer.isRooted()){
+                Process p;
+                try {
+                    p = Runtime.getRuntime().exec("su");
+
+                    DataOutputStream outputStream = new DataOutputStream(p.getOutputStream());
+                    outputStream.writeBytes("svc data enable" + "\n");
+                    outputStream.flush();
+                    Log.e("Mobile Data", "Enabled");
+                    outputStream.writeBytes("exit\n");
+                    outputStream.flush();
+                    p.waitFor();
+                }catch(IOException | InterruptedException e){
+                    Toast.makeText(this, "Root not detected for Airplane Mode", Toast.LENGTH_LONG).show();
+                    throw new Exception(e);
+                }
+            }
+
+        }
+    }
+
+
 
     private String printForegroundTask() {
         String currentApp = "";
@@ -262,7 +339,14 @@ public class Timer_Service extends Service {
         db.set_Hours("");
         db.set_Data("");
 //        db.set_openCounter(0);
-        db.set_openTimes(0);
+        db.set_on_off(0);
+        db.set_StateTitle("None");
+        db.set_once(0);
+        try {
+            lock_State();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Log.e("Timer Done", "Finish");
     }
 
@@ -285,6 +369,15 @@ public class Timer_Service extends Service {
                     Log.e("strDate", strDate);
                     twoDatesBetweenTime();
                     LockApps();
+                    if (db.get_once(1)==1){
+                        db.set_once(0);
+                        try {
+                            lock_State();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                 }
 
             });

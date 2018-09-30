@@ -42,9 +42,12 @@ import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 import com.roughike.swipeselector.SwipeItem;
 import com.roughike.swipeselector.SwipeSelector;
+import com.scottyab.rootbeer.RootBeer;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,7 +81,8 @@ public class Main extends DrawerActivity {
     MultiSelectDialog multiSelectDialog;
     //strings
     String package_name;
-    //String running;
+    //RootBeer Root Checker
+    RootBeer rootbeer;
     //views
     View aboutPage;
     Button Lock;
@@ -91,7 +95,7 @@ public class Main extends DrawerActivity {
             title_timer.setText(getString(R.string.time_left1)
                     + str_time
                     + "\n" + getString(R.string.selected_time) + db.get_Hours(1)
-                    + getString(R.string.minutes_hours) + "\n" + getString(R.string.selected_counter) + db.get_openCounter(1) + getString(R.string.open_times));
+                    + getString(R.string.minutes_hours) + "\n" + getString(R.string.selected_state) + db.get_StateTitle(1));
             if (db.get_TimerFinish(1) == 1) {
                 title_timer.setText(getString(R.string.not_running));
             }
@@ -127,6 +131,7 @@ public class Main extends DrawerActivity {
         Lock = findViewById(R.id.sendButton);
 
         //------------Method Calls------------
+        rootbeer = new RootBeer(this);
         ActionBarMethod();
         permission_check();
         isIgnoringBattery();
@@ -224,7 +229,7 @@ public class Main extends DrawerActivity {
         //First launch and update check
         if (db.getFirstBootCount() == 0) {
             db.set_AllTimerData("", "N", 1, "", 0, "");
-            db.set_defaultOpenCounter(0, 0);
+            db.set_defaultStateTable(0, 0,"None", 0);
 //          saveVersionNameAndCode(this);
             db.set_FirstBoot("N");
             db.set_defaultUsage("XXX");
@@ -261,9 +266,9 @@ public class Main extends DrawerActivity {
             hours_selector.selectItemWithValue(db.get_LockTime(1));
         }
 
-        if (db.get_openCounter(1) > 0) {
+        if (db.get_StateTable(1) > 0) {
 
-            counter_selector.selectItemWithValue(db.get_openCounter(1) + "_times");
+            counter_selector.selectItemWithValue(db.get_StateTable(1) + "");
         }
 
 
@@ -300,32 +305,35 @@ public class Main extends DrawerActivity {
                                             }
 
                                             if (counter_selector.hasSelection()) {
-//                                                    if (db.get_openCounter(1) == 0) {
+//                                                    if (db.get_StateTable(1) == 0) {
                                                 SwipeItem selected_Counter = counter_selector.getSelectedItem();
                                                 c_value = selected_Counter.getValue();
                                                 switch (c_value) {
-                                                    case "2_times":
-                                                        db.set_openCounter(2);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
+                                                    case "1":
+                                                        db.set_StateTable(1);
+                                                        db.set_on_off(1);
+                                                        db.set_StateTitle(selected_Counter.getTitle());
+                                                        toastMessage += getString(R.string.state) + selected_Counter.getTitle();
                                                         break;
-                                                    case "3_times":
-                                                        db.set_openCounter(3);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
-                                                        break;
-                                                    case "4_times":
-                                                        db.set_openCounter(4);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
-                                                        break;
-                                                    case "5_times":
-                                                        db.set_openCounter(5);
-                                                        toastMessage += getString(R.string.counter) + selected_Counter.getTitle();
-                                                        break;
+                                                    case "2":
+                                                        if(rootbeer.isRooted()){
+                                                            db.set_StateTable(2);
+                                                            db.set_on_off(1);
+                                                            db.set_StateTitle(selected_Counter.getTitle());
+                                                            toastMessage += getString(R.string.state) + selected_Counter.getTitle();
+                                                        }
+                                                        else{
+                                                            db.set_StateTitle("None");
+                                                            toastMessage += getString(R.string.swipe_root_alert);
+                                                            break;
+                                                        }
+
                                                 }
 //                                                    } else {
 //                                                        toastMessage += "\nCounter already Selected, new Counter ignored.";
 //                                                    }
                                             } else {
-                                                toastMessage += getString(R.string.toast_no_counter_selection);
+                                                toastMessage += getString(R.string.toast_no_state_selection);
                                             }
                                             notification_update();
                                             CafeBar.builder(Main.this)
@@ -341,7 +349,7 @@ public class Main extends DrawerActivity {
                                                 public void run() {
                                                     finish();
                                                 }
-                                            }, 2000);
+                                            }, 3000);
 
                                         }
                                     })
@@ -384,6 +392,7 @@ public class Main extends DrawerActivity {
         db.set_Hours(hours.replaceAll("[\\D]", ""));
         db.set_LockTime(hours);
         db.set_Running("Y");
+        db.set_once(1);
 
         Intent intent_service = new Intent(getApplicationContext(), Timer_Service.class);
         startService(intent_service);
@@ -784,8 +793,8 @@ public class Main extends DrawerActivity {
                 //.setDefaults(Notification.) // also requires VIBRATE permission
                 .setSmallIcon(R.mipmap.ic_launcher) // Required!
                 .setContentTitle(getString(R.string.notification_title1))
-                .setContentText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + ", " + getString(R.string.app_open1) + db.get_openCounter(1) + getString(R.string.open_times))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + "\n" + getString(R.string.app_open2) + db.get_openCounter(1) + getString(R.string.open_times)))
+                .setContentText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + ", " + getString(R.string.app_open1) + db.get_StateTitle(1))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + "\n" + getString(R.string.app_open2) + db.get_StateTitle(1)))
                 .setVibrate(new long[]{0, 500})
                 //.setAutoCancel(true)
                 .setContentIntent(pIntent);
@@ -832,7 +841,7 @@ public class Main extends DrawerActivity {
 ////                db.set_LockTime("");
 //                db.set_Hours("");
 //                db.set_Data("");
-////                db.set_openCounter(0);
+////                db.set_StateTable(0);
 //                db.set_openTimes(0);
 //            } else {
 //                Log.e("App_Update", "NO, V and C: " + versionName + " ||| " + versionCode);

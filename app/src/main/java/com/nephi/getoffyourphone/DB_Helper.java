@@ -29,7 +29,7 @@ public class DB_Helper extends SQLiteOpenHelper {
     //Timer table name
     private static final String TABLE_TIMER = "Timer";
     //App Open Counter
-    private static final String TABLE_OPEN_COUNTER = "OpenCounter";
+    private static final String TABLE_CON_STATE = "StateTable";
 
 
     // Apps Table Columns names
@@ -53,10 +53,13 @@ public class DB_Helper extends SQLiteOpenHelper {
     private static final String DATA = "data";
     private static final String SELECTED = "isSelected";
 
-    //Open Counter
-    private static final String KEY_OPEN_ID = "o_id";
-    private static final String KEY_LOCK_COUNTER = "lock_counter";
-    private static final String KEY_OPENED_TIMES = "opened_times";
+    //State
+    private static final String KEY_OPEN_ID = "state_id";
+    private static final String KEY_LOCK_STATE = "lock_state";
+    private static final String KEY_IS_ON = "on_off";
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_ONCE = "once";
+
 
 
     DB_Helper(Context context) {
@@ -71,10 +74,12 @@ public class DB_Helper extends SQLiteOpenHelper {
                 + KEY_ID_FB + " INTEGER PRIMARY KEY,"
                 + KEY_FIRST_BOOT + " TEXT" + ")";
         //Create Open Counter table
-        String CREATE_OPEN_COUNTER = "CREATE TABLE " + TABLE_OPEN_COUNTER + "("
+        String CREATE_OPEN_COUNTER = "CREATE TABLE " + TABLE_CON_STATE + "("
                 + KEY_OPEN_ID + " INTEGER PRIMARY KEY,"
-                + KEY_LOCK_COUNTER + " INTEGER,"
-                + KEY_OPENED_TIMES + " INTEGER" + ")";
+                + KEY_LOCK_STATE + " INTEGER,"
+                + KEY_IS_ON + " INTEGER,"
+                + KEY_TITLE + " TEXT,"
+                + KEY_ONCE + " INTEGER" + ")";
         //Create apps table
         String CREATE_APPS_TABLE = "CREATE TABLE " + TABLE_APPS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
@@ -110,20 +115,22 @@ public class DB_Helper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMER);
         db.execSQL("DROP TABLE IF EXISTS Version");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OPEN_COUNTER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CON_STATE);
         // Create tables again
         onCreate(db);
     }
 
-    void set_defaultOpenCounter(int openCounter, int opened_times) {
+    void set_defaultStateTable(int StateTable, int on_off, String title, int once) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_LOCK_COUNTER, openCounter); //Counter of Opens
-        values.put(KEY_OPENED_TIMES, opened_times); //Counter of Opens
+        values.put(KEY_LOCK_STATE, StateTable); //lock state
+        values.put(KEY_IS_ON, on_off); //is on or off
+        values.put(KEY_TITLE, title); // Title of selected State
+        values.put(KEY_ONCE, once);// Run only once in Service
 
         //Inserting Row
-        db.insert(TABLE_OPEN_COUNTER, null, values);
+        db.insert(TABLE_CON_STATE, null, values);
 
         db.close(); //closing database connetion
     }
@@ -140,52 +147,100 @@ public class DB_Helper extends SQLiteOpenHelper {
         db.close(); //closing database connetion
     }
 
-    void set_openTimes(int openTimes) {
+    void set_once(int once) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_OPENED_TIMES, openTimes); //Hours
+        values.put(KEY_ONCE, once); //Hours
         //Inserting Row
-        db.update(TABLE_OPEN_COUNTER, values, "o_id=?", new String[]{"1"});
+        db.update(TABLE_CON_STATE, values, "state_id=?", new String[]{"1"});
         db.close(); //closing database connetion
     }
 
-    int get_openTimes(int _id) {
+    int get_once(int _id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int openCounter = 0;
-        Cursor cursor = db.query(TABLE_OPEN_COUNTER, new String[]{KEY_OPEN_ID,
-                        KEY_LOCK_COUNTER, KEY_OPENED_TIMES}, KEY_OPEN_ID + "=?",
+        int StateTable = 0;
+        Cursor cursor = db.query(TABLE_CON_STATE, new String[]{KEY_OPEN_ID,
+                        KEY_LOCK_STATE, KEY_ONCE}, KEY_OPEN_ID + "=?",
                 new String[]{String.valueOf(_id)}, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
-            openCounter = cursor.getInt(2);
+            StateTable = cursor.getInt(2);
             cursor.close();
         }
         // return App
-        return openCounter;
+        return StateTable;
     }
 
-    void set_openCounter(int openCounter) {
+    void set_on_off(int on_off) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_LOCK_COUNTER, openCounter); //Hours
+        values.put(KEY_IS_ON, on_off); //Hours
         //Inserting Row
-        db.update(TABLE_OPEN_COUNTER, values, "o_id=?", new String[]{"1"});
+        db.update(TABLE_CON_STATE, values, "state_id=?", new String[]{"1"});
         db.close(); //closing database connetion
     }
 
-    int get_openCounter(int _id) {
+    int get_on_off(int _id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int openCounter = 0;
-        Cursor cursor = db.query(TABLE_OPEN_COUNTER, new String[]{KEY_OPEN_ID,
-                        KEY_LOCK_COUNTER}, KEY_OPEN_ID + "=?",
+        int StateTable = 0;
+        Cursor cursor = db.query(TABLE_CON_STATE, new String[]{KEY_OPEN_ID,
+                        KEY_LOCK_STATE, KEY_IS_ON}, KEY_OPEN_ID + "=?",
                 new String[]{String.valueOf(_id)}, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
-            openCounter = cursor.getInt(1);
+            StateTable = cursor.getInt(2);
             cursor.close();
         }
         // return App
-        return openCounter;
+        return StateTable;
+    }
+
+    void set_StateTable(int StateTable) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_LOCK_STATE, StateTable); //Hours
+        //Inserting Row
+        db.update(TABLE_CON_STATE, values, "state_id=?", new String[]{"1"});
+        db.close(); //closing database connetion
+    }
+
+    int get_StateTable(int _id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int StateTable = 0;
+        Cursor cursor = db.query(TABLE_CON_STATE, new String[]{KEY_OPEN_ID,
+                        KEY_LOCK_STATE}, KEY_OPEN_ID + "=?",
+                new String[]{String.valueOf(_id)}, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            StateTable = cursor.getInt(1);
+            cursor.close();
+        }
+        // return App
+        return StateTable;
+    }
+
+    void set_StateTitle(String title) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, title); //Hours
+        //Inserting Row
+        db.update(TABLE_CON_STATE, values, "state_id=?", new String[]{"1"});
+        db.close(); //closing database connetion
+    }
+
+    String get_StateTitle(int _id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String StateTable = "";
+        Cursor cursor = db.query(TABLE_CON_STATE, new String[]{KEY_OPEN_ID,
+                        KEY_LOCK_STATE, KEY_TITLE}, KEY_OPEN_ID + "=?",
+                new String[]{String.valueOf(_id)}, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            StateTable = cursor.getString(2);
+            cursor.close();
+        }
+        // return App
+        return StateTable;
     }
 
     void set_AllTimerData(String LockTime, String Running, int TimerFinish, String Hours, int Selected, String data) {
@@ -511,9 +566,9 @@ public class DB_Helper extends SQLiteOpenHelper {
     }
 
     // Getting Apps Count
-    long getOpenCounter() {
+    long getStateTable() {
         SQLiteDatabase db = this.getReadableDatabase();
-        long cnt = DatabaseUtils.queryNumEntries(db, TABLE_OPEN_COUNTER);
+        long cnt = DatabaseUtils.queryNumEntries(db, TABLE_CON_STATE);
         db.close();
         return cnt;
     }

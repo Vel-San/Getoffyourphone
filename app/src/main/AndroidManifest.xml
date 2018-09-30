@@ -8,11 +8,12 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="MODIFY_PHONE_STATE"/>
+
     <uses-permission
         android:name="android.permission.INTERNET"
-        tools:node="remove" />
-    <uses-permission
-        android:name="android.permission.ACCESS_NETWORK_STATE"
         tools:node="remove" />
 
     <application
@@ -28,9 +29,6 @@
 
         <!-- </activity> -->
         <activity
-            android:name=".shame_activity"
-            android:launchMode="singleInstance" />
-        <activity
             android:name=".locked"
             android:launchMode="singleInstance" />
         <activity
@@ -38,7 +36,8 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".Main"
-            android:theme="@style/AppTheme.BrandedLaunch">
+            android:theme="@style/AppTheme.BrandedLaunch"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
