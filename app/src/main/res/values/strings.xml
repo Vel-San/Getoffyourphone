@@ -5,7 +5,7 @@
     <string name="lock_button">LOCK SELECTED APPS !</string>
     <string name="system_wide_lock">SYSTEM LOCK-DOWN</string>
     <string name="start_by_swiping_left">Start by swiping left.</string>
-    <string name="select_desired_counter">Select Desired Counter.</string>
+    <string name="select_desired_state">Select Desired State.</string>
     <string name="select_desired_time">Select Desired Time.</string>
 
     <string name="time_left1">Time Left:&#160;</string>
@@ -13,14 +13,14 @@
 
     <string name="time_chosen">Time Chosen:&#160;</string>
     <string name="times">&#160;Times</string>
-    <string name="app_open1">App-Open:&#160;</string>
-    <string name="app_open2">App-Open Counter:&#160;</string>
+    <string name="app_open1">State:&#160;</string>
+    <string name="app_open2">Selected State:&#160;</string>
     <string name="minutes_hours">&#160;mins/hours</string>
     <string name="hours">Hours:&#160;</string>
-    <string name="counter">\nCounter:&#160;</string>
+    <string name="state">\nState:&#160;</string>
 
     <string name="selected_time">Selected Time:&#160;</string>
-    <string name="selected_counter">Selected Counter:&#160;</string>
+    <string name="selected_state">Selected state:&#160;</string>
     <string name="selected_apps">Selected Apps:&#160;</string>
 
     <string name="open_times">+ Times</string>
@@ -35,7 +35,7 @@
 
     <string name="toast_already_running">Timer already running, new selection ignored</string>
     <string name="toast_no_hour_selection">No hours selected</string>
-    <string name="toast_no_counter_selection">\nNo counter selected</string>
+    <string name="toast_no_state_selection">\nNo state selected</string>
 
     <string name="cafebar_error">Please select Desired Lock Time</string>
     <string name="cafebar_error2">Select at least 1 app to lock</string>
@@ -65,7 +65,7 @@
     <string name="app_selector_clear">Clear</string>
 
     <string name="drawer_item2_dialog_title">Help</string>
-    <string name="drawer_item2_dialog_message">General Info:\n\n1- You CANNOT lock apps without selecting a timer\n2- You CAN lock apps without selecting App-Open Counter\n3- App will close when you confirm lock down and a notification will show up\n4- You can dismiss the notification, and a "Timer Finished" notification will show when the lock-down is done\n\n______\n\n-Select Desired Time:\nThis option is where the magic happens, you select the desired time, which will be the duration of apps lock-down. After you select this, you cannot change it until lock-down is done. Please do not force close the app or you will have to clear app data.\n\n-Select Desired Counter:\nThis option is related to how many times you open the locked apps. All you have to do is select an option, every time you bypass the selected value, the Lock Screen ( screen that opens when you launch a locked app ) will change. I made 4 lock screens, each with a different GIF and text that will somehow, make you feel ashamed for passing the limit. You CANNOT change this after starting the lock-down, until it finishes.\n\nThat\'s all ! if you have any issues or concerns please don't hesitate to use the built-in issue reporter. Enjoy !</string>
+    <string name="drawer_item2_dialog_message">General Info:\n\n1- You CANNOT lock apps without selecting a timer\n2- You CAN lock apps without selecting a State\n3- App will close when you confirm lock down and a notification will show up\n4- You can dismiss the notification, and a "Timer Finished" notification will show when the lock-down is done\n\n______\n\n-Select Desired Time:\nThis option is where the magic happens, you select the desired time, which will be the duration of apps lock-down. After you select this, you cannot change it until lock-down is done. Please do not force close the app or you will have to clear app data.\n\n-Desired State:\nIf toggled on, it will turn off Wifi for the remaining time of the lock-down and toggle it back when lock-down ends.\n\nThat\'s all !</string>
     <string name="drawer_item3_dialog_title">Recent Changes</string>
     <string name="drawer_item5_dialog_title">About</string>
     <string name="drawer_item5_dialog_message">Social Links Below</string>
@@ -84,10 +84,9 @@
     <string name="swipe_item3">I need to finish a task that needs a bit of time, lock my apps for 2 hours</string>
     <string name="swipe_item4">HELP ME PLEASE!! Lock my apps for 3 hours !</string>
 
-    <string name="swipe_item5">Meh.. I know my limits</string>
-    <string name="swipe_item6">Well, I thought i needed a break anyways</string>
-    <string name="swipe_item7">Okay Okay, this is getting out of hands</string>
-    <string name="swipe_item8">Destroy Me</string>
+    <string name="swipe_item5">Turn WiFi Off</string>
+    <string name="swipe_item6">Turn WiFi + Mobile Data Off</string>
+    <string name="swipe_root_alert">&#160;Root Not Detected</string>
 
     <string name="custom_list_name">Name</string>
     <string name="custom_list_version">Version:&#160;</string>
