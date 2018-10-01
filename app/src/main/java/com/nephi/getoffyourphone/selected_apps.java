@@ -8,26 +8,22 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
-public class selected_apps extends AppCompatActivity{
+public class selected_apps extends AppCompatActivity {
 
+    static Context appcontext1;
     //TextView
     TextView title;
-
     //Database
     DB_Helper db;
-    static Context appcontext1;
     //Variable to store app drawable in
     Drawable Aicon;
     //Variable to save version number of an app
@@ -60,16 +56,16 @@ public class selected_apps extends AppCompatActivity{
     }
 
     //Initialize OnCreate()
-    public void init(){
+    public void init() {
         //TextView
         title = findViewById(R.id.selected_apps_title);
 
         //DataBase Handler
         db = new DB_Helper(this);
         appcontext1 = getApplicationContext();
-        name = new String[(int)db.getAppsCount()];
-        images = new Drawable[(int)db.getAppsCount()];
-        versionNumber = new String[(int)db.getAppsCount()];
+        name = new String[(int) db.getAppsCount()];
+        images = new Drawable[(int) db.getAppsCount()];
+        versionNumber = new String[(int) db.getAppsCount()];
         title.setText(getString(R.string.custom_list_title) + "(" + String.valueOf(db.getAppsCount() + ")"));
 
         getIcons();
@@ -79,7 +75,7 @@ public class selected_apps extends AppCompatActivity{
     }
 
     //Fill the ListView
-    public void populate(){
+    public void populate() {
 
         lView = (ListView) findViewById(R.id.selected_apps_list);
 
@@ -99,20 +95,20 @@ public class selected_apps extends AppCompatActivity{
                         .setTopColorRes(R.color.blue)
                         .setButtonsColorRes(R.color.black)
                         .setIcon(R.drawable.ic_perm_device_information_white_48dp)
-                        .setTitle(name[i]+ ":")
+                        .setTitle(name[i] + ":")
                         .setMessage(selected_apps.this.getString(R.string.usage_dialog_message) + result)
                         .setPositiveButton(selected_apps.this.getString(R.string.usage_dialog_bt1), new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                intent.setData(Uri.parse("package:" + db.get_app(i+1).get_PKG()));
+                                intent.setData(Uri.parse("package:" + db.get_app(i + 1).get_PKG()));
                                 selected_apps.this.startActivity(intent);
                             }
                         })
                         .setNegativeButton(selected_apps.this.getString(R.string.usage_dialog_bt2), new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                openApp(selected_apps.this, db.get_app(i+1).get_PKG());
+                                openApp(selected_apps.this, db.get_app(i + 1).get_PKG());
                             }
                         })
                         .show();
@@ -140,26 +136,26 @@ public class selected_apps extends AppCompatActivity{
         }
     }
 
-    public Drawable[] getIcons(){
-            int i;
-            for(i = 0; i < images.length; i++){
-                try {
-                    ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(db.get_app(i+1).get_PKG(),PackageManager.GET_META_DATA);
-                    Aicon = applicationInfo.loadIcon(getPackageManager());
-                    images[i] = Aicon;
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
+    public Drawable[] getIcons() {
+        int i;
+        for (i = 0; i < images.length; i++) {
+            try {
+                ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(db.get_app(i + 1).get_PKG(), PackageManager.GET_META_DATA);
+                Aicon = applicationInfo.loadIcon(getPackageManager());
+                images[i] = Aicon;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return images;
     }
 
-    public String[] getNames(){
+    public String[] getNames() {
         int i;
-        for(i = 0; i < name.length; i++){
-            name[i] = db.get_app_PKG(i+1);
+        for (i = 0; i < name.length; i++) {
+            name[i] = db.get_app_PKG(i + 1);
             try {
-                ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(db.get_app(i+1).get_PKG(),PackageManager.GET_META_DATA);
+                ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(db.get_app(i + 1).get_PKG(), PackageManager.GET_META_DATA);
                 AppName = applicationInfo.loadLabel(getPackageManager()).toString();
                 name[i] = AppName;
             } catch (PackageManager.NameNotFoundException e) {
@@ -169,17 +165,17 @@ public class selected_apps extends AppCompatActivity{
         return name;
     }
 
-    public String[] getVersions(){
+    public String[] getVersions() {
         int i;
-            for(i = 0; i < versionNumber.length; i++){
-                versionNumber[i] = db.get_app(i+1).get_PKG();
-                try {
-                    PackageInfo pInfo = getPackageManager().getPackageInfo(db.get_app(i+1).get_PKG(),PackageManager.GET_META_DATA);
-                    version = pInfo.versionName;
-                    versionNumber[i] = version;
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
+        for (i = 0; i < versionNumber.length; i++) {
+            versionNumber[i] = db.get_app(i + 1).get_PKG();
+            try {
+                PackageInfo pInfo = getPackageManager().getPackageInfo(db.get_app(i + 1).get_PKG(), PackageManager.GET_META_DATA);
+                version = pInfo.versionName;
+                versionNumber[i] = version;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return versionNumber;
     }

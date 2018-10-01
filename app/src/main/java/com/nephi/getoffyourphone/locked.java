@@ -47,7 +47,6 @@ public class locked extends AppCompatActivity {
         assert v != null;
 
 
-
         //getSupportActionBar().hide();
     }
 

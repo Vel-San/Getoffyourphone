@@ -23,7 +23,6 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,7 +30,6 @@ import com.scottyab.rootbeer.RootBeer;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -89,7 +87,7 @@ public class Timer_Service extends Service {
         //Root Detector
         rootbeer = new RootBeer(this);
         //Wifi Manager
-        wifiManager = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+        wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 
         //DB
         db = new DB_Helper(this);
@@ -161,7 +159,7 @@ public class Timer_Service extends Service {
                 db.set_Data("");
                 //db.set_openCounter(0);
                 db.set_on_off(0);
-                switch (db.get_StateTable(1)){
+                switch (db.get_StateTable(1)) {
                     case 1:
                         db.set_StateTitle("None");
                         unlockStateWifi();
@@ -184,7 +182,7 @@ public class Timer_Service extends Service {
             //db.set_openCounter(0);
             db.set_on_off(0);
             db.set_StateTitle("None");
-            switch (db.get_StateTable(1)){
+            switch (db.get_StateTable(1)) {
                 case 1:
                     db.set_StateTitle("None");
                     unlockStateWifi();
@@ -232,7 +230,7 @@ public class Timer_Service extends Service {
                 .setContentText(getString(R.string.notification_message))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_message)))
                 .setVibrate(new long[]{0, 500});
-                //.setAutoCancel(true);
+        //.setAutoCancel(true);
         //.setOngoing(true)
         //.addAction(R.drawable.ic_clear_black_48dp, "Dismiss", dismissIntent);
         //.addAction(R.drawable.ic_action_boom, "Action!", someOtherPendingIntent);
@@ -247,7 +245,7 @@ public class Timer_Service extends Service {
             int count = (int) db.getAppsCount();
             for (int i = 1; i <= count; ++i) {
                 if (printForegroundTask().equalsIgnoreCase(db.get_app_PKG(i))) {
-                            startActivity(lockIntent);
+                    startActivity(lockIntent);
                 }
             }
         }
@@ -354,7 +352,7 @@ public class Timer_Service extends Service {
 //        db.set_openCounter(0);
         db.set_on_off(0);
         db.set_StateTitle("None");
-        switch (db.get_StateTable(1)){
+        switch (db.get_StateTable(1)) {
             case 1:
                 db.set_StateTitle("None");
                 unlockStateWifi();
@@ -387,7 +385,7 @@ public class Timer_Service extends Service {
                     Log.e("strDate", strDate);
                     twoDatesBetweenTime();
                     LockApps();
-                    if (db.get_once(1)==1){
+                    if (db.get_once(1) == 1) {
                         db.set_once(0);
                         try {
                             lock_State();

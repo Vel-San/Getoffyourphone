@@ -13,19 +13,18 @@ import android.widget.TextView;
 
 public class SelectedAppsAdapter extends BaseAdapter {
 
-    private Context context;
-    private final String [] values;
-    private final String [] numbers;
+    private final String[] values;
+    private final String[] numbers;
     private final Drawable[] images;
+    private Context context;
 
-    public SelectedAppsAdapter(Context context, String [] values, String [] numbers, Drawable [] images){
+    public SelectedAppsAdapter(Context context, String[] values, String[] numbers, Drawable[] images) {
         //super(context, R.layout.single_list_app_item, utilsArrayList);
         this.context = context;
         this.values = values;
         this.numbers = numbers;
         this.images = images;
     }
-
 
 
     @Override
@@ -61,16 +60,16 @@ public class SelectedAppsAdapter extends BaseAdapter {
             viewHolder.txtVersion = (TextView) convertView.findViewById(R.id.version);
             viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
 
-            result=convertView;
+            result = convertView;
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+            result = convertView;
         }
 
         viewHolder.txtName.setText(values[position]);
-        viewHolder.txtVersion.setText(context.getString(R.string.custom_list_version)+ numbers[position]);
+        viewHolder.txtVersion.setText(context.getString(R.string.custom_list_version) + numbers[position]);
         viewHolder.icon.setImageDrawable(images[position]);
 
         return convertView;

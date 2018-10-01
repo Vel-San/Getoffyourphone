@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abdeveloper.library.MultiSelectDialog;
 import com.abdeveloper.library.MultiSelectModel;
@@ -46,8 +45,6 @@ import com.scottyab.rootbeer.RootBeer;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,6 +58,7 @@ import mehdi.sakout.aboutpage.Element;
 public class Main extends DrawerActivity {
 //        implements ForceUpdateChecker.OnUpdateNeededListener {
 
+    static Context appContext;
     //------------Google related------------
     public String h_value = "";
     public String c_value = "";
@@ -70,7 +68,6 @@ public class Main extends DrawerActivity {
     //------------Variables------------
     //Database
     DB_Helper db;
-    static Context appContext;
     //intents
     Intent lockIntent;
     //Arraylists for Apps
@@ -120,7 +117,7 @@ public class Main extends DrawerActivity {
 
         //DataBase Handler
         db = new DB_Helper(this);
-        appContext=getApplicationContext();
+        appContext = getApplicationContext();
         //Locked_intent
         lockIntent = new Intent(this, locked.class);
         lockIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -229,7 +226,7 @@ public class Main extends DrawerActivity {
         //First launch and update check
         if (db.getFirstBootCount() == 0) {
             db.set_AllTimerData("", "N", 1, "", 0, "");
-            db.set_defaultStateTable(0, 0,"None", 0);
+            db.set_defaultStateTable(0, 0, "None", 0);
 //          saveVersionNameAndCode(this);
             db.set_FirstBoot("N");
             db.set_defaultUsage("XXX");
@@ -316,13 +313,12 @@ public class Main extends DrawerActivity {
                                                         toastMessage += getString(R.string.state) + selected_Counter.getTitle();
                                                         break;
                                                     case "2":
-                                                        if(rootbeer.isRooted()){
+                                                        if (rootbeer.isRooted()) {
                                                             db.set_StateTable(2);
                                                             db.set_on_off(1);
                                                             db.set_StateTitle(selected_Counter.getTitle());
                                                             toastMessage += getString(R.string.state) + selected_Counter.getTitle();
-                                                        }
-                                                        else{
+                                                        } else {
                                                             db.set_StateTitle("None");
                                                             toastMessage += getString(R.string.swipe_root_alert);
                                                             break;

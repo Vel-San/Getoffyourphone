@@ -61,7 +61,6 @@ public class DB_Helper extends SQLiteOpenHelper {
     private static final String KEY_ONCE = "once";
 
 
-
     DB_Helper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
