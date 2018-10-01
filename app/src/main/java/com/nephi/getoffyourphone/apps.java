@@ -46,7 +46,6 @@ public class apps {
     }
 
 
-
     // setting name
     public void set_PKG(String _PKG) {
         this._PKG = _PKG;

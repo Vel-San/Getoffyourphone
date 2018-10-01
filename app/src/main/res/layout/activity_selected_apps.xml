@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".selected_apps"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:context=".selected_apps">
 
 
     <TextView
         android:id="@+id/selected_apps_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textColor="@color/white"
-        android:text="@string/custom_list_title"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:textSize="25sp"/>
+        android:text="@string/custom_list_title"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/hint"
-        android:layout_below="@id/selected_apps_title"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:textColor="@color/grey"
-        android:text="@string/custom_list_hint"
+        android:layout_below="@id/selected_apps_title"
         android:gravity="center"
-        android:textSize="12sp"/>
+        android:text="@string/custom_list_hint"
+        android:textColor="@color/grey"
+        android:textSize="12sp" />
 
 
     <ListView
         android:id="@+id/selected_apps_list"
-        android:layout_below="@id/selected_apps_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/selected_apps_title" />
 
 </RelativeLayout>

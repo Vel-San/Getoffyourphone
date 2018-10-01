@@ -17,7 +17,7 @@ import java.util.List;
 public class DB_Helper extends SQLiteOpenHelper {
 
     // All Static variables
-    private static final int DATABASE_VERSION = 11;  // Database Version
+    private static final int DATABASE_VERSION = 12;  // Database Version
     // Database Name
     private static final String DATABASE_NAME = "SelectedApps";
     // Apps table name
@@ -59,7 +59,6 @@ public class DB_Helper extends SQLiteOpenHelper {
     private static final String KEY_IS_ON = "on_off";
     private static final String KEY_TITLE = "title";
     private static final String KEY_ONCE = "once";
-
 
 
     DB_Helper(Context context) {
