@@ -28,6 +28,25 @@ ______
 <details><summary>Change Log</summary>
 <p>
 
+    v6.0r (1.10.2018//16:28:08)
+
+    [Fixed]
+    - Critical Bug related to Timer-Done notification
+    - Increased timeout of app close after lock-down start ( 2.5 seconds )
+    - Notifications text
+    - Usage stats Format + Algorithm
+
+    [New]
+    - App Icon ( Thanks to twingenious)
+    - System-wide lockdown (Mobile Data lock needs ROOT)
+    - Vibration pattern upon open of locked app
+
+    [Removed]
+    - Previous App Open Counter & different lock screens
+
+    NOTE: New Permissions are needed to turn wifi and mobile data on/off
+    _________
+
     v5.9r (18.9.2018//00:05:37)
 
     [NEW]
