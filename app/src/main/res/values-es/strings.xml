@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">Get Off Your Phone</string>
+    <string name="title">Get Off Your Phone</string>
+    <string name="description">Podés bloquear tus apps seleccionadas con las siguientes opciones</string>
+    <string name="lock_button">BLOQUEAR APPS SELECCIONADAS!</string>
+    <string name="system_wide_lock">BLOQUEO DE TODO EL SISTEMA</string>
+    <string name="start_by_swiping_left">Empieza deslizando a la izquierda.</string>
+    <string name="select_desired_state">Selecciona el estado deseado.</string>
+    <string name="select_desired_time">Selecciona el tiempo deseado.</string>
+
+    <string name="time_left1">Tiempo restante:&#160;</string>
+    <string name="time_left2">Tiempo restante para desbloquear:&#160;</string>
+
+    <string name="time_chosen">Periodo de tiempo elegido:&#160;</string>
+    <string name="times">&#160;Veces</string>
+    <string name="app_open1">Estado:&#160;</string>
+    <string name="app_open2">Estado seleccionado:&#160;</string>
+    <string name="minutes_hours">&#160;minutos/horas</string>
+    <string name="hours">Horas:&#160;</string>
+    <string name="state">\nEstado:&#160;</string>
+
+    <string name="selected_time">Periodo de tiempo seleccionado:&#160;</string>
+    <string name="selected_state">Estado seleccionado:&#160;</string>
+    <string name="selected_apps">Apps seleccionadas:&#160;</string>
+
+    <string name="open_times">+ Veces</string>
+    <string name="not_running">Contador no corriendo</string>
+    <string name="dialog_description">v6.0r\nUna app que simplemente intenta hacer tu día más productivo;\nSi te ayudo, seria de gran ayuda que dejes un puntaje!"</string>
+
+    <string name="permission_check_title">Deseas dar acceso a datos de uso?</string>
+    <string name="permission_check_message">Sin este permiso, la app no funcionará</string>
+
+    <string name="lockBT_dialog_title">Confirmar selecciones?</string>
+    <string name="lockBT_dialog_message">No puedes cambiar estas preferencias hasta que el contador termine!</string>
+
+    <string name="toast_already_running">La selección va a ser ignorada hasta que el contador termine</string>
+    <string name="toast_no_hour_selection">No se seleccionó ninguna hora</string>
+    <string name="toast_no_state_selection">\nNo se seleccionó ningun estado</string>
+
+    <string name="cafebar_error">Por favor seleccione el tiempo de bloqueo deseado</string>
+    <string name="cafebar_error2">Seleccione al menos 1 app para bloquear</string>
+    <string name="cafebar_error3">El contador ya esta corriendo</string>
+    <string name="cafebar_error4">Selecciones limpiadas</string>
+    <string name="cafebar_error5">Apps ya seleccionadas, espere hasta que el contador termine</string>
+
+    <string name="battery_dialog_title">Desactivar optimización de batería?</string>
+    <string name="battery_dialog_message">RECOMIENDO DESACTIVAR ESTO.\nAndroid va a cerrar la app despues de un tiempo si esto esta activado!</string>
+
+    <string name="drawer_item1_text">Seleccionar apps</string>
+    <string name="drawer_item1_text2">Seleccionar que apps bloquear</string>
+    <string name="drawer_item2_text">Ayuda</string>
+    <string name="drawer_item2_text2">Información importante de uso</string>
+    <string name="drawer_item3_text">Cambios recientes</string>
+    <string name="drawer_item3_text2">Que hay de nuevo en esta versión</string>
+    <string name="drawer_item4_text">Librerias</string>
+    <string name="drawer_item4_text2">Las librerias usadas para cocinar esta app</string>
+    <string name="drawer_item5_text">Sobre mi</string>
+    <string name="drawer_item5_text2">Redes Sociales</string>
+    <string name="drawer_item6_text">Apps seleccionadas</string>
+    <string name="drawer_item6_text2">Apps que ya seleccionaste para bloquear</string>
+
+    <string name="app_selector_title">Seleccionar apps: </string>
+    <string name="app_selector_apply">Aplicar</string>
+    <string name="app_selector_cancel">Cancelar</string>
+    <string name="app_selector_clear">Borrar</string>
+
+    <string name="drawer_item2_dialog_title">Ayuda</string>
+    <string name="drawer_item2_dialog_message">Información general:\n\n1- NO podés bloquear apps sin configurar un periodo de tiempo antes\n2- PODÉS bloquear apps sin seleccionar un estado\n3- Al confirmar un bloqueo la app se cerrará y una notificación aparecerá\n4- Podés cerrar esta notificación, y una notifiación de "Contador terminado" aparecerá cuando termine el tiempo\n\n______\n\n-Seleccionar periodo de tiempo deseado:\nEsta opción es donde pasa la magia, seleccionas un periodo de tiempo, que será el tiempo en el que las apps estarán bloqueadas. No podrás cambiar hasta que el tiempo de bloqueo termine. Por favor no forzar la detención de esta app o tendrás que borrar los datos de app.\n\n-Estado deseado:\nSi esto está activado, se desactivara WiFi/Datos hasta que el periodo de tiempo termine.\n\nEso es todo!</string>
+    <string name="drawer_item3_dialog_title">Cambios recientes</string>
+    <string name="drawer_item5_dialog_title">Acerca de</string>
+    <string name="drawer_item5_dialog_message">Redes Sociales</string>
+
+    <string name="notification_title1">Apreta para abrir app</string>
+    <string name="notification_title2">Periodo de tiempo terminado!</string>
+    <string name="notification_message">Ahora puedes usar tus apps</string>
+
+    <string name="shame_message1">Ves esa caja? Eres tu la que está en la caja. \nNo tienes control sobre ti mismo. \nVete a trabajar.\nTiempo restante:&#160;</string>
+    <string name="shame_message2">OH AHORA TE TENGO!\nTOCA ESTA APP UNA VEZ MÁS.\nTE RETO, TE DOBLE RETO!\nTiempo restante:&#160;</string>
+    <string name="shame_message3">Me estas empezando a molestar..\nPor que haces esto?\nTiempo restante:&#160;</string>
+    <string name="shame_message4">BRING IT ON !\nDODGE THIS\nDODGE THAT\nNO WAY TO RUN!!!\nTime left to unlock:&#160;</string>
+
+    <string name="swipe_item1">Solo un poco de control, bloquea mis apps por 30 minutos</string>
+    <string name="swipe_item2">Fácil y rapido, bloquea mis apps por 1 hora</string>
+    <string name="swipe_item3">Necesito completar una tarea que tarda algo de tiempo, bloquea mis apps por 2 horas</string>
+    <string name="swipe_item4">POR FAVOR AYUDAME!!! Bloquea mis apps por 3 horas!</string>
+
+    <string name="swipe_item5">Apagar WiFi</string>
+    <string name="swipe_item6">Apagar WiFi y Datos mobiles</string>
+    <string name="swipe_root_alert">&#160;Root no detectado</string>
+
+    <string name="custom_list_name">Nombre</string>
+    <string name="custom_list_version">Versión:&#160;</string>
+    <string name="custom_list_title">Apps seleccionadas actualmente&#160;</string>
+    <string name="custom_list_hint">(Apreta en las apps para más información)</string>
+
+    <string name="usage_dialog_message">Uso de hoy:&#160;</string>
+    <string name="usage_dialog_title">Información de app</string>
+    <string name="usage_dialog_bt1">Configuración de app</string>
+    <string name="usage_dialog_bt2">Iniciar app</string>
+
+    <string name="privacy_element">Politicas de privacidad</string>
+    <string name="FDroid_element">Conseguir en F-Droid</string>
+
+
+    <string name="changes">
+    v6.0r (1.10.2018//16:28:08)\n\n[Fixed]\n- Critical Bug related to Timer-Done notification\n- Increased timeout of app close after lock-down start ( 2.5 seconds )\n- Notifications text\n- Usage stats Format + Algorithm\n\n[New]\n- App Icon ( Thanks to twingenious)\n- System-wide lockdown (Mobile Data lock needs ROOT)\n- Vibration pattern upon open of locked app\n\n[Removed]\n- Previous App Open Counter &amp; different lock screens\n\n_______\n\nv5.9r (18.9.2018//00:05:37)\n\n[NEW]\n\n- Daily usage per app (Press on an app in \"Selected Apps\" screen)\n- Privacy Policy link in About Me\n- F-Droid link in About Me\n\n[Announcment]\n\n- Next update will take sometime as i will implement user requested features &amp; reported bugs all at once, bare with me please!\n\nIf you want to contribute with translations, visit GitHub repo or Email me.\n\n_______\n\nv5.8r (12.9.2018//10:25:57)\n\n[NEW]\n\n- Currently selected apps ( Feature Request )\n\nNow you can check your selected apps without opening the app selector; you can also open specific app settings screen by clicking on it. ( This feature will get more updates such as Usage Time per App )\n\n[FIXED]\n\n- Some database values\n- Some UI Bugs\n\n_______\n\nv5.7r (10.9.2018//11:11:41)\n\n[FIXED]\n\n- OpenCounters changed from double digits to: 2,3,4,5\n\n[ANNOUNCEMENT]\n\n- GOYP is now on F-Droid!\n\n_______\n\nv5.6r (21.7.2018//10:40:31)\n\n[NEW]\n\n- You can now contribute to translations! Email me if you are interested in translating the app :)\n\n[Fixed]\n\n- Some of the selected apps disappearing (Thanks to a user bug report!)\n- Crash upon pressing on Bug Reporter (This has been completely removed)\n\n[Updated]\n\n- Multi Selector Library\n- Other dependancies\n- Playstore screenshots\n- Added support email in About\n- Added GitHub account in About\n\n\nThankyou for taking the time and leaving bug reports/feedback!\n\nHave a wonderful weekend!
+    </string>
+</resources>
