@@ -142,3 +142,5 @@ You need to change the following files/tokens to your OWN private ones:
 
 ### Contributions:
 -New Logo made by @twingenious 
+- Spanish Translation by @Makm
+- Chinese translation by @Waining
