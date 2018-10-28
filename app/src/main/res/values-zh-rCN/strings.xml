@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">放开你的手机</string>
+    <string name="title">放开你的手机</string>
+    <string name="description">你可以使用以下选项锁定自己选中的软件</string>
+    <string name="lock_button">锁定选中的软件！</string>
+    <string name="system_wide_lock">系统已锁定</string>
+    <string name="start_by_swiping_left">左滑以开始。</string>
+    <string name="select_desired_state">选择所想要的状态。</string>
+    <string name="select_desired_time">选择所想要的时长。</string>
+
+    <string name="time_left1">剩余时间：&#160;</string>
+    <string name="time_left2">距离解锁还有：&#160;</string>
+
+    <string name="time_chosen">已选时间：&#160;</string>
+    <string name="times">&#160;次数</string>
+    <string name="app_open1">状态：&#160;</string>
+    <string name="app_open2">已选状态：&#160;</string>
+    <string name="minutes_hours">&#160;分/时</string>
+    <string name="hours">小时：&#160;</string>
+    <string name="state">\n状态：&#160;</string>
+
+    <string name="selected_time">选定的时间：&#160;</string>
+    <string name="selected_state">选定的状态：&#160;</string>
+    <string name="selected_apps">选定的软件：&#160;</string>
+
+    <string name="open_times">+ 次</string>
+    <string name="not_running">锁定计时器未运行</string>
+    <string name="dialog_description">v6.0r\n一个纯粹为了帮助你成就更有生产力一天的软件。\n如果它帮到了你，请给我们评分，感激不尽！"</string>
+
+    <string name="permission_check_title">要授予使用情况权限吗？</string>
+    <string name="permission_check_message">如果没有这一权限，本软件将无法工作</string>
+
+    <string name="lockBT_dialog_title">确认选择？</string>
+    <string name="lockBT_dialog_message">在计时器结束前，你将无法改变这些设置！</string>
+
+    <string name="toast_already_running">计时器正在运行，新选项已被忽略</string>
+    <string name="toast_no_hour_selection">未选择时长</string>
+    <string name="toast_no_state_selection">\n未选择状态</string>
+
+    <string name="cafebar_error">请选择想要的锁定时长</string>
+    <string name="cafebar_error2">选择至少1个软件进行锁定</string>
+    <string name="cafebar_error3">计时器已在运行</string>
+    <string name="cafebar_error4">选择已清空</string>
+    <string name="cafebar_error5">软件已选择，等待计时器结束</string>
+
+    <string name="battery_dialog_title">禁用电池优化？</string>
+    <string name="battery_dialog_message">我极其建议禁用它！\n如果启用，Android系统会在很短时间内杀掉该软件！</string>
+
+    <string name="drawer_item1_text">选择软件</string>
+    <string name="drawer_item1_text2">选择要锁定的软件</string>
+    <string name="drawer_item2_text">帮助</string>
+    <string name="drawer_item2_text2">重要用法信息</string>
+    <string name="drawer_item3_text">近期修改</string>
+    <string name="drawer_item3_text2">What\'s new in this release</string>
+    <string name="drawer_item4_text">库</string>
+    <string name="drawer_item4_text2">Libraries used to cook this app</string>
+    <string name="drawer_item5_text">About Me</string>
+    <string name="drawer_item5_text2">Social Links</string>
+    <string name="drawer_item6_text">已选软件</string>
+    <string name="drawer_item6_text2">已保存的软件</string>
+
+    <string name="app_selector_title">选择软件：</string>
+    <string name="app_selector_apply">应用</string>
+    <string name="app_selector_cancel">取消</string>
+    <string name="app_selector_clear">清除</string>
+
+    <string name="drawer_item2_dialog_title">帮助</string>
+    <string name="drawer_item2_dialog_message">General Info:\n\n1- You CANNOT lock apps without selecting a timer\n2- You CAN lock apps without selecting a State\n3- App will close when you confirm lock down and a notification will show up\n4- You can dismiss the notification, and a "Timer Finished" notification will show when the lock-down is done\n\n______\n\n-Select Desired Time:\nThis option is where the magic happens, you select the desired time, which will be the duration of apps lock-down. After you select this, you cannot change it until lock-down is done. Please do not force close the app or you will have to clear app data.\n\n-Desired State:\nIf toggled on, it will turn off Wifi/Data for the remaining time of the lock-down and toggle it back when lock-down ends.\n\nThat\'s all !</string>
+    <string name="drawer_item3_dialog_title">近期修改</string>
+    <string name="drawer_item5_dialog_title">About</string>
+    <string name="drawer_item5_dialog_message">Social Links Below</string>
+
+    <string name="notification_title1">按下以打开软件</string>
+    <string name="notification_title2">锁定结束！</string>
+    <string name="notification_message">又可以使用你的软件了</string>
+
+    <string name="shame_message1">你看到那个盒子了吗？就是你，在那个盒子里。\n毫无自控能力的你。\n回去工作。\n距离解锁还有：&#160;</string>
+    <string name="shame_message2">噢，我抓到你了！\n有胆再点一下这个软件。\n来啊，来试试啊！\n距离解锁还有：&#160;</string>
+    <string name="shame_message3">你居然在这点我的按钮。。\n你为什么要这么做？\n已经被锁定 &amp; 加载了啊\n距离解锁还有：&#160;</string>
+    <string name="shame_message4">BRING IT ON !\nDODGE THIS\nDODGE THAT\nNO WAY TO RUN!!!\nTime left to unlock:&#160;</string>
+
+    <string name="swipe_item1">稍微进行一点控制，将我的软件锁定30分钟</string>
+    <string name="swipe_item2">快快快，将我的软件锁定1个小时</string>
+    <string name="swipe_item3">我要进行一项需要一定时间的工作，将我的软件锁定2个小时</string>
+    <string name="swipe_item4">救救我！！将我的软件锁定3个小时！</string>
+
+    <string name="swipe_item5">关闭WiFi</string>
+    <string name="swipe_item6">关闭WiFi和移动数据</string>
+    <string name="swipe_root_alert">&#160;未检测到Root</string>
+
+    <string name="custom_list_name">名称</string>
+    <string name="custom_list_version">版本：&#160;</string>
+    <string name="custom_list_title">当前已选软件&#160;</string>
+    <string name="custom_list_hint">（按在软件上来获取更多信息）</string>
+
+    <string name="usage_dialog_message">今日使用量：&#160;</string>
+    <string name="usage_dialog_title">软件信息</string>
+    <string name="usage_dialog_bt1">软件设置</string>
+    <string name="usage_dialog_bt2">启动软件</string>
+
+    <string name="privacy_element">隐私政策</string>
+    <string name="FDroid_element">Get on F-Droid</string>
+
+
+    <string name="changes">
+    v6.0r (1.10.2018//16:28:08)\n\n[Fixed]\n- Critical Bug related to Timer-Done notification\n- Increased timeout of app close after lock-down start ( 2.5 seconds )\n- Notifications text\n- Usage stats Format + Algorithm\n\n[New]\n- App Icon ( Thanks to twingenious)\n- System-wide lockdown (Mobile Data lock needs ROOT)\n- Vibration pattern upon open of locked app\n\n[Removed]\n- Previous App Open Counter &amp; different lock screens\n\n_______\n\nv5.9r (18.9.2018//00:05:37)\n\n[NEW]\n\n- Daily usage per app (Press on an app in \"Selected Apps\" screen)\n- Privacy Policy link in About Me\n- F-Droid link in About Me\n\n[Announcment]\n\n- Next update will take sometime as i will implement user requested features &amp; reported bugs all at once, bare with me please!\n\nIf you want to contribute with translations, visit GitHub repo or Email me.\n\n_______\n\nv5.8r (12.9.2018//10:25:57)\n\n[NEW]\n\n- Currently selected apps ( Feature Request )\n\nNow you can check your selected apps without opening the app selector; you can also open specific app settings screen by clicking on it. ( This feature will get more updates such as Usage Time per App )\n\n[FIXED]\n\n- Some database values\n- Some UI Bugs\n\n_______\n\nv5.7r (10.9.2018//11:11:41)\n\n[FIXED]\n\n- OpenCounters changed from double digits to: 2,3,4,5\n\n[ANNOUNCEMENT]\n\n- GOYP is now on F-Droid!\n\n_______\n\nv5.6r (21.7.2018//10:40:31)\n\n[NEW]\n\n- You can now contribute to translations! Email me if you are interested in translating the app :)\n\n[Fixed]\n\n- Some of the selected apps disappearing (Thanks to a user bug report!)\n- Crash upon pressing on Bug Reporter (This has been completely removed)\n\n[Updated]\n\n- Multi Selector Library\n- Other dependancies\n- Playstore screenshots\n- Added support email in About\n- Added GitHub account in About\n\n\nThankyou for taking the time and leaving bug reports/feedback!\n\nHave a wonderful weekend!
+    </string>
+</resources>
