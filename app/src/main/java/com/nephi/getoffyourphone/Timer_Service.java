@@ -49,8 +49,8 @@ public class Timer_Service extends Service {
     public String str_testing;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
-    String strDate;
-    Date date_current, date_diff;
+    Long strDate;
+    Long date_current, date_diff;
     //Root Detector
     RootBeer rootbeer;
     //Con Manager
@@ -114,13 +114,13 @@ public class Timer_Service extends Service {
 
 
         try {
-            date_current = simpleDateFormat.parse(strDate);
+            date_current = strDate;
         } catch (Exception e) {
 
         }
 
         try {
-            date_diff = simpleDateFormat.parse(db.get_Data(1));
+            date_diff = db.get_Data(1);
         } catch (Exception e) {
 
         }
@@ -128,7 +128,7 @@ public class Timer_Service extends Service {
         try {
 
 
-            long diff = date_current.getTime() - date_diff.getTime();
+            long diff = date_current - date_diff;
             int int_hours = Integer.valueOf(db.get_Hours(1));
             long int_timer;
             if (int_hours > 10) {
@@ -156,7 +156,7 @@ public class Timer_Service extends Service {
                 db.set_Running("N");
                 //db.set_LockTime("");
                 db.set_Hours("");
-                db.set_Data("");
+                db.set_Data(0L);
                 //db.set_openCounter(0);
                 db.set_on_off(0);
                 switch (db.get_StateTable(1)) {
@@ -178,7 +178,7 @@ public class Timer_Service extends Service {
             db.set_Running("N");
             // db.set_LockTime("");
             db.set_Hours("");
-            db.set_Data("");
+            db.set_Data(0L);
             //db.set_openCounter(0);
             db.set_on_off(0);
             db.set_StateTitle("None");
@@ -348,7 +348,7 @@ public class Timer_Service extends Service {
         db.set_Running("N");
 //        db.set_LockTime("");
         db.set_Hours("");
-        db.set_Data("");
+        db.set_Data(0L);
 //        db.set_openCounter(0);
         db.set_on_off(0);
         db.set_StateTitle("None");
@@ -379,10 +379,11 @@ public class Timer_Service extends Service {
 
                 @Override
                 public void run() {
-                    calendar = Calendar.getInstance();
-                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-                    strDate = simpleDateFormat.format(calendar.getTime());
-                    Log.e("strDate", strDate);
+//                    calendar = Calendar.getInstance();
+//                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+//                    strDate = simpleDateFormat.format(calendar.getTime());
+                    strDate = System.currentTimeMillis();
+                    Log.e("strDate", "" + strDate);
                     twoDatesBetweenTime();
                     LockApps();
                     if (db.get_once(1) == 1) {

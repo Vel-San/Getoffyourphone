@@ -96,7 +96,7 @@ public class DB_Helper extends SQLiteOpenHelper {
                 + TIMER_FINISH + " INTEGER,"
                 + HOURS + " TEXT,"
                 + SELECTED + " INTEGER,"
-                + DATA + " TEXT" + ")";
+                + DATA + " INTEGER" + ")";
         db.execSQL(CREATE_FIRST_BOOT_TABLE);
         db.execSQL(CREATE_APPS_TABLE);
         db.execSQL(CREATE_TIMER_TABLE);
@@ -258,7 +258,7 @@ public class DB_Helper extends SQLiteOpenHelper {
         db.close(); //closing database connetion
     }
 
-    void set_Data(String Data) {
+    void set_Data(long Data) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -268,14 +268,14 @@ public class DB_Helper extends SQLiteOpenHelper {
         db.close(); //closing database connetion
     }
 
-    String get_Data(int _id) {
+    Long get_Data(int _id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String Data = "";
+        Long Data = 0L;
         Cursor cursor = db.query(TABLE_TIMER, new String[]{KEY_ID_TIMER,
                         LOCK_TIME, RUNNING, TIMER_FINISH, HOURS, SELECTED, DATA}, KEY_ID_TIMER + "=?",
                 new String[]{String.valueOf(_id)}, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
-            Data = cursor.getString(6);
+            Data = cursor.getLong(6);
             cursor.close();
         }
         // return App

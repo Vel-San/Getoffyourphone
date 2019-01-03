@@ -65,6 +65,7 @@ public class Main extends DrawerActivity {
     String date_time;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
+    long millisNow;
     //------------Variables------------
     //Database
     DB_Helper db;
@@ -89,10 +90,21 @@ public class Main extends DrawerActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String str_time = intent.getStringExtra("time");
-            title_timer.setText(getString(R.string.time_left1)
-                    + str_time
-                    + "\n" + getString(R.string.selected_time) + db.get_Hours(1)
-                    + getString(R.string.minutes_hours) + "\n" + getString(R.string.selected_state) + db.get_StateTitle(1));
+            if (Integer.valueOf(db.get_Hours(1)) > 10)
+            {
+                title_timer.setText(getString(R.string.time_left1)
+                        + str_time
+                        + "\n" + getString(R.string.selected_time) + db.get_Hours(1)
+                        + getString(R.string.minutes) + "\n" + getString(R.string.selected_state) + db.get_StateTitle(1));
+            }
+            else
+                {
+                    title_timer.setText(getString(R.string.time_left1)
+                            + str_time
+                            + "\n" + getString(R.string.selected_time) + db.get_Hours(1)
+                            + getString(R.string.Hours_v2) + "\n" + getString(R.string.selected_state) + db.get_StateTitle(1));
+                }
+
             if (db.get_TimerFinish(1) == 1) {
                 title_timer.setText(getString(R.string.not_running));
             }
@@ -380,11 +392,12 @@ public class Main extends DrawerActivity {
     }
 
     public void start_timer(String hours) {
-        calendar = Calendar.getInstance();
-        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        date_time = simpleDateFormat.format(calendar.getTime());
-
-        db.set_Data(date_time);
+//        calendar = Calendar.getInstance();
+//        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+//        date_time = simpleDateFormat.format(calendar.getTime());
+        millisNow = System.currentTimeMillis();
+//        db.set_Data(date_time);
+        db.set_Data(millisNow);
         db.set_Hours(hours.replaceAll("[\\D]", ""));
         db.set_LockTime(hours);
         db.set_Running("Y");
@@ -771,6 +784,8 @@ public class Main extends DrawerActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         int notificationId = new Random().nextInt(); // just use a counter in some util class...
 
+        NotificationCompat.Builder builder;
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel("notification_1", "Timer_Notification", NotificationManager.IMPORTANCE_DEFAULT);
 
@@ -784,19 +799,39 @@ public class Main extends DrawerActivity {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notification_1");
-        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
-                //.setDefaults(Notification.) // also requires VIBRATE permission
-                .setSmallIcon(R.mipmap.ic_launcher) // Required!
-                .setContentTitle(getString(R.string.notification_title1))
-                .setContentText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + ", " + getString(R.string.app_open1) + db.get_StateTitle(1))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes_hours) + "\n" + getString(R.string.app_open2) + db.get_StateTitle(1)))
-                .setVibrate(new long[]{0, 500})
-                //.setAutoCancel(true)
-                .setContentIntent(pIntent);
-        //.setOngoing(true)
-        //.addAction(R.drawable.ic_clear_black_48dp, "Dismiss", dismissIntent);
-        //.addAction(R.drawable.ic_action_boom, "Action!", someOtherPendingIntent);
+        if (Integer.valueOf(db.get_Hours(1)) > 10)
+        {
+            builder = new NotificationCompat.Builder(this, "notification_1");
+            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
+                    //.setDefaults(Notification.) // also requires VIBRATE permission
+                    .setSmallIcon(R.mipmap.ic_launcher) // Required!
+                    .setContentTitle(getString(R.string.notification_title1))
+                    .setContentText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes) + ", " + getString(R.string.app_open1) + db.get_StateTitle(1))
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.minutes) + "\n" + getString(R.string.app_open2) + db.get_StateTitle(1)))
+                    .setVibrate(new long[]{0, 500})
+                    //.setAutoCancel(true)
+                    .setContentIntent(pIntent);
+            //.setOngoing(true)
+            //.addAction(R.drawable.ic_clear_black_48dp, "Dismiss", dismissIntent);
+            //.addAction(R.drawable.ic_action_boom, "Action!", someOtherPendingIntent);
+        }
+        else
+            {
+                builder = new NotificationCompat.Builder(this, "notification_1");
+                builder.setPriority(NotificationCompat.PRIORITY_DEFAULT) //HIGH, MAX, FULL_SCREEN and setDefaults(Notification.DEFAULT_ALL) will make it a Heads Up Display Style
+                        //.setDefaults(Notification.) // also requires VIBRATE permission
+                        .setSmallIcon(R.mipmap.ic_launcher) // Required!
+                        .setContentTitle(getString(R.string.notification_title1))
+                        .setContentText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.Hours_v2) + ", " + getString(R.string.app_open1) + db.get_StateTitle(1))
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.time_chosen) + db.get_Hours(1) + getString(R.string.Hours_v2) + "\n" + getString(R.string.app_open2) + db.get_StateTitle(1)))
+                        .setVibrate(new long[]{0, 500})
+                        //.setAutoCancel(true)
+                        .setContentIntent(pIntent);
+                //.setOngoing(true)
+                //.addAction(R.drawable.ic_clear_black_48dp, "Dismiss", dismissIntent);
+                //.addAction(R.drawable.ic_action_boom, "Action!", someOtherPendingIntent);
+            }
+
 
         // Builds the notification and issues it.
         assert notificationManager != null;

@@ -15,7 +15,7 @@
     <string name="times">&#160;次数</string>
     <string name="app_open1">状态：&#160;</string>
     <string name="app_open2">已选状态：&#160;</string>
-    <string name="minutes_hours">&#160;分/时</string>
+    <string name="minutes">&#160;分</string>
     <string name="hours">小时：&#160;</string>
     <string name="state">\n状态：&#160;</string>
 
@@ -74,11 +74,6 @@
     <string name="notification_title2">锁定结束！</string>
     <string name="notification_message">又可以使用你的软件了</string>
 
-    <string name="shame_message1">你看到那个盒子了吗？就是你，在那个盒子里。\n毫无自控能力的你。\n回去工作。\n距离解锁还有：&#160;</string>
-    <string name="shame_message2">噢，我抓到你了！\n有胆再点一下这个软件。\n来啊，来试试啊！\n距离解锁还有：&#160;</string>
-    <string name="shame_message3">你居然在这点我的按钮。。\n你为什么要这么做？\n已经被锁定 &amp; 加载了啊\n距离解锁还有：&#160;</string>
-    <string name="shame_message4">BRING IT ON !\nDODGE THIS\nDODGE THAT\nNO WAY TO RUN!!!\nTime left to unlock:&#160;</string>
-
     <string name="swipe_item1">稍微进行一点控制，将我的软件锁定30分钟</string>
     <string name="swipe_item2">快快快，将我的软件锁定1个小时</string>
     <string name="swipe_item3">我要进行一项需要一定时间的工作，将我的软件锁定2个小时</string>
@@ -105,4 +100,5 @@
     <string name="changes">
     v6.0r (1.10.2018//16:28:08)\n\n[Fixed]\n- Critical Bug related to Timer-Done notification\n- Increased timeout of app close after lock-down start ( 2.5 seconds )\n- Notifications text\n- Usage stats Format + Algorithm\n\n[New]\n- App Icon ( Thanks to twingenious)\n- System-wide lockdown (Mobile Data lock needs ROOT)\n- Vibration pattern upon open of locked app\n\n[Removed]\n- Previous App Open Counter &amp; different lock screens\n\n_______\n\nv5.9r (18.9.2018//00:05:37)\n\n[NEW]\n\n- Daily usage per app (Press on an app in \"Selected Apps\" screen)\n- Privacy Policy link in About Me\n- F-Droid link in About Me\n\n[Announcment]\n\n- Next update will take sometime as i will implement user requested features &amp; reported bugs all at once, bare with me please!\n\nIf you want to contribute with translations, visit GitHub repo or Email me.\n\n_______\n\nv5.8r (12.9.2018//10:25:57)\n\n[NEW]\n\n- Currently selected apps ( Feature Request )\n\nNow you can check your selected apps without opening the app selector; you can also open specific app settings screen by clicking on it. ( This feature will get more updates such as Usage Time per App )\n\n[FIXED]\n\n- Some database values\n- Some UI Bugs\n\n_______\n\nv5.7r (10.9.2018//11:11:41)\n\n[FIXED]\n\n- OpenCounters changed from double digits to: 2,3,4,5\n\n[ANNOUNCEMENT]\n\n- GOYP is now on F-Droid!\n\n_______\n\nv5.6r (21.7.2018//10:40:31)\n\n[NEW]\n\n- You can now contribute to translations! Email me if you are interested in translating the app :)\n\n[Fixed]\n\n- Some of the selected apps disappearing (Thanks to a user bug report!)\n- Crash upon pressing on Bug Reporter (This has been completely removed)\n\n[Updated]\n\n- Multi Selector Library\n- Other dependancies\n- Playstore screenshots\n- Added support email in About\n- Added GitHub account in About\n\n\nThankyou for taking the time and leaving bug reports/feedback!\n\nHave a wonderful weekend!
     </string>
+    <string name="Hours_v2">&#160;小时</string>
 </resources>
