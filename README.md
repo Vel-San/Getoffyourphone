@@ -30,8 +30,6 @@ ______
 
     v6.1r (1.3.2019//1:55:24)
 
-    IMPORTANT: The app uses a new sign key, please uninstall it before updating!
-
     [Fixed]
     - Midnight Timer increasing to 20+ hours by itself (Please leave a feedback whether this fix is working for you or not)
     - Fixed notifications selected time text (From 2 mins/Hours to Hours only or Minutes only)

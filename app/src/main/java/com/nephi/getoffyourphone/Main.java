@@ -715,6 +715,13 @@ public class Main extends DrawerActivity {
                                 .build()
                 )
                 .addAttributions(
+                        new Attribution.Builder("Root Beer")
+                                .addCopyrightNotice("Copyright (c) 2015, Scott Alexander-Bown, Mat Rollings")
+                                .addLicense(License.APACHE)
+                                .setWebsite("https://github.com/scottyab/rootbeer")
+                                .build()
+                )
+                .addAttributions(
                         new Attribution.Builder("Lovely Dialog")
                                 .addCopyrightNotice("Copyright (c) 2016 Yaroslav Shevchuk")
                                 .addLicense(License.APACHE)
