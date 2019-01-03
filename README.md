@@ -28,6 +28,24 @@ ______
 <details><summary>Change Log</summary>
 <p>
 
+    v6.1r (1.3.2019//1:55:24)
+
+    IMPORTANT: The app uses a new sign key, please uninstall it before updating!
+
+    [Fixed]
+    - Midnight Timer increasing to 20+ hours by itself (Please leave a feedback whether this fix is working for you or not)
+    - Fixed notifications selected time text (From 2 mins/Hours to Hours only or Minutes only)
+    - Cleaned some unused strings
+
+    [New]
+    - Chinese translation by @Waining
+    - Spanish Translation by @Makmm 
+
+    [Updated]
+    - Dependencies and Libraries, supporting Android Pie SDK 28
+
+    More updates and feature requests coming soon! Happy New year <3
+   
     v6.0r (1.10.2018//16:28:08)
 
     [Fixed]
