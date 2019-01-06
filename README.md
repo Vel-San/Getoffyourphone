@@ -6,6 +6,11 @@ Useful for everyone, anytime & anywhere. End procrastination with this simple ap
 
 ______
 
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQUXGRB8M26WU&source=url)
+ 
+ - Donations are much appreciate, but not needed. Thankyou if you've participated in a donation!
+______
+
 ## Features:
 
 - Select Any app you want to block, never limit yourself !
