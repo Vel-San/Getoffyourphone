@@ -36,6 +36,9 @@
             android:name=".locked"
             android:launchMode="singleInstance" />
         <activity
+            android:name=".settings"
+            android:launchMode="singleInstance" />
+        <activity
             android:name=".selected_apps"
             android:launchMode="singleInstance" />
         <activity
@@ -55,11 +58,13 @@
             android:stopWithTask="false" />
 
         // You must hold the RECEIVE_BOOT_COMPLETED permission in order to receive this broadcast.
-        <receiver android:enabled="true" android:name="com.nephi.getoffyourphone.BootUpReceiver"
+        <receiver
+            android:enabled="true"
+            android:name="com.nephi.getoffyourphone.BootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

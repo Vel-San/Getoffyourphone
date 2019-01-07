@@ -19,8 +19,7 @@ public class BootUpReceiver extends BroadcastReceiver {
         //DataBase Handler
         db = new DB_Helper(context);
 
-        if(Objects.equals(intent.getAction(), Intent.ACTION_BOOT_COMPLETED))
-        {
+        if (Objects.equals(intent.getAction(), Intent.ACTION_BOOT_COMPLETED)) {
             db.set_Running("N");
         }
 

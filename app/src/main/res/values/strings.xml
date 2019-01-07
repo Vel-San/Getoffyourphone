@@ -58,6 +58,8 @@
     <string name="drawer_item5_text2">Social Links</string>
     <string name="drawer_item6_text">Selected Apps</string>
     <string name="drawer_item6_text2">Apps you\'ve already saved</string>
+    <string name="drawer_item7_text">Settings</string>
+    <string name="drawer_item7_text2">Application Settings &amp; Customization</string>
 
     <string name="app_selector_title">Select Apps: </string>
     <string name="app_selector_apply">Apply</string>
@@ -95,6 +97,28 @@
 
     <string name="privacy_element">Privacy Policy</string>
     <string name="FDroid_element">Get on F-Droid</string>
+
+    <string name="Settings_title1">Notifications</string>
+    <string name="Settings_title2">App UI</string>
+    <string name="Settings_title3">Lock-Down options</string>
+    <string name="Settings_title4">Information</string>
+    <string name="Settings_title5">Links</string>
+    <string name="Settings_item1_T">GOYP Notifications</string>
+    <string name="Settings_item1_D">Show notifications of Start/End of lock-down</string>
+    <string name="Settings_item2_T">Block App Notifications</string>
+    <string name="Settings_item2_D">Block notifications from selected apps currently being locked</string>
+    <string name="Settings_item3_T">Light Theme</string>
+    <string name="Settings_item3_D">Toggle on light app theme</string>
+    <string name="Settings_item4_T">Reverse Timer</string>
+    <string name="Settings_item4_D">Coming Soon</string>
+    <string name="Settings_item5_T">Help</string>
+    <string name="Settings_item5_D">Important usage info</string>
+    <string name="Settings_item6_T">Recent Changes</string>
+    <string name="Settings_item6_D">What\'s new in this release</string>
+    <string name="Settings_item7_T">Libraries</string>
+    <string name="Settings_item7_D">What i used to cook this app</string>
+    <string name="Settings_item8_T">About Me</string>
+    <string name="Settings_item8_D">Social Links</string>
 
 
     <string name="changes">

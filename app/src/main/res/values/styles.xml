@@ -8,12 +8,25 @@
     <!--<item name="colorAccent">@color/colorAccent</item>-->
     <!--</style>-->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/blue</item>
+    <item name="android:colorBackground">@color/black</item>
+    <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/grey</item>
         <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
+
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--<item name="colorPrimary">@color/white</item>-->
+        <!--<item name="colorPrimaryDark">@color/blue</item>-->
+        <!--<item name="colorAccent">@color/blue</item>-->
+        <!--<item name="android:colorBackground">@color/white</item>-->
+        <!--<item name="android:textColorPrimary">@color/black</item>-->
+        <!--<item name="android:textColorSecondary">@color/blue</item>-->
+        <!--<item name="actionBarStyle">@style/ThemeOverlay.AppCompat.ActionBar</item>-->
+    <!--</style>-->
 
     <!--<style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">-->
     <!--<item name="colorPrimary">@color/black</item>-->
@@ -22,12 +35,12 @@
     <!--<item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>-->
     <!--</style>-->
 
-    <style name="MyTitleStyle" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">30sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:textColor">#ffffff</item>
-    </style>
+    <!--<style name="MyTitleStyle" parent="@android:style/Widget.TextView">-->
+        <!--<item name="android:textSize">30sp</item>-->
+        <!--<item name="android:textStyle">bold</item>-->
+        <!--<item name="android:fontFamily">sans-serif-condensed</item>-->
+        <!--<item name="android:textColor">#ffffff</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.BrandedLaunch" parent="AppTheme">
         <item name="android:windowBackground">@drawable/branded_logo</item>

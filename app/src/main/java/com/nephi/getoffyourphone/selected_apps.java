@@ -93,7 +93,6 @@ public class selected_apps extends AppCompatActivity {
                 result = db.get_Usage(1);
                 new LovelyStandardDialog(selected_apps.this)
                         .setTopColorRes(R.color.blue)
-                        .setButtonsColorRes(R.color.black)
                         .setIcon(R.drawable.ic_perm_device_information_white_48dp)
                         .setTitle(name[i] + ":")
                         .setMessage(selected_apps.this.getString(R.string.usage_dialog_message) + result)

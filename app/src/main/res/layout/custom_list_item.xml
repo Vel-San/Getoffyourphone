@@ -22,7 +22,6 @@
         android:layout_toRightOf="@+id/icon"
         android:maxLines="2"
         android:text="@string/custom_list_name"
-        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -34,7 +33,6 @@
         android:layout_alignLeft="@+id/name"
         android:maxLines="1"
         android:text="@string/custom_list_version"
-        android:textColor="@color/white"
         android:textSize="14sp" />
 
 

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".selected_apps">
 
 
@@ -14,7 +13,6 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/custom_list_title"
-        android:textColor="@color/white"
         android:textSize="25sp" />
 
     <TextView
@@ -24,7 +22,6 @@
         android:layout_below="@id/selected_apps_title"
         android:gravity="center"
         android:text="@string/custom_list_hint"
-        android:textColor="@color/grey"
         android:textSize="12sp" />
 
 
