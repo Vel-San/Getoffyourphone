@@ -252,7 +252,10 @@ public class Main extends DrawerActivity {
                                             } else {
                                                 toastMessage += getString(R.string.toast_no_state_selection);
                                             }
-                                            notification_update();
+                                            if(DefaultSettings.getCb1(Main.this)){
+                                                //Timer Start/End notifications enabled
+                                                notification_update();
+                                            }
                                             CafeBar.builder(Main.this)
                                                     .duration(CafeBar.Duration.MEDIUM)
                                                     .content(toastMessage)

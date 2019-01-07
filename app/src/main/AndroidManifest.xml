@@ -34,7 +34,7 @@
         <!-- </activity> -->
         <activity
             android:name=".locked"
-            android:launchMode="singleInstance" />
+            android:launchMode="standard" />
         <activity
             android:name=".settings"
             android:launchMode="standard" />

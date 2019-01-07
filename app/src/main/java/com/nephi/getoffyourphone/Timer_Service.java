@@ -58,7 +58,6 @@ public class Timer_Service extends Service {
     DB_Helper db;
     Intent intent;
     Intent lockIntent;
-    Intent Shame;
     //Shame Int Counter
     private Handler mHandler = new Handler();
     private Timer mTimer = null;
@@ -150,7 +149,10 @@ public class Timer_Service extends Service {
 
             } else {
                 stopService(new Intent(getApplicationContext(), Timer_Service.class));
-                notification_update();
+                if(DefaultSettings.getCb1(this)){
+                    //Timer Start/End notifications enabled
+                    notification_update();
+                }
                 db.set_TimerFinish(1);
                 db.set_Running("N");
                 //db.set_LockTime("");
