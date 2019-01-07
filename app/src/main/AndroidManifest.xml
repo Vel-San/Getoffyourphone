@@ -37,13 +37,13 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".settings"
-            android:launchMode="singleInstance" />
+            android:launchMode="standard" />
         <activity
             android:name=".selected_apps"
-            android:launchMode="singleInstance" />
+            android:launchMode="standard" />
         <activity
             android:name=".Main"
-            android:launchMode="singleInstance"
+            android:launchMode="standard"
             android:theme="@style/AppTheme.BrandedLaunch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
