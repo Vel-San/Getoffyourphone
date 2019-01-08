@@ -15,9 +15,8 @@ ______
 
 - Select Any app you want to block, never limit yourself !
 - Up to 4 lock times: 30 minutes, 1, 2 & 3 hours.
-- Minimal Permissions needed ( Check below )
-- Multiple lock screens with different GIFs to know how much left for unlock
-- Beautiful minimal design and colors
+- Straight forward Permissions needed ( Check below )
+- Beautiful minimal design and colors with Light and Dark themes
 
 ______
 
@@ -26,7 +25,8 @@ ______
 - Install
 - Give usage permission.
 - Whitelist from battery optimisation
-- Select apps, Select desired time and start lock-down!
+- Optional: Give Do Not Disturb Access
+- Select apps, Select desired time, check desired settings and start lock-down!
 
 ______
 
@@ -146,6 +146,8 @@ ______
 - "android.permission.VIBRATE" ( Notifications )
 - "android.permission.ACCESS_WIFI_STATE" ( Enable/Disable Wifi/Mobile Data )
 - "android.permission.CHANGE_WIFI_STATE" ( Enable/Disable Wifi/Mobile Data )
+- "android.permission.RECEIVE_BOOT_COMPLETED" (Fixes Timer service if the phone has been rebooted)
+- "android.permission.ACCESS_NOTIFICATION_POLICY" (Optional, block Apps notifications while lock-down is running)
 - "MODIFY_PHONE_STATE" ( Enable/Disable Wifi/Mobile Data )
 - Root ( Optional,  you can disable it, however, it is needed if you want to Disable mobile data with your lockdown )
 
@@ -162,6 +164,7 @@ You need to change the following files/tokens to your OWN private ones:
 - ~~Json file in App folder~~ **Removed**
 
 ### Contributions:
--New Logo made by @twingenious 
+- New Logo made by @twingenious 
 - Spanish Translation by @Makmm
 - Chinese translation by @Waining
+- All other users who helped in feature requests and issue reportings. Much love!
