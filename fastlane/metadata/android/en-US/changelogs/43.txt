@@ -1,4 +1,3 @@
-<en-US>
 v6.0r (1.10.2018//16:28:08)
 
 [Fixed]
@@ -16,4 +15,3 @@ v6.0r (1.10.2018//16:28:08)
 - Previous App Open Counter & different lock screens
 
 NOTE: New Permissions are needed to turn wifi and mobile data on/off
-</en-US>
