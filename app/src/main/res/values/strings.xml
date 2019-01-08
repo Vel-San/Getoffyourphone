@@ -48,14 +48,6 @@
 
     <string name="drawer_item1_text">Select Apps</string>
     <string name="drawer_item1_text2">Select the apps to lock</string>
-    <string name="drawer_item2_text">Help</string>
-    <string name="drawer_item2_text2">Important usage information</string>
-    <string name="drawer_item3_text">Recent Changes</string>
-    <string name="drawer_item3_text2">What\'s new in this release</string>
-    <string name="drawer_item4_text">Libraries</string>
-    <string name="drawer_item4_text2">Libraries used to cook this app</string>
-    <string name="drawer_item5_text">About Me</string>
-    <string name="drawer_item5_text2">Social Links</string>
     <string name="drawer_item6_text">Selected Apps</string>
     <string name="drawer_item6_text2">Apps you\'ve already saved</string>
     <string name="drawer_item7_text">Settings</string>
@@ -106,7 +98,7 @@
     <string name="Settings_item1_T">GOYP Notifications</string>
     <string name="Settings_item1_D">Show notifications of Start/End of lock-down</string>
     <string name="Settings_item2_T">Block App Notifications</string>
-    <string name="Settings_item2_D">Block notifications from selected apps currently being locked</string>
+    <string name="Settings_item2_D">Block All Notifications (Android M+ ONLY)</string>
     <string name="Settings_item3_T">Light Theme</string>
     <string name="Settings_item3_D">Toggle on light app theme</string>
     <string name="Settings_item4_T">Reverse Timer</string>
@@ -119,6 +111,11 @@
     <string name="Settings_item7_D">What i used to cook this app</string>
     <string name="Settings_item8_T">About Me</string>
     <string name="Settings_item8_D">Social Links</string>
+
+    <string name="Settings_dialog1_T">Reboot?</string>
+    <string name="Settings_dialog1_D">You need to reboot for changes to take effect. \nProceed?</string>
+    <string name="Settings_dialog2_T">Do Not Disturb Access</string>
+    <string name="Settings_dialog2_D">DND Access is required for this option. \nProceed?</string>
 
 
     <string name="changes">

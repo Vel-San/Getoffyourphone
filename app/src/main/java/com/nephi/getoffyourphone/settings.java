@@ -1,22 +1,32 @@
 package com.nephi.getoffyourphone;
 
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.franmontiel.attributionpresenter.AttributionPresenter;
 import com.franmontiel.attributionpresenter.entities.Attribution;
 import com.franmontiel.attributionpresenter.entities.License;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
+import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
@@ -26,6 +36,13 @@ public class settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if(DefaultSettings.getTheme(this)){
+            //Change App Theme
+            setTheme(R.style.AppTheme_Light);
+        }
+        else {
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_layout);
 
@@ -49,11 +66,18 @@ public class settings extends AppCompatActivity {
         Preference recent_changes;
         Preference libraries;
         Preference about_me;
+        SwitchPreference theme;
+        CheckBoxPreference DND;
+        NotificationManager mNotificationManager;
         //views
         View aboutPage;
+        //Int
+        int i = 0;
+        int j = 0;
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
+
             super.onCreate(savedInstanceState);
             // Settings UI
             addPreferencesFromResource(R.xml.settings_ui);
@@ -68,7 +92,119 @@ public class settings extends AppCompatActivity {
             recent_changes = findPreference("recent_changes");
             libraries = findPreference("libraries");
             about_me = findPreference("about_me");
+            theme = (SwitchPreference) findPreference("theme");
+            DND = (CheckBoxPreference) findPreference("cb2");
+            if (!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)) {
+                DND.setEnabled(false);
+            }
             about_page();
+
+            //N Manager
+            mNotificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+
+            //DND CheckBox Listener
+            DND.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    // Check if the notification policy access has been granted for the app.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if(DND.isChecked()){
+                            if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
+                                new LovelyStandardDialog(getActivity())
+                                        .setTopColorRes(R.color.blue)
+                                        .setIcon(R.drawable.ic_perm_device_information_white_48dp)
+                                        .setTitle(getString(R.string.Settings_dialog2_T))
+                                        .setMessage(getString(R.string.Settings_dialog2_D))
+                                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                                                startActivity(intent);
+                                                Toast.makeText(getActivity(),"Notifications will be blocked after you start lock-down",Toast.LENGTH_LONG).show();
+                                            }
+                                        })
+                                        .setNegativeButton(android.R.string.no, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                DND.setChecked(false);
+                                            }
+                                        })
+                                        .setCancelable(false)
+                                        .show();
+                            }
+                            else {
+                                Toast.makeText(getActivity(),"Notifications will be blocked after you start lock-down",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(getActivity(),"Notifications will be shown",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    return true;
+                }
+            });
+
+            // SwitchPreference preference change listener
+            theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    if(theme.isChecked()){
+                        new LovelyStandardDialog(getActivity())
+                                .setTopColorRes(R.color.blue)
+                                .setIcon(R.drawable.baseline_refresh_white_48)
+                                .setTitle(getString(R.string.Settings_dialog1_T))
+                                .setMessage(getString(R.string.Settings_dialog1_D))
+                                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // Uncheck
+                                        theme.setChecked(false);
+                                        Intent i = getActivity().getPackageManager()
+                                                .getLaunchIntentForPackage(getActivity().getPackageName());
+                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(i);
+                                        ActivityCompat.finishAfterTransition(getActivity());
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        theme.setChecked(true);
+                                    }
+                                })
+                                .setCancelable(false)
+                                .show();
+                    }else {
+                        new LovelyStandardDialog(getActivity())
+                                .setTopColorRes(R.color.blue)
+                                .setIcon(R.drawable.baseline_refresh_white_48)
+                                .setTitle(getString(R.string.Settings_dialog1_T))
+                                .setMessage(getString(R.string.Settings_dialog1_D))
+                                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        // Check
+                                        theme.setChecked(true);
+                                        Intent i = getActivity().getPackageManager()
+                                                .getLaunchIntentForPackage(getActivity().getPackageName());
+                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(i);
+                                        ActivityCompat.finishAfterTransition(getActivity());
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        theme.setChecked(false);
+                                    }
+                                })
+                                .setCancelable(false)
+                                .show();
+
+                    }
+                    return true;
+                }
+            });
 
             help.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override

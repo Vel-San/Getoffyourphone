@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
@@ -93,7 +94,13 @@ public class Main extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+        if(DefaultSettings.getTheme(this)){
+            //Change App Theme
+            setTheme(R.style.AppTheme_Light);
+        }
+        else {
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -312,8 +319,22 @@ public class Main extends DrawerActivity {
         db.set_Running("Y");
         db.set_once(1);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            dnd_toggle();
+        }
+
         Intent intent_service = new Intent(getApplicationContext(), Timer_Service.class);
         startService(intent_service);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void dnd_toggle(){
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (DefaultSettings.getCb2(this)) {
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+        }
+
     }
 
     //Check if app usage access is granted

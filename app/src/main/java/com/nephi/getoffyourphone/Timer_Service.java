@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -58,7 +59,6 @@ public class Timer_Service extends Service {
     DB_Helper db;
     Intent intent;
     Intent lockIntent;
-    //Shame Int Counter
     private Handler mHandler = new Handler();
     private Timer mTimer = null;
 
@@ -89,6 +89,17 @@ public class Timer_Service extends Service {
 
         //DB
         db = new DB_Helper(this);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void dnd_toggle(){
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (DefaultSettings.getCb2(this)) {
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+        }
+
     }
 
     @Override
@@ -153,6 +164,9 @@ public class Timer_Service extends Service {
                     //Timer Start/End notifications enabled
                     notification_update();
                 }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    dnd_toggle();
+                }
                 db.set_TimerFinish(1);
                 db.set_Running("N");
                 //db.set_LockTime("");
@@ -175,6 +189,9 @@ public class Timer_Service extends Service {
             }
         } catch (Exception e) {
             stopService(new Intent(getApplicationContext(), Timer_Service.class));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                dnd_toggle();
+            }
             db.set_TimerFinish(1);
             db.set_Running("N");
             // db.set_LockTime("");
