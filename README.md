@@ -33,6 +33,30 @@ ______
 <details><summary>Change Log</summary>
 <p>
 
+    v7.0r (1.9.2019//1:08:55)
+
+    [Fixed]
+    - Timer service on reboot
+    - Drawer screens navigation
+    - Drawer Back Button
+
+    [New]
+    - Settings Screen
+    - Light Theme
+    - Ability to enable/disable timer notifications
+    - Block ALL Phone notification with lock-down (DND)
+    - Side Drawer
+    - Donate Button
+
+    [Updated]
+    - Code (Formats, imports, comments)
+    - Colours & Styles
+    - Deleted most of assets (smaller in size)
+
+    Thanks to everyone who helped in bugs/requests reporting 🥰
+
+    _________
+
     v6.1r (1.3.2019//1:55:24)
 
     [Fixed]
@@ -49,6 +73,8 @@ ______
 
     More updates and feature requests coming soon! Happy New year <3
    
+    _________
+
     v6.0r (1.10.2018//16:28:08)
 
     [Fixed]
@@ -66,6 +92,7 @@ ______
     - Previous App Open Counter & different lock screens
 
     NOTE: New Permissions are needed to turn wifi and mobile data on/off
+
     _________
 
     v5.9r (18.9.2018//00:05:37)
