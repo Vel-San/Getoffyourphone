@@ -48,6 +48,12 @@ public class selected_apps extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (DefaultSettings.getTheme(this)) {
+            //Change App Theme
+            setTheme(R.style.AppTheme_Light);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_apps);
 

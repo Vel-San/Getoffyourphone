@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,20 +32,29 @@ import com.abdeveloper.library.MultiSelectModel;
 import com.danimahardhika.cafebar.CafeBar;
 import com.danimahardhika.cafebar.CafeBarTheme;
 import com.facebook.stetho.Stetho;
-import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.roughike.swipeselector.SwipeItem;
 import com.roughike.swipeselector.SwipeSelector;
 import com.scottyab.rootbeer.RootBeer;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import pl.droidsonroids.gif.GifDrawable;
 
-public class Main extends DrawerActivity {
+
+public class Main extends AppCompatActivity {
 
     static Context appContext;
     //------------Google related------------
@@ -52,6 +62,16 @@ public class Main extends DrawerActivity {
     public String c_value = "";
     long millisNow;
     //------------Variables------------
+    //Drawer Tabs
+    private Drawer result = null;
+    AccountHeader headerResult;
+    SecondaryDrawerItem item1;
+    SecondaryDrawerItem item2;
+    SecondaryDrawerItem item3;
+    SecondaryDrawerItem item4;
+    SectionDrawerItem section1;
+    SectionDrawerItem section2;
+    GifDrawable gifFromResource;
     //Database
     DB_Helper db;
     //intents
@@ -66,7 +86,6 @@ public class Main extends DrawerActivity {
     String package_name;
     //RootBeer Root Checker
     RootBeer rootbeer;
-    //views
     Button Lock;
     TextView title_timer;
     //------------Service related------------
@@ -94,16 +113,14 @@ public class Main extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(DefaultSettings.getTheme(this)){
+        if (DefaultSettings.getTheme(this)) {
             //Change App Theme
             setTheme(R.style.AppTheme_Light);
-        }
-        else {
+        } else {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //startService(new Intent(this, ReviverService.class));
         init();
     }
@@ -122,6 +139,28 @@ public class Main extends DrawerActivity {
         lockIntent = new Intent(this, locked.class);
         lockIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
+        //Drawer Tabs
+        //if you want to update the items at a later time it is recommended to keep it in a variable
+        item1 = new SecondaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_item1_text)).withDescription(getString(R.string.drawer_item1_text2)).withIcon(GoogleMaterial.Icon.gmd_star).withSelectable(false);
+        item2 = new SecondaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_item6_text)).withDescription(getString(R.string.drawer_item6_text2)).withIcon(GoogleMaterial.Icon.gmd_save).withSelectable(false);
+        item3 = new SecondaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_item7_text)).withDescription(getString(R.string.drawer_item7_text2)).withIcon(GoogleMaterial.Icon.gmd_settings).withSelectable(false);
+        item4 = new SecondaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_item8_text)).withDescription(getString(R.string.drawer_item8_text2)).withIcon(GoogleMaterial.Icon.gmd_attach_money).withSelectable(false);
+        section1 = new SectionDrawerItem().withName("Apps");
+        section2 = new SectionDrawerItem().withName("Other");
+        try {
+            gifFromResource = new GifDrawable(getResources(), R.drawable.tick_tick);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Create the Header for Drawer
+        headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(gifFromResource)
+                .withSelectionListEnabledForSingleProfile(false)
+                .addProfiles(
+                        new ProfileDrawerItem().withEmail(getString(R.string.drawer_header)).withIcon(R.color.black)
+                )
+                .build();
         //Title Timer
         title_timer = findViewById(R.id.title_timer);
         //Lock Button
@@ -129,7 +168,7 @@ public class Main extends DrawerActivity {
 
         //------------Method Calls------------
         rootbeer = new RootBeer(this);
-        ActionBarMethod();
+        new_drawer();
         permission_check();
         isIgnoringBattery();
         first_Boot_check();
@@ -139,7 +178,6 @@ public class Main extends DrawerActivity {
             e.printStackTrace();
         }
         selection_all();
-        set_drawer();
         PreSelect();
         //Main Title text change
         if (db.get_Running(1).equals("N")) {
@@ -147,6 +185,125 @@ public class Main extends DrawerActivity {
         }
         Stetho.initializeWithDefaults(this);
 
+    }
+
+    //New Drawer
+    public void new_drawer() {
+        result = new DrawerBuilder()
+                .withActivity(this)
+                .withAccountHeader(headerResult)
+//                .withTranslucentStatusBar(false)
+                .withActionBarDrawerToggle(true)
+                .addDrawerItems(
+                        section1,
+                        item1,
+                        item2,
+//                        new DividerDrawerItem(),
+                        section2,
+                        item3,
+                        item4
+
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        //Drawer Tab Clicks
+                        if (drawerItem.getIdentifier() == 1) {
+                            //Select Apps to Lock
+                            Drawer_App_Selector();
+                        } else if (drawerItem.getIdentifier() == 2) {
+                            //Open selected_apps activity
+                            Intent intent = new Intent(Main.this, selected_apps.class);
+                            startActivity(intent);
+                        } else if (drawerItem.getIdentifier() == 3) {
+                            //Open selected_apps activity
+                            Intent intent = new Intent(Main.this, settings.class);
+                            startActivity(intent);
+                        } else if (drawerItem.getIdentifier() == 4) {
+                            //Open PayPal WebPage
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQUXGRB8M26WU&source=url"));
+                            startActivity(browserIntent);
+                        }
+                        return false;
+                    }
+                })
+                .build();
+        //set the selection to the item with the identifier 1
+        result.setSelection(-1);
+    }
+
+    //Drawer App Selector
+    public void Drawer_App_Selector() {
+//        Checking if the lock is running or not
+        if (db.get_Running(1).equals("N")) {
+
+            //Creating multi dialog
+            multiSelectDialog = new MultiSelectDialog()
+                    .title(R.string.app_selector_title) //setting title for dialog
+                    .titleSize(20) //setting textSize
+                    .positiveText(getString(R.string.app_selector_apply)) //setting Submit text
+                    .negativeText(getString(R.string.app_selector_cancel)) //setting Cancel text
+                    .clearText(getString(R.string.app_selector_clear))
+                    .preSelectIDsList(preselectedApps) //List of ids that you need to be selected
+                    .multiSelectList(listOfApps) // the multi select model list with ids and name
+                    .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                        @Override
+                        public void onDismiss(ArrayList<Integer> ids, String dataString) {
+                            //Clear previous selections from DB and add the new ones
+                            db.deleteAll();
+                            if (ids.size() >= 1) {
+                                //set_Selected means there is at least 1 item selected, set to true
+                                db.set_Selected(1);
+                            } else if (ids.size() < 1) {
+                                //set to false
+                                db.set_Selected(0);
+                            }
+                            //Adding IDs of selections and the respective PKG name
+                            for (int i = 0; i < ids.size(); i++) {
+                                db.add_apps(new apps(LS.get(ids.get(i) - 1)
+                                        , multiSelectDialog.Get_ID(listOfApps, ids.get(i) - 1)));
+                                //Toast.makeText(Main.this,"Selected Ids : " + ids.get(i),Toast.LENGTH_SHORT).show();
+                            }
+
+                            //Showing result in a cafeBar
+                            CafeBar.builder(Main.this)
+                                    .duration(CafeBar.Duration.SHORT)
+                                    .content(getString(R.string.selected_apps) + ids.size())
+                                    .maxLines(4)
+                                    .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
+                                    .show();
+                        }
+
+                        //onCancel do nothing
+                        @Override
+                        public void onCancel() {
+                            Log.e("onCancel", "Dialog Dismissed without selection");
+                        }
+
+                        //I added this button to your library, this clears all
+                        //selections, tho, it needs an app restart to see it visually
+                        public void onClear() {
+                            db.deleteAll();
+                            db.set_Selected(0);
+                            preselectedApps = new ArrayList<>();
+                            CafeBar.builder(Main.this)
+                                    .duration(CafeBar.Duration.SHORT)
+                                    .content(getString(R.string.cafebar_error4))
+                                    .maxLines(4)
+                                    .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
+                                    .show();
+                            Log.e("onClear", "Cleared Selections");
+                        }
+                    });
+            multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
+        } else {
+            CafeBar.builder(Main.this)
+                    .duration(CafeBar.Duration.MEDIUM)
+                    .content(getString(R.string.cafebar_error5))
+                    .maxLines(4)
+                    .theme(CafeBarTheme.Custom(Color.parseColor("#C62828")))
+                    .show();
+        }
     }
 
     //Initialize all values on First Boot ever
@@ -259,7 +416,7 @@ public class Main extends DrawerActivity {
                                             } else {
                                                 toastMessage += getString(R.string.toast_no_state_selection);
                                             }
-                                            if(DefaultSettings.getCb1(Main.this)){
+                                            if (DefaultSettings.getCb1(Main.this)) {
                                                 //Timer Start/End notifications enabled
                                                 notification_update();
                                             }
@@ -327,8 +484,9 @@ public class Main extends DrawerActivity {
         startService(intent_service);
     }
 
+    //Control DND Mode
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void dnd_toggle(){
+    public void dnd_toggle() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (DefaultSettings.getCb2(this)) {
@@ -381,15 +539,6 @@ public class Main extends DrawerActivity {
         }
     }
 
-    //Action Bar related
-    public void ActionBarMethod() {
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setLogo(R.mipmap.ic_launcher);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-    }
-
     //Preselect the apps that are saved in DB when opening app selector
     public void PreSelect() {
         if ((int) db.getAppsCount() != 0) {
@@ -426,127 +575,6 @@ public class Main extends DrawerActivity {
             }
         }
         return componentList;
-    }
-
-    //Initialize Drawer
-    public void set_drawer() {
-
-        //Drawer divider and item creator, this is called once only on every onCreate()
-        addItem(
-                new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.ic_installed))
-                        .setTextPrimary(getString(R.string.drawer_item1_text))
-                        .setTextSecondary(getString(R.string.drawer_item1_text2))
-                        .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
-                            @Override
-                            public void onClick(DrawerItem drawerItem, final long id, int position) {
-                                //Checking if the lock is running or not
-                                if (db.get_Running(1).equals("N")) {
-
-                                    //Creating multi dialog
-                                    multiSelectDialog = new MultiSelectDialog()
-                                            .title(R.string.app_selector_title) //setting title for dialog
-                                            .titleSize(20) //setting textSize
-                                            .positiveText(getString(R.string.app_selector_apply)) //setting Submit text
-                                            .negativeText(getString(R.string.app_selector_cancel)) //setting Cancel text
-                                            .clearText(getString(R.string.app_selector_clear))
-                                            .preSelectIDsList(preselectedApps) //List of ids that you need to be selected
-                                            .multiSelectList(listOfApps) // the multi select model list with ids and name
-                                            .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
-                                                @Override
-                                                public void onDismiss(ArrayList<Integer> ids, String dataString) {
-                                                    //Clear previous selections from DB and add the new ones
-                                                    db.deleteAll();
-                                                    if (ids.size() >= 1) {
-                                                        //set_Selected means there is at least 1 item selected, set to true
-                                                        db.set_Selected(1);
-                                                    } else if (ids.size() < 1) {
-                                                        //set to false
-                                                        db.set_Selected(0);
-                                                    }
-                                                    //Adding IDs of selections and the respective PKG name
-                                                    for (int i = 0; i < ids.size(); i++) {
-                                                        db.add_apps(new apps(LS.get(ids.get(i) - 1)
-                                                                , multiSelectDialog.Get_ID(listOfApps, ids.get(i) - 1)));
-                                                        //Toast.makeText(Main.this,"Selected Ids : " + ids.get(i),Toast.LENGTH_SHORT).show();
-                                                    }
-
-                                                    //Showing result in a cafeBar
-                                                    CafeBar.builder(Main.this)
-                                                            .duration(CafeBar.Duration.SHORT)
-                                                            .content(getString(R.string.selected_apps) + ids.size())
-                                                            .maxLines(4)
-                                                            .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
-                                                            .show();
-                                                }
-
-                                                //onCancel do nothing
-                                                @Override
-                                                public void onCancel() {
-                                                    Log.e("onCancel", "Dialog Dismissed without selection");
-                                                }
-
-                                                //I added this button to your library, this clears all
-                                                //selections, tho, it needs an app restart to see it visually
-                                                public void onClear() {
-                                                    db.deleteAll();
-                                                    db.set_Selected(0);
-                                                    preselectedApps = new ArrayList<>();
-                                                    CafeBar.builder(Main.this)
-                                                            .duration(CafeBar.Duration.SHORT)
-                                                            .content(getString(R.string.cafebar_error4))
-                                                            .maxLines(4)
-                                                            .theme(CafeBarTheme.Custom(Color.parseColor("#1976D2")))
-                                                            .show();
-                                                    Log.e("onClear", "Cleared Selections");
-                                                }
-                                            });
-                                    multiSelectDialog.show(getSupportFragmentManager(), "multiSelectDialog");
-                                } else {
-                                    CafeBar.builder(Main.this)
-                                            .duration(CafeBar.Duration.MEDIUM)
-                                            .content(getString(R.string.cafebar_error5))
-                                            .maxLines(4)
-                                            .theme(CafeBarTheme.Custom(Color.parseColor("#C62828")))
-                                            .show();
-                                }
-
-                            }
-                        })
-        );
-
-        addDivider();
-        addItem(
-                new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.baseline_save_white_48))
-                        .setTextPrimary(getString(R.string.drawer_item6_text))
-                        .setTextSecondary(getString(R.string.drawer_item6_text2))
-                        .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
-                            @Override
-                            public void onClick(DrawerItem drawerItem, long id, int position) {
-                                //Open selected_apps activity
-                                Intent intent = new Intent(Main.this, selected_apps.class);
-                                startActivity(intent);
-                            }
-                        })
-        );
-
-        addDivider();
-        addItem(
-                new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.baseline_settings_white_48))
-                        .setTextPrimary(getString(R.string.drawer_item7_text))
-                        .setTextSecondary(getString(R.string.drawer_item7_text2))
-                        .setOnItemClickListener(new DrawerItem.OnItemClickListener() {
-                            @Override
-                            public void onClick(DrawerItem drawerItem, long id, int position) {
-                                //Open selected_apps activity
-                                Intent intent = new Intent(Main.this, settings.class);
-                                startActivity(intent);
-                            }
-                        })
-        );
-
     }
 
     //Everything related to Notifications
@@ -607,6 +635,16 @@ public class Main extends DrawerActivity {
         // Builds the notification and issues it.
         assert notificationManager != null;
         notificationManager.notify(313, builder.build());
+    }
+
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        if (result != null && result.isDrawerOpen()) {
+            result.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

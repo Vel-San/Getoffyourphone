@@ -47,11 +47,14 @@
     <string name="battery_dialog_message">I STRONGLY RECOMMEND DISABLING THIS.\nAndroid System will kill the app after a short while if this is Enabled!</string>
 
     <string name="drawer_item1_text">Select Apps</string>
-    <string name="drawer_item1_text2">Select the apps to lock</string>
-    <string name="drawer_item6_text">Selected Apps</string>
+    <string name="drawer_item1_text2">Select which apps to lock</string>
+    <string name="drawer_item6_text">Currently Selected Apps</string>
     <string name="drawer_item6_text2">Apps you\'ve already saved</string>
     <string name="drawer_item7_text">Settings</string>
     <string name="drawer_item7_text2">Application Settings &amp; Customization</string>
+    <string name="drawer_item8_text">Donate</string>
+    <string name="drawer_item8_text2">Not needed, but much appreciated!</string>
+    <string name="drawer_header">Thank you for choosing GOYP &#10024;</string>
 
     <string name="app_selector_title">Select Apps: </string>
     <string name="app_selector_apply">Apply</string>
@@ -97,7 +100,7 @@
     <string name="Settings_title5">Links</string>
     <string name="Settings_item1_T">GOYP Notifications</string>
     <string name="Settings_item1_D">Show notifications of Start/End of lock-down</string>
-    <string name="Settings_item2_T">Block App Notifications</string>
+    <string name="Settings_item2_T">Block Apps Notifications</string>
     <string name="Settings_item2_D">Block All Notifications (Android M+ ONLY)</string>
     <string name="Settings_item3_T">Light Theme</string>
     <string name="Settings_item3_D">Toggle on light app theme</string>
@@ -112,10 +115,14 @@
     <string name="Settings_item8_T">About Me</string>
     <string name="Settings_item8_D">Social Links</string>
 
-    <string name="Settings_dialog1_T">Reboot?</string>
-    <string name="Settings_dialog1_D">You need to reboot for changes to take effect. \nProceed?</string>
+    <string name="Settings_dialog1_T">Refresh App?</string>
+    <string name="Settings_dialog1_D">You need to refresh for changes to take effect. \n\nProceed?</string>
     <string name="Settings_dialog2_T">Do Not Disturb Access</string>
-    <string name="Settings_dialog2_D">DND Access is required for this option. \nProceed?</string>
+    <string name="Settings_dialog2_D">DND Access is required for this option. \n\nProceed?</string>
+    <string name="Settings_dialog3_T">WARNING</string>
+    <string name="Settings_dialog3_D">Enabling this option will block ALL system notifications. This means you will not even get phone calls or alarms! This will turn off by itself after lock-down and you will receive all notifications at once. \n\nIf you force close the app you have to put alarm and phone call volume back on manually.</string>
+
+    <string name="Toast_1">Notifications will be blocked after you start lock-down</string>
 
 
     <string name="changes">

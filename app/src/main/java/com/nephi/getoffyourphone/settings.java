@@ -1,10 +1,8 @@
 package com.nephi.getoffyourphone;
 
-import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -36,11 +34,10 @@ public class settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if(DefaultSettings.getTheme(this)){
+        if (DefaultSettings.getTheme(this)) {
             //Change App Theme
             setTheme(R.style.AppTheme_Light);
-        }
-        else {
+        } else {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
@@ -108,19 +105,51 @@ public class settings extends AppCompatActivity {
                 public boolean onPreferenceClick(Preference preference) {
                     // Check if the notification policy access has been granted for the app.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if(DND.isChecked()){
+                        if (DND.isChecked()) {
                             if (!mNotificationManager.isNotificationPolicyAccessGranted()) {
-                                new LovelyStandardDialog(getActivity())
-                                        .setTopColorRes(R.color.blue)
+                                new LovelyStandardDialog(getActivity(), LovelyStandardDialog.ButtonLayout.VERTICAL)
+                                        .setTopColorRes(R.color.red)
                                         .setIcon(R.drawable.ic_perm_device_information_white_48dp)
-                                        .setTitle(getString(R.string.Settings_dialog2_T))
-                                        .setMessage(getString(R.string.Settings_dialog2_D))
+                                        .setTitle(R.string.Settings_dialog3_T)
+                                        .setMessage(R.string.Settings_dialog3_D)
                                         .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                                                startActivity(intent);
-                                                Toast.makeText(getActivity(),"Notifications will be blocked after you start lock-down",Toast.LENGTH_LONG).show();
+                                                new LovelyStandardDialog(getActivity())
+                                                        .setTopColorRes(R.color.blue)
+                                                        .setIcon(R.drawable.ic_perm_device_information_white_48dp)
+                                                        .setTitle(getString(R.string.Settings_dialog2_T))
+                                                        .setMessage(getString(R.string.Settings_dialog2_D))
+                                                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                                                                startActivity(intent);
+                                                                Toast.makeText(getActivity(), getString(R.string.Toast_1), Toast.LENGTH_LONG).show();
+                                                            }
+                                                        })
+                                                        .setNegativeButton(android.R.string.no, new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                DND.setChecked(false);
+                                                            }
+                                                        })
+                                                        .setCancelable(false)
+                                                        .show();
+                                            }
+                                        })
+                                        .setCancelable(false)
+                                        .show();
+                            } else {
+                                new LovelyStandardDialog(getActivity())
+                                        .setTopColorRes(R.color.red)
+                                        .setIcon(R.drawable.ic_perm_device_information_white_48dp)
+                                        .setTitle(R.string.Settings_dialog3_T)
+                                        .setMessage(R.string.Settings_dialog3_D)
+                                        .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                Toast.makeText(getActivity(), getString(R.string.Toast_1), Toast.LENGTH_LONG).show();
                                             }
                                         })
                                         .setNegativeButton(android.R.string.no, new View.OnClickListener() {
@@ -132,12 +161,8 @@ public class settings extends AppCompatActivity {
                                         .setCancelable(false)
                                         .show();
                             }
-                            else {
-                                Toast.makeText(getActivity(),"Notifications will be blocked after you start lock-down",Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        else {
-                            Toast.makeText(getActivity(),"Notifications will be shown",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Notifications Enabled", Toast.LENGTH_SHORT).show();
                         }
                     }
                     return true;
@@ -148,7 +173,7 @@ public class settings extends AppCompatActivity {
             theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
-                    if(theme.isChecked()){
+                    if (theme.isChecked()) {
                         new LovelyStandardDialog(getActivity())
                                 .setTopColorRes(R.color.blue)
                                 .setIcon(R.drawable.baseline_refresh_white_48)
@@ -174,7 +199,7 @@ public class settings extends AppCompatActivity {
                                 })
                                 .setCancelable(false)
                                 .show();
-                    }else {
+                    } else {
                         new LovelyStandardDialog(getActivity())
                                 .setTopColorRes(R.color.blue)
                                 .setIcon(R.drawable.baseline_refresh_white_48)
@@ -317,9 +342,9 @@ public class settings extends AppCompatActivity {
                     )
                     .addAttributions(
                             new Attribution.Builder("Material Drawer")
-                                    .addCopyrightNotice("Copyright (c) 2017 Jan Heinrich Reimer")
-                                    .addLicense(License.MIT)
-                                    .setWebsite("https://github.com/heinrichreimer/material-drawer")
+                                    .addCopyrightNotice("Copyright (c) 2018 Mike Penz")
+                                    .addLicense(License.APACHE)
+                                    .setWebsite("https://github.com/mikepenz/MaterialDrawer")
                                     .build()
                     )
                     .addAttributions(

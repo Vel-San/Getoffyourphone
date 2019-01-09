@@ -93,7 +93,7 @@ public class Timer_Service extends Service {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void dnd_toggle(){
+    public void dnd_toggle() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (DefaultSettings.getCb2(this)) {
@@ -160,7 +160,7 @@ public class Timer_Service extends Service {
 
             } else {
                 stopService(new Intent(getApplicationContext(), Timer_Service.class));
-                if(DefaultSettings.getCb1(this)){
+                if (DefaultSettings.getCb1(this)) {
                     //Timer Start/End notifications enabled
                     notification_update();
                 }
