@@ -33,7 +33,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     androidTestImplementation 'junit:junit:4.12'
     implementation 'com.scottyab:rootbeer-lib:0.0.7'
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
@@ -48,6 +48,6 @@ dependencies {
     implementation project(':swipe-selector')
     implementation project(':library')
     //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:palette-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.palette:palette:1.0.0'
 }
