@@ -19,7 +19,7 @@ package com.roughike.swipeselector;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
-import android.support.annotation.XmlRes;
+import androidx.annotation.XmlRes;
 
 import org.xmlpull.v1.XmlPullParserException;
 

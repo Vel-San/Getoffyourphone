@@ -29,9 +29,6 @@
         android:fullBackupContent="false"
         tools:ignore="ExtraText,GoogleAppIndexingWarning">
 
-        <!-- <activity android:name=".MainActivity"> -->
-
-
         <!-- </activity> -->
         <activity
             android:name=".locked"
@@ -58,7 +55,6 @@
             android:process=":Timer_Service"
             android:stopWithTask="false" />
 
-        // You must hold the RECEIVE_BOOT_COMPLETED permission in order to receive this broadcast.
         <receiver
             android:enabled="true"
             android:name="com.nephi.getoffyourphone.BootUpReceiver"
@@ -68,11 +64,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         <!-- <service -->
         <!-- android:name=".ReviverService" -->
         <!-- android:process=":ReviverService" -->
         <!-- android:stopWithTask="false" /> -->
     </application>
-
 </manifest>
