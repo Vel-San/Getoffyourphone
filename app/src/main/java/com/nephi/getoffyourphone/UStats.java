@@ -9,7 +9,6 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class UStats {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-yyyy HH:mm:ss");
@@ -53,13 +52,14 @@ public class UStats {
         final DB_Helper db = new DB_Helper(selected_apps.appcontext1);
         for (i = 0; i < usageStatsList.size(); i++) {
             if (usageStatsList.get(i).getPackageName().equals(db.get_app(j + 1).get_PKG())) {
+                long TimeInforground = usageStatsList.get(i).getTotalTimeInForeground();
+                int minutes = (int) ((TimeInforground / (100060)) % 60);
+                int seconds = (int) (TimeInforground / 1000) % 60;
+                int hours = (int) ((TimeInforground / (10006060)) % 24);
                 String result = String.format("%02d h, %02d min, %02d sec",
-                        TimeUnit.MILLISECONDS.toHours(usageStatsList.get(i).getTotalTimeInForeground()),
-                        TimeUnit.MILLISECONDS.toMinutes(usageStatsList.get(i).getTotalTimeInForeground()) -
-                                TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(usageStatsList.get(i).getTotalTimeInForeground())),
-                        TimeUnit.MILLISECONDS.toSeconds(usageStatsList.get(i).getTotalTimeInForeground()) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(usageStatsList.get(i).getTotalTimeInForeground()))
-                );
+                        hours,
+                        minutes,
+                        seconds);
                 Log.d(TAG, "Pkg: " + usageStatsList.get(i).getPackageName() + "\t" + "ForegroundTime: "
                         + result);
 //                    Toast.makeText(selected_apps.appcontext1, "Pkg: " + usageStatsList.get(i).getPackageName() +  "\t" + "ForegroundTime: "
