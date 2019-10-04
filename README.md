@@ -4,6 +4,7 @@ Useful for everyone, anytime & anywhere. End procrastination with this simple ap
 
 <a href='https://play.google.com/store/apps/details?id=com.nephi.getoffyourphone'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="100"/></a> <a href="https://f-droid.org/app/com.nephi.getoffyourphone"><img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="100"></a>
 
+(Google version not maintained anymore)
 ______
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQUXGRB8M26WU&source=url)
