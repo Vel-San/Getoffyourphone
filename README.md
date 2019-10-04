@@ -15,7 +15,7 @@ ______
 
 ## Change-Log
 
-<a hreft='https://github.com/Vel-San/Getoffyourphone/blob/master/CHANGELOG.md'>Click Me!</a>
+<a href='https://github.com/Vel-San/Getoffyourphone/blob/master/CHANGELOG.md'>Click Me!</a>
 ______
 
 ## Features
