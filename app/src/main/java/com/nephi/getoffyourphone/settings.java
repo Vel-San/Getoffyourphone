@@ -303,14 +303,14 @@ public class settings extends AppCompatActivity {
                     //.addItem(new Element().setTitle("Version 6.2"))
                     //.addItem(adsElement)
                     //.addGroup("Connect with us")
-                    .addEmail("goyp.sup@outlook.com")
+                    .addEmail("Ali.Karaki@tuta.io")
                     //.addWebsite("REPLACE WITH UR OWN")
                     //.addFacebook("REPLACE WITH UR OWN")
                     //.addTwitter("REPLACE WITH UR OWN")
                     //.addYoutube("REPLACE WITH UR OWN")
-                    .addPlayStore("com.nephi.getoffyourphone")
+                    //.addPlayStore("com.nephi.getoffyourphone")
                     //.addInstagram("REPLACE WITH UR OWN")
-                    .addGitHub("Alikaraki95")
+                    .addGitHub("Vel-San")
                     .addItem(getPrivacyP())
                     .addItem(FDroid())
                     .create();
@@ -404,7 +404,7 @@ public class settings extends AppCompatActivity {
             privacy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://htmlpreview.github.io/?https://raw.githubusercontent.com/Alikaraki95/Getoffyourphone/master/privacy_policy.html"));
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://htmlpreview.github.io/?https://raw.githubusercontent.com/Vel-San/Getoffyourphone/master/privacy_policy.html"));
                     startActivity(browserIntent);
                 }
             });

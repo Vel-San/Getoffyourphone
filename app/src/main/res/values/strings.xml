@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Get Off Your Phone</string>
     <string name="title">Get Off Your Phone</string>
-    <string name="description">&#128072; Swipe LEFT for more settings</string>
+    <string name="description">&#128072; Swipe here for more settings</string>
     <string name="lock_button">LOCK SELECTED APPS !</string>
     <string name="system_wide_lock">SYSTEM LOCK-DOWN</string>
     <string name="start_by_swiping_left">Start by swiping left.</string>

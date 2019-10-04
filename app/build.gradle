@@ -5,13 +5,13 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.nephi.getoffyourphone"
         minSdkVersion 21
         multiDexEnabled true
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 45
         versionName "7.0r"
     }
@@ -48,6 +48,6 @@ dependencies {
     implementation project(':swipe-selector')
     implementation project(':library')
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.palette:palette:1.0.0'
 }
