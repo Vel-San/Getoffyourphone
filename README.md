@@ -8,11 +8,17 @@ Useful for everyone, anytime & anywhere. End procrastination with this simple ap
 ______
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQUXGRB8M26WU&source=url)
- 
+
 - Donations are much appreciate, but not needed. Thankyou if you've participated in a donation!
+
 ______
 
-## Features:
+## Change-Log
+
+<a hreft='https://github.com/Vel-San/Getoffyourphone/blob/master/CHANGELOG.md'>Click Me!</a>
+______
+
+## Features
 
 - Select Any app you want to block, never limit yourself !
 - Up to 4 lock times: 30 minutes, 1, 2 & 3 hours.
@@ -21,7 +27,7 @@ ______
 
 ______
 
-## How to install:
+## How to install
 
 - Install
 - Give usage permission.
@@ -32,7 +38,7 @@ ______
 
 ______
 
-### Permissions:
+### Permissions
 
 - "android.permission.PACKAGE_USAGE_STATS" ( Running Apps )
 - "android.permission.WAKE_LOCK" (Keep Lock Service alive )
@@ -46,7 +52,7 @@ ______
 
 ______
 
-### NOTE:
+### NOTE
 
 You need to change the following files/tokens to your OWN private ones:
 
@@ -56,8 +62,9 @@ You need to change the following files/tokens to your OWN private ones:
 - Change About Me data in Main.java
 - ~~Json file in App folder~~ **Removed**
 
-### Contributions:
-- New Logo made by @twingenious 
+### Contributions
+
+- New Logo made by @twingenious
 - Spanish Translation by @Makmm
 - Chinese translation by @Waining
 - All other users who helped in feature requests and issue reportings. Much love!
